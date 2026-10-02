@@ -473,6 +473,24 @@ main {
   gap: 0.65rem;
 }
 
+.hero-followup {
+  gap: 0.35rem 0.5rem;
+}
+
+.hero-followup .btn {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--text-secondary);
+}
+
+.hero-followup .btn:hover {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--accent);
+  text-decoration: none;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
