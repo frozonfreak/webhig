@@ -443,10 +443,52 @@ main {
   border-radius: 999px;
 }
 
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 42rem;
+  margin: 0 0 1.25rem;
+  padding: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.hero-cta .btn {
+  min-height: 3rem;
+  padding: 0.75rem 1.35rem;
+  font-size: 1rem;
+}
+
+.hero-cta .btn-primary {
+  box-shadow: var(--shadow-sm);
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
+}
+
+.hero-followup {
+  gap: 0.35rem 0.5rem;
+}
+
+.hero-followup .btn {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--text-secondary);
+}
+
+.hero-followup .btn:hover {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--accent);
+  text-decoration: none;
 }
 
 .btn {
@@ -2385,6 +2427,11 @@ nav.sidebar a.nav-page-active {
   .hero {
     margin: 0 -1.25rem 2rem;
     padding: 2rem 1.25rem;
+  }
+
+  .hero-cta .btn {
+    flex: 1 1 100%;
+    justify-content: center;
   }
 
   .section-prominent {
