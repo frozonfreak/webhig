@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Read the HIG
-    url: https://github.com/frozonfreak/hig/blob/main/HIG.md
+    url: https://github.com/frozonfreak/webhig/blob/main/HIG.md
     about: Review the full specification before opening an issue

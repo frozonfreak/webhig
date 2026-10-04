@@ -1,6 +1,6 @@
 (function () {
-  const REPO = 'https://github.com/frozonfreak/hig';
-  const BADGE = 'https://frozonfreak.github.io/hig/badge.svg';
+  const REPO = 'https://github.com/frozonfreak/webhig';
+  const BADGE = 'https://frozonfreak.github.io/webhig/badge.svg';
   const sourceSelect = document.getElementById('share-source');
   const customWrap = document.getElementById('share-custom-wrap');
   const customInput = document.getElementById('share-custom');

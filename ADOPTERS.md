@@ -8,9 +8,9 @@ Products and repositories that **pin** The Web HIG (semver + profile) and use it
 
 | Project | Version / profile | Stack | Notes |
 | --- | --- | --- | --- |
-| [HIG documentation site](https://frozonfreak.github.io/hig/) | v1.12.5 · Full | Static docs | Hosts the standard’s public documentation |
+| [HIG documentation site](https://frozonfreak.github.io/webhig/) | v1.12.5 · Full | Static docs | Hosts the standard’s public documentation |
 | [Live demo (Aruvi Flow)](https://hig.aruviflow.com/) | v1.12.5 · Practical | Web app | Demonstrates archetypes, surfaces, states, and HIG-aligned UX patterns |
-| [This repository](https://github.com/frozonfreak/hig) | v1.12.5 · Full | Markdown, CI | Source of truth; `examples/agent-rules/` consumed by downstream repos |
+| [This repository](https://github.com/frozonfreak/webhig) | v1.12.5 · Full | Markdown, CI | Source of truth; `examples/agent-rules/` consumed by downstream repos |
 
 ---
 

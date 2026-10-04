@@ -1,7 +1,7 @@
 /** Shared documentation site URLs and sitemap entries (no side effects). */
 export const SITE = {
-  origin: 'https://frozonfreak.github.io/hig',
-  github: 'https://github.com/frozonfreak/hig',
+  origin: 'https://frozonfreak.github.io/webhig',
+  github: 'https://github.com/frozonfreak/webhig',
   title: 'The Web HIG — Pin how the web behaves',
 };
 

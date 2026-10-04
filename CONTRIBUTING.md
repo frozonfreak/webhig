@@ -32,7 +32,7 @@ Out of scope:
 
 ## How to propose a spec change
 
-1. **Search [issues](https://github.com/frozonfreak/hig/issues)** for duplicates.
+1. **Search [issues](https://github.com/frozonfreak/webhig/issues)** for duplicates.
 2. Open a **[Spec change proposal](./.github/ISSUE_TEMPLATE/spec-change.yml)** — describe problem, affected layers, and backward compatibility.
 3. Fork, branch from `main`, implement focused edits.
 4. Run **`npm install`** (root workspaces), then **`npm run validate`**, **`npm run lint`**, and **`npm test`** — CI rejects contract integrity failures (Markdown links, rule ID consistency, manifest schema, version headers).
@@ -89,7 +89,7 @@ Roadmap context: [ROADMAP.md](./ROADMAP.md)
 
 ## Documentation site
 
-The public site is static HTML in [`docs/`](./docs/) — hub [`index.html`](./docs/index.html) plus [`understand.html`](./docs/understand.html), [`adopt.html`](./docs/adopt.html) (share UI), [`ai.html`](./docs/ai.html), and [`reference.html`](./docs/reference.html) — deployed to [GitHub Pages](https://frozonfreak.github.io/hig/) on every push to `main` ([`.github/workflows/pages.yml`](./.github/workflows/pages.yml)).
+The public site is static HTML in [`docs/`](./docs/) — hub [`index.html`](./docs/index.html) plus [`understand.html`](./docs/understand.html), [`adopt.html`](./docs/adopt.html) (share UI), [`ai.html`](./docs/ai.html), and [`reference.html`](./docs/reference.html) — deployed to [GitHub Pages](https://frozonfreak.github.io/webhig/) on every push to `main` ([`.github/workflows/pages.yml`](./.github/workflows/pages.yml)).
 
 ```bash
 npm run build:docs

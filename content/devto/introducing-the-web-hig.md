@@ -4,14 +4,14 @@ published: false
 description: "Design systems define what UI looks like. The Web HIG defines how it behaves — 98 pin-able rules, stable IDs, and agent templates without swapping your stack."
 tags: webdev, ai, accessibility, ux, opensource
 cover_image:
-canonical_url: https://github.com/frozonfreak/hig
+canonical_url: https://github.com/frozonfreak/webhig
 ---
 
 Your design system probably nails color, type, and button variants. WCAG covers accessibility conformance. Your framework docs cover routing and data fetching.
 
 Then you ask an AI agent to “add a delete project flow,” and you get a modal that optimistically removes the row, no focus trap, hex colors sprinkled in the CSS, and a toast that says “Success!” without telling anyone *what* succeeded.
 
-That gap — **portable, testable product behavior** — is what [The Web HIG](https://github.com/frozonfreak/hig) is for.
+That gap — **portable, testable product behavior** — is what [The Web HIG](https://github.com/frozonfreak/webhig) is for.
 
 ## Not a component library
 
@@ -25,7 +25,7 @@ You keep MUI, shadcn, Tailwind, or a home-grown token file. You keep React, Vue,
 
 > **Design systems define *what* it looks like.** **The Web HIG defines *how* it behaves.**
 
-Current release: **v1.12.5**. [Quick Reference](https://github.com/frozonfreak/hig/blob/main/HIG-QUICK.md) · [Live demo](https://hig.aruviflow.com/) · [Documentation site](https://frozonfreak.github.io/hig/)
+Current release: **v1.12.5**. [Quick Reference](https://github.com/frozonfreak/webhig/blob/main/HIG-QUICK.md) · [Live demo](https://hig.aruviflow.com/) · [Documentation site](https://frozonfreak.github.io/webhig/)
 
 ## Why “just use a checklist” fails at scale
 
@@ -35,7 +35,7 @@ Informal checklists and blog posts help once. They do not:
 - Map rules to **CI severity** (block vs warn vs observe)
 - Compose cleanly with **agent context windows** (load topics on demand, not a 200-page PDF)
 
-The Web HIG is built for **testable behavior**: RFC 2119 vocabulary in the full spec, Layer 8 gate classes for automation, and a manifest ([`rules/manifest.yaml`](https://github.com/frozonfreak/hig/blob/main/rules/manifest.yaml)) so tools (and agents) can load only the module they need — forms, mutations, accessibility, and so on.
+The Web HIG is built for **testable behavior**: RFC 2119 vocabulary in the full spec, Layer 8 gate classes for automation, and a manifest ([`rules/manifest.yaml`](https://github.com/frozonfreak/webhig/blob/main/rules/manifest.yaml)) so tools (and agents) can load only the module they need — forms, mutations, accessibility, and so on.
 
 ## One standard, three levels
 
@@ -43,9 +43,9 @@ You do not have to read everything on day one.
 
 | Level | Document | When |
 | --- | --- | --- |
-| **Quick** | [HIG-QUICK.md](https://github.com/frozonfreak/hig/blob/main/HIG-QUICK.md) — 98 rules | Daily work, agents, PR review |
-| **Practical** | [HIG-LITE.md](https://github.com/frozonfreak/hig/blob/main/HIG-LITE.md) + `rules/` | Features — IDs, modules, archetypes |
-| **Full** | [HIG.md](https://github.com/frozonfreak/hig/blob/main/HIG.md) | Edge cases, CI gates, disputes |
+| **Quick** | [HIG-QUICK.md](https://github.com/frozonfreak/webhig/blob/main/HIG-QUICK.md) — 98 rules | Daily work, agents, PR review |
+| **Practical** | [HIG-LITE.md](https://github.com/frozonfreak/webhig/blob/main/HIG-LITE.md) + `rules/` | Features — IDs, modules, archetypes |
+| **Full** | [HIG.md](https://github.com/frozonfreak/webhig/blob/main/HIG.md) | Edge cases, CI gates, disputes |
 
 Same rule IDs at every layer. Escalate only when you need to.
 
@@ -106,7 +106,7 @@ When you push back on a shortcut, citing `HIG-MUT-001` or `HIG-A11Y-003` is clea
 └──────────────────────────────────────┘
 ```
 
-More background: [RATIONALE.md](https://github.com/frozonfreak/hig/blob/main/RATIONALE.md).
+More background: [RATIONALE.md](https://github.com/frozonfreak/webhig/blob/main/RATIONALE.md).
 
 ## Built for the AI-assisted workflow
 
@@ -135,13 +135,13 @@ You should see citations like `HIG-MUT-001`, `HIG-A11Y-008`, and `HIG-A11Y-004` 
 
 ## Try it in one afternoon
 
-1. **Pin** — copy `VERSION`, `HIG-QUICK.md`, and optional `HIG-CORE.md` to `docs/hig/` ([profiles guide](https://github.com/frozonfreak/hig/blob/main/PROFILES.md)).
-2. **Scope** — adapt [`examples/hig-scope.example.md`](https://github.com/frozonfreak/hig/blob/main/examples/hig-scope.example.md) to `docs/hig-scope.md`.
-3. **Agents** — one file from [`examples/agent-rules/`](https://github.com/frozonfreak/hig/tree/main/examples/agent-rules).
+1. **Pin** — copy `VERSION`, `HIG-QUICK.md`, and optional `HIG-CORE.md` to `docs/hig/` ([profiles guide](https://github.com/frozonfreak/webhig/blob/main/PROFILES.md)).
+2. **Scope** — adapt [`examples/hig-scope.example.md`](https://github.com/frozonfreak/webhig/blob/main/examples/hig-scope.example.md) to `docs/hig-scope.md`.
+3. **Agents** — one file from [`examples/agent-rules/`](https://github.com/frozonfreak/webhig/tree/main/examples/agent-rules).
 4. **Upgrade safely** — vendor the repo and run `npm run validate` when you bump the pinned version.
 
-Walkthrough: [quick-profile walkthrough](https://github.com/frozonfreak/hig/blob/main/examples/adoption/quick-profile-walkthrough.md).  
-Team adoption: [INTEGRATION.md](https://github.com/frozonfreak/hig/blob/main/INTEGRATION.md).
+Walkthrough: [quick-profile walkthrough](https://github.com/frozonfreak/webhig/blob/main/examples/adoption/quick-profile-walkthrough.md).  
+Team adoption: [INTEGRATION.md](https://github.com/frozonfreak/webhig/blob/main/INTEGRATION.md).
 
 Minimal PR checklist once the HIG is pinned:
 
@@ -157,16 +157,16 @@ Minimal PR checklist once the HIG is pinned:
 - **4** page archetypes  
 - Layers covering applicability, UX, IA, tokens, server-driven UI, a11y, perf, CI gates, and security UX  
 
-Index: [SPECIFICATION.md](https://github.com/frozonfreak/hig/blob/main/SPECIFICATION.md).  
-Roadmap for machine-readable registries and linters: [MACHINE_READABLE.md](https://github.com/frozonfreak/hig/blob/main/MACHINE_READABLE.md).
+Index: [SPECIFICATION.md](https://github.com/frozonfreak/webhig/blob/main/SPECIFICATION.md).  
+Roadmap for machine-readable registries and linters: [MACHINE_READABLE.md](https://github.com/frozonfreak/webhig/blob/main/MACHINE_READABLE.md).
 
 ## Open standard, your stack
 
-The Web HIG is deliberately **adopt, don’t rewrite**: pin the contract, wire your agents, optionally gate CI later. Framework notes live under [`framework/`](https://github.com/frozonfreak/hig/tree/main/framework) (React, Next, Vue, Nuxt, Astro) without mandating any of them.
+The Web HIG is deliberately **adopt, don’t rewrite**: pin the contract, wire your agents, optionally gate CI later. Framework notes live under [`framework/`](https://github.com/frozonfreak/webhig/tree/main/framework) (React, Next, Vue, Nuxt, Astro) without mandating any of them.
 
-If you are standardizing how your team — and your coding agents — handle loading states, destructive flows, and token discipline, **[star or pin the repo](https://github.com/frozonfreak/hig)** and tell us what you are building in [ADOPTERS.md](https://github.com/frozonfreak/hig/blob/main/ADOPTERS.md) or a GitHub issue.
+If you are standardizing how your team — and your coding agents — handle loading states, destructive flows, and token discipline, **[star or pin the repo](https://github.com/frozonfreak/webhig)** and tell us what you are building in [ADOPTERS.md](https://github.com/frozonfreak/webhig/blob/main/ADOPTERS.md) or a GitHub issue.
 
-Contributions welcome: [CONTRIBUTING.md](https://github.com/frozonfreak/hig/blob/main/CONTRIBUTING.md).
+Contributions welcome: [CONTRIBUTING.md](https://github.com/frozonfreak/webhig/blob/main/CONTRIBUTING.md).
 
 ---
 

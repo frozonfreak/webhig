@@ -1,8 +1,8 @@
 # The Web HIG
 
-[![Version](https://img.shields.io/github/v/tag/frozonfreak/hig?label=version\&color=1d4ed8)](https://github.com/frozonfreak/hig/releases)
-[![License: MIT](https://img.shields.io/github/license/frozonfreak/hig)](./LICENSE)
-[![CI](https://github.com/frozonfreak/hig/actions/workflows/validate.yml/badge.svg)](https://github.com/frozonfreak/hig/actions/workflows/validate.yml)
+[![Version](https://img.shields.io/github/v/tag/frozonfreak/webhig?label=version\&color=1d4ed8)](https://github.com/frozonfreak/webhig/releases)
+[![License: MIT](https://img.shields.io/github/license/frozonfreak/webhig)](./LICENSE)
+[![CI](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml/badge.svg)](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml)
 [![Pin me](https://img.shields.io/badge/Pin_me-HIG--QUICK.md-0f172a)](./HIG-QUICK.md)
 
 **A practical standard for how modern web interfaces should behave.**
@@ -154,7 +154,7 @@ Most people only need **HIG-QUICK**.
 
 **Current release:** [v1.12.5](./VERSION) · [Changelog](./CHANGELOG.md) · [Release notes](./RELEASE_NOTES.md)
 
-**[Documentation site](https://frozonfreak.github.io/hig/)** · **[HIG Audit](https://hig.aruviflow.com/)** · **[Integration guide](./INTEGRATION.md)** · **[Adopters](./ADOPTERS.md)**
+**[Documentation site](https://frozonfreak.github.io/webhig/)** · **[HIG Audit](https://hig.aruviflow.com/)** · **[Integration guide](./INTEGRATION.md)** · **[Adopters](./ADOPTERS.md)**
 
 ---
 
@@ -423,10 +423,10 @@ Example consumer project:
 
 Add the Web HIG badge to a project that follows the standard:
 
-![The Web HIG](https://frozonfreak.github.io/hig/badge.svg)
+![The Web HIG](https://frozonfreak.github.io/webhig/badge.svg)
 
 ```markdown
-[![The Web HIG](https://frozonfreak.github.io/hig/badge.svg)](https://github.com/frozonfreak/hig?utm_source=github_readme&utm_medium=badge&utm_campaign=share)
+[![The Web HIG](https://frozonfreak.github.io/webhig/badge.svg)](https://github.com/frozonfreak/webhig?utm_source=github_readme&utm_medium=badge&utm_campaign=share)
 ```
 
 Additional badges and attribution options are available in [SHARE.md](./SHARE.md).

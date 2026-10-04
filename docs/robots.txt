@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://frozonfreak.github.io/hig/sitemap.xml
+Sitemap: https://frozonfreak.github.io/webhig/sitemap.xml

@@ -70,7 +70,7 @@ const body = [
   '',
   '---',
   '',
-  `Pin: [HIG-QUICK.md](https://github.com/frozonfreak/hig/blob/v${requested}/HIG-QUICK.md) · Contract: [VERSION](https://github.com/frozonfreak/hig/blob/v${requested}/VERSION)`,
+  `Pin: [HIG-QUICK.md](https://github.com/frozonfreak/webhig/blob/v${requested}/HIG-QUICK.md) · Contract: [VERSION](https://github.com/frozonfreak/webhig/blob/v${requested}/VERSION)`,
   '',
 ].join('\n');
 
