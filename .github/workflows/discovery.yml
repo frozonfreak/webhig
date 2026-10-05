@@ -20,10 +20,15 @@ jobs:
       - uses: actions/checkout@v4
       - name: Sync GitHub description, homepage, and topics
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.REPO_ADMIN_TOKEN }}
         run: |
           DESC=$(jq -r .description .github/repo-discovery.json)
           HOME_URL=$(jq -r .homepage .github/repo-discovery.json)
+          jq -r '.topics[]' .github/repo-discovery.json >/dev/null
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::notice::Metadata sync was skipped. REPO_ADMIN_TOKEN is needed: a fine-grained PAT with Administration read and write on this repo, stored as a repository secret, to update the description, homepage, and topics from .github/repo-discovery.json."
+            exit 0
+          fi
           gh repo edit "$GITHUB_REPOSITORY" --description "$DESC" --homepage "$HOME_URL"
           jq -r '.topics[]' .github/repo-discovery.json | while read -r topic; do
             gh repo edit "$GITHUB_REPOSITORY" --add-topic "$topic"
@@ -31,8 +36,12 @@ jobs:
       - name: Attempt GitHub social preview upload
         continue-on-error: true
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.REPO_ADMIN_TOKEN }}
         run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::notice::Social preview upload was skipped. REPO_ADMIN_TOKEN is needed: a fine-grained PAT with Administration read and write on this repo, stored as a repository secret, to upload .github/social-preview.png."
+            exit 0
+          fi
           curl -sS -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer $GH_TOKEN" \
