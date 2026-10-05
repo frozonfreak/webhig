@@ -113,6 +113,8 @@ regenerates `docs/robots.txt`, `docs/sitemap.xml`, and `docs/404.html`. Commit t
 
 On a version tag (`vX.Y.Z`), [`.github/workflows/release.yml`](./.github/workflows/release.yml) drafts a GitHub Release from [CHANGELOG.md](./CHANGELOG.md) and [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
+[`.github/workflows/discovery.yml`](./.github/workflows/discovery.yml) syncs the GitHub description, homepage, topics, and social preview from [`.github/repo-discovery.json`](./.github/repo-discovery.json). Those calls need the **`REPO_ADMIN_TOKEN`** repository secret: a fine-grained personal access token with Administration read and write on this repo. When that secret is unset, the workflow prints a notice and skips the sync instead of failing.
+
 ---
 
 ## Code of conduct
