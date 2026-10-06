@@ -1447,6 +1447,40 @@ tr:last-child td {
   border-bottom: none;
 }
 
+.companion-table {
+  table-layout: fixed;
+}
+
+.companion-table caption {
+  caption-side: top;
+  text-align: left;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0 0 0.65rem;
+}
+
+.companion-table th,
+.companion-table td {
+  overflow-wrap: break-word;
+}
+
+.companion-table th[scope="row"] {
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+.companion-table tr:last-child th {
+  border-bottom: none;
+}
+
+#companion .table-wrap {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
 td a {
   font-weight: 500;
 }
@@ -1992,6 +2026,11 @@ details p {
 @media (max-width: 640px) {
   .two-col {
     grid-template-columns: 1fr;
+  }
+
+  .companion-table th,
+  .companion-table td {
+    padding: 0.6rem 0.5rem;
   }
 }
 

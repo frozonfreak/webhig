@@ -138,6 +138,19 @@ See [skills/](./skills/) and [examples/agent-rules/](./examples/agent-rules/).
 
 ---
 
+## Companion: Design Decision Method
+
+You can use WebHIG with your existing design process. WebHIG and Design Decision Method (DDM) help with different parts of the work, and each stands on its own.
+
+| | What it helps you do | Example |
+| --- | --- | --- |
+| WebHIG | Build interfaces that behave clearly, consistently and accessibly | Make errors understandable and preserve entered information when saving fails |
+| Design Decision Method (DDM) | Choose an interface that fits the people and task | Decide whether a task needs one form or a step-by-step flow |
+
+If you also want help choosing layouts, navigation and interaction patterns, [DDM](https://frozonfreak.github.io/DesignDecesionMethod/) gives you a structured way to make those decisions. DDM is optional.
+
+---
+
 ## Which document should I read?
 
 Most people only need **HIG-QUICK**.
