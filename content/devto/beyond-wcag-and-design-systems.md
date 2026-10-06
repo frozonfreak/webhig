@@ -3,7 +3,7 @@ title: "WCAG + your design system still leave a hole — The Web HIG fills the b
 published: false
 description: "Accessibility conformance and visual tokens are necessary, not sufficient. The Web HIG is a vendor-neutral contract for loading states, destructive flows, motion, and agent enforcement."
 tags: accessibility, ux, webdev, design, opensource
-canonical_url: https://github.com/frozonfreak/hig
+canonical_url: https://github.com/frozonfreak/webhig
 ---
 
 Most mature teams already have two pillars:
@@ -21,7 +21,7 @@ Ship a product and you still argue about:
 
 Those are **behavioral** questions. Neither WCAG nor Material/shadcn/your Figma kit answers them as a **versioned, citeable contract**.
 
-That is the hole [The Web HIG](https://github.com/frozonfreak/hig?utm_source=blog&utm_medium=article&utm_campaign=share) fills.
+That is the hole [The Web HIG](https://github.com/frozonfreak/webhig?utm_source=blog&utm_medium=article&utm_campaign=share) fills.
 
 ## Where it sits
 
@@ -54,7 +54,7 @@ Concrete domains covered by rule IDs and topic modules:
 
 ## Scope first (or you will over-apply)
 
-Layer 0 defines archetypes: **content**, **commerce**, **application**, **auth**. A blog does not need the same mutation state machine as an admin dashboard. Product repos declare scope in something like `docs/hig-scope.md`, then pin a profile (Quick / Practical / Full) — see [PROFILES.md](https://github.com/frozonfreak/hig/blob/main/PROFILES.md).
+Layer 0 defines archetypes: **content**, **commerce**, **application**, **auth**. A blog does not need the same mutation state machine as an admin dashboard. Product repos declare scope in something like `docs/hig-scope.md`, then pin a profile (Quick / Practical / Full) — see [PROFILES.md](https://github.com/frozonfreak/webhig/blob/main/PROFILES.md).
 
 ## Production use today
 
@@ -70,11 +70,11 @@ Tooling includes `@web-hig/cli` (`check`, `explain`, `upgrade` pin report). Runt
 
 | Need | Link |
 | --- | --- |
-| 5-minute rules | [HIG-QUICK.md](https://github.com/frozonfreak/hig/blob/main/HIG-QUICK.md) |
-| Why it exists | [RATIONALE.md](https://github.com/frozonfreak/hig/blob/main/RATIONALE.md) |
-| Wire agents / CI | [INTEGRATION.md](https://github.com/frozonfreak/hig/blob/main/INTEGRATION.md) |
+| 5-minute rules | [HIG-QUICK.md](https://github.com/frozonfreak/webhig/blob/main/HIG-QUICK.md) |
+| Why it exists | [RATIONALE.md](https://github.com/frozonfreak/webhig/blob/main/RATIONALE.md) |
+| Wire agents / CI | [INTEGRATION.md](https://github.com/frozonfreak/webhig/blob/main/INTEGRATION.md) |
 | Live audit | [hig.aruviflow.com](https://hig.aruviflow.com/) |
 
-[![The Web HIG](https://frozonfreak.github.io/hig/badge.svg)](https://github.com/frozonfreak/hig?utm_source=blog&utm_medium=badge&utm_campaign=share)
+[![The Web HIG](https://frozonfreak.github.io/webhig/badge.svg)](https://github.com/frozonfreak/webhig?utm_source=blog&utm_medium=badge&utm_campaign=share)
 
 Open source (MIT). Adopt the behavior; keep the look.
