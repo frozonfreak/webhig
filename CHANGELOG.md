@@ -10,7 +10,7 @@ Expanded adoption notes: [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
 ---
 
-## 1.13.0 - 2026-10-09
+## [1.13.0] - 2026-10-09
 
 ### Changed
 
