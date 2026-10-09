@@ -4,7 +4,7 @@ applyTo: "**/*.{css,scss,less,html,js,jsx,ts,tsx,vue,svelte,astro,mdx}"
 
 # The Web HIG — path-specific Copilot instructions
 
-Follow The Web HIG v1.12.5 on UI and front-end files.
+Follow The Web HIG v1.13.0 on UI and front-end files.
 
 - **Quick Reference:** `docs/hig/HIG-QUICK.md` (Layer 1) — *Follow The Web HIG Quick Reference.* Do not load full HIG unless needed.
 - **Practical guide:** `docs/hig/HIG-LITE.md` + `docs/hig/rules/manifest.yaml` (Layer 2) — load matching `rules/*.md` on topic match; `framework/*.md` when stack-specific
@@ -30,7 +30,7 @@ Follow The Web HIG v1.12.5 on UI and front-end files.
 - Slow async server regions SHOULD have streaming boundaries with layout-matching skeletons — HIG-SSR-002
 - Server mutation forms MUST expose pending UI — HIG-SSR-003
 - WCAG 2.2 AA conformance (reference official spec, do not redefine criteria) — HIG-A11Y-002
-- Prefer native HTML over ARIA; accessible names from visible text first — HIG-A11Y-003
+- Prefer native HTML over ARIA; accessible names from visible text first, verified against the browser accessibility tree (platform AccName) — HIG-A11Y-003
 - Icon buttons need accessible names; images need `alt`; visible focus; min 24×24px targets (44px preferred for touch) — HIG-A11Y-004–007
 - Modals MUST implement actual focus containment (not just `aria-modal`) — HIG-A11Y-008
 - Destructive mutations MUST NOT use optimistic confirmation without undo/soft-delete — HIG-MUT-001

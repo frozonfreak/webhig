@@ -25,7 +25,7 @@ You keep MUI, shadcn, Tailwind, or a home-grown token file. You keep React, Vue,
 
 > **Design systems define *what* it looks like.** **The Web HIG defines *how* it behaves.**
 
-Current release: **v1.12.5**. [Quick Reference](https://github.com/frozonfreak/webhig/blob/main/HIG-QUICK.md) · [Live demo](https://hig.aruviflow.com/) · [Documentation site](https://frozonfreak.github.io/webhig/)
+Current release: **v1.13.0**. [Quick Reference](https://github.com/frozonfreak/webhig/blob/main/HIG-QUICK.md) · [Live demo](https://hig.aruviflow.com/) · [Documentation site](https://frozonfreak.github.io/webhig/)
 
 ## Why “just use a checklist” fails at scale
 

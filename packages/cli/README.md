@@ -54,7 +54,7 @@ $env:WEB_HIG_ROOT = "docs/hig"
 Copy [web-hig.example.yaml](https://github.com/frozonfreak/hig/blob/main/examples/web-hig.example.yaml) to your repo root:
 
 ```yaml
-version: "1.12.5"
+version: "1.13.0"
 profile: practical
 archetype: application
 framework:
@@ -118,7 +118,7 @@ Options:
 **Example output:**
 
 ```text
-Web HIG v1.12.5
+Web HIG v1.13.0
 
 Profile: Practical
 Archetype: Application

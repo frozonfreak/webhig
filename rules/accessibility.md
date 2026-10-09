@@ -1,6 +1,6 @@
 # Accessibility — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §5](../HIG.md#layer-5-accessibility-a11y--keyboard-navigation) · **Rule IDs:** HIG-A11Y-001–008
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §5](../HIG.md#layer-5-accessibility-a11y--keyboard-navigation) · **Rule IDs:** HIG-A11Y-001–008
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -16,12 +16,16 @@
 
 Native semantic HTML MUST be preferred over ARIA when equivalent semantics exist (**HIG-A11Y-003**). Example: `<button>` not `<div role="button">`.
 
-**Accessible name computation** — prefer in order:
+**Accessible name and description** — Names and descriptions MUST match the **user-agent** computation ([AccName 1.2](https://www.w3.org/TR/accname-1.2/) Working Draft; [AccName 1.1](https://www.w3.org/TR/accname-1.1/)). Do not treat a simplified attribute order as authoritative when it disagrees with the browser accessibility tree. AccName 1.2 WD wording is not an independent HIG conformance bar.
 
-1. Visible text content
-2. Accessible name from content (`<img alt>`, `<label>` association)
-3. `aria-labelledby`
-4. `aria-label` (when visible text insufficient)
+**Authoring preference** (ergonomic — not a substitute for the algorithm):
+
+1. Visible text / native labeling (`<label>`, button text, `<img alt>`)
+2. `aria-labelledby` from existing visible text
+3. `aria-label` when visible text is insufficient
+4. Descriptions via `aria-describedby` (prefer) or `aria-description` where supported — verify in the accessibility tree
+
+Watch divergence for shadow roots/slots, CSS-generated content, hidden ID references, embedded controls, and roles that prohibit naming. Prefer the browser accessibility tree in audits.
 
 Icon buttons MUST have accessible names (**HIG-A11Y-004**). Images MUST have `alt` (**HIG-A11Y-005**).
 

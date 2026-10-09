@@ -165,7 +165,7 @@ Most people only need **HIG-QUICK**.
 | I want to understand why HIG exists         | [RATIONALE.md](./RATIONALE.md)          |
 | I want to audit an existing website         | [HIG Audit](https://hig.aruviflow.com/) |
 
-**Current release:** [v1.12.5](./VERSION) · [Changelog](./CHANGELOG.md) · [Release notes](./RELEASE_NOTES.md)
+**Current release:** [v1.13.0](./VERSION) · [Changelog](./CHANGELOG.md) · [Release notes](./RELEASE_NOTES.md)
 
 **[Documentation site](https://frozonfreak.github.io/webhig/)** · **[HIG Audit](https://hig.aruviflow.com/)** · **[Integration guide](./INTEGRATION.md)** · **[Adopters](./ADOPTERS.md)**
 

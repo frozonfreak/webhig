@@ -1,10 +1,10 @@
 # HIG scope for this product (example)
 
-Pinned contract: The Web HIG v1.12.5
+Pinned contract: The Web HIG v1.13.0
 
 | File | Purpose |
 | --- | --- |
-| `docs/hig/VERSION` | Version pin (currently 1.12.5) |
+| `docs/hig/VERSION` | Version pin (currently 1.13.0) |
 | `docs/hig/HIG-QUICK.md` | Quick Reference — default agent context (Layer 1) |
 | `docs/hig/HIG-LITE.md` | Practical guide with rule IDs (Layer 2) |
 | `docs/hig/rules/archetypes/*.md` | Archetype packs |

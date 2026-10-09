@@ -1,6 +1,6 @@
 # The Web HIG — Quick Reference
 
-**Layer 1** · ~5 minutes · **Version:** v1.12.5
+**Layer 1** · ~5 minutes · **Version:** v1.13.0
 
 **Pin this file — that is the whole onboarding path.** You do not need the rest of the repository to start.
 
@@ -132,7 +132,7 @@ Bullets that name **`HIG-*` inline** use the canonical ID. Machine-readable Quic
 66. Target WCAG 2.2 Level AA — refer to the official spec; do not redefine criteria.
 67. Use native HTML elements before reaching for ARIA — `<button>`, `<a>`, `<input>`, `<select>`.
 68. Never use `<div onClick>` or `<span onClick>` for interactive controls.
-69. Every control must have an accessible name — especially icon-only buttons.
+69. Every control must have an accessible name — especially icon-only buttons. Prefer visible/`<label>` text; verify names against the browser accessibility tree (platform AccName), not a simplified attribute checklist — especially for web components, slots, and hidden ID refs.
 70. Every informative image must have meaningful `alt` text; decorative images use `alt=""`.
 71. All functionality must be operable by keyboard alone.
 72. Focus must be visible on every interactive element — never `outline: none` without a custom ring.
@@ -151,7 +151,7 @@ Bullets that name **`HIG-*` inline** use the canonical ID. Machine-readable Quic
 
 81. Default to server rendering — add client JavaScript only when interaction requires it.
 82. Protect Core Web Vitals: LCP ≤2.5 s, INP ≤200 ms (field), CLS ≤0.1 (**HIG-PERF-001**, **HIG-PERF-002**).
-83. Images must declare dimensions or aspect ratio to prevent layout shift.
+83. Images must declare dimensions or aspect ratio to prevent layout shift. Choose formats by measured transfer cost and LCP; offer emerging formats (e.g. JPEG XL) only via `<picture>` progressive enhancement with a broadly supported fallback.
 84. Lazy-load below-the-fold media; never lazy-load the LCP candidate.
 85. Application CSS must not use `transition: all` — enumerate animated properties explicitly.
 86. Micro-feedback animations must complete within 300 ms and serve exactly one purpose.

@@ -1,6 +1,6 @@
 # The Web HIG — Practical Guide (Layer 2)
 
-**Version:** v1.12.5 · **Quick Reference:** [HIG-QUICK.md](./HIG-QUICK.md) · **Core:** [HIG-CORE.md](./HIG-CORE.md) · **Full spec:** [HIG.md](./HIG.md) · **Topic index:** [rules/INDEX.md](./rules/INDEX.md)
+**Version:** v1.13.0 · **Quick Reference:** [HIG-QUICK.md](./HIG-QUICK.md) · **Core:** [HIG-CORE.md](./HIG-CORE.md) · **Full spec:** [HIG.md](./HIG.md) · **Topic index:** [rules/INDEX.md](./rules/INDEX.md)
 
 Practical documentation with rule IDs and checklists. Start with [HIG-QUICK.md](./HIG-QUICK.md) (Layer 1, ~5 min); open this file when you need rule ID links and archetype guidance. Load [rules/manifest.yaml](./rules/manifest.yaml) topic modules when the task requires depth beyond this summary.
 
@@ -23,7 +23,7 @@ Practical documentation with rule IDs and checklists. Start with [HIG-QUICK.md](
 
 - Mobile-first and responsive; clear visual hierarchy ([§1.1](./HIG.md#11-direct-manipulation--motion-ergonomics))
 - One primary action per screen; never create dead ends ([§2.1](./HIG.md#21-document-fundamentals))
-- Ship document fundamentals: language/dir, one primary main landmark, title, viewport, CLS-safe images, and disciplined font loading (**HIG-DOC-001**, **HIG-DOC-002**, **HIG-DOC-003**, **HIG-DOC-004**, **HIG-DOC-005**, **HIG-DOC-006**)
+- Ship document fundamentals: language/dir, one primary main landmark, title, viewport, CLS-safe images (formats by measured outcome; emerging formats only via progressive enhancement), and disciplined font loading (**HIG-DOC-001**, **HIG-DOC-002**, **HIG-DOC-003**, **HIG-DOC-004**, **HIG-DOC-005**, **HIG-DOC-006**)
 - Preserve user state; URL represents navigable state where applicable ([§2.3](./HIG.md#23-navigation-architecture-command-palette--deep-linking))
 - SEO/shareable content uses metadata, canonical URLs, social metadata, and structured data where warranted (**HIG-SEO-001**, **HIG-SEO-002**, **HIG-SEO-003**)
 - Immediate local feedback on every interaction ([§1.1](./HIG.md#11-direct-manipulation--motion-ergonomics))
@@ -36,7 +36,7 @@ Practical documentation with rule IDs and checklists. Start with [HIG-QUICK.md](
 - Semantic HTML first; native elements over ARIA (**HIG-A11Y-003** → [§5.2](./HIG.md#52-native-html-over-aria))
 - Keyboard accessible; follow platform widget patterns ([§5.3](./HIG.md#53-keyboard-focus--interaction))
 - Visible focus indicator with sufficient contrast (**HIG-A11Y-006** → [§5.3](./HIG.md#53-keyboard-focus--interaction))
-- Accessible names on all controls; icon buttons and images included (**HIG-A11Y-004**, **HIG-A11Y-005** → [§5.2](./HIG.md#52-native-html-over-aria))
+- Accessible names on all controls; icon buttons and images included — match the platform AccName computation / browser accessibility tree, not a simplified attribute order (**HIG-A11Y-004**, **HIG-A11Y-005** → [§5.2](./HIG.md#52-native-html-over-aria))
 - **MUST** 24×24 CSS px minimum targets — WCAG 2.5.8-aligned baseline (**HIG-A11Y-007** → [§5.4](./HIG.md#54-target-sizes)); WCAG exceptions apply
 - **SHOULD** 44×44 CSS px for primary touch — HIG ergonomic recommendation only; not **HIG-A11Y-007**
 - Modal focus containment, not just `aria-modal` (**HIG-A11Y-008** → [§5.3](./HIG.md#53-keyboard-focus--interaction))

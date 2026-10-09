@@ -1,6 +1,6 @@
 # The Web HIG — Rule Index (Level 2)
 
-**Version:** v1.12.5 · **Machine-readable:** [manifest.yaml](./manifest.yaml), [registry.yaml](./registry.yaml) · **Quick Reference:** [HIG-QUICK.md](../HIG-QUICK.md) · **Practical:** [HIG-LITE.md](../HIG-LITE.md) · **Full spec:** [HIG.md](../HIG.md)
+**Version:** v1.13.0 · **Machine-readable:** [manifest.yaml](./manifest.yaml), [registry.yaml](./registry.yaml) · **Quick Reference:** [HIG-QUICK.md](../HIG-QUICK.md) · **Practical:** [HIG-LITE.md](../HIG-LITE.md) · **Full spec:** [HIG.md](../HIG.md)
 
 This index maps rule IDs to standalone Layer 2 modules and tells agents **when** to load them. Each module is a self-contained extract; [HIG.md](../HIG.md) remains the complete normative contract (Layer 3).
 
@@ -91,7 +91,7 @@ Load alongside **architecture** when the task is framework-specific:
 | HIG-DOC-002 | One primary main landmark and native interactive semantics | ux | §2.1 |
 | HIG-DOC-003 | Unique descriptive title | ux | §2.1 |
 | HIG-DOC-004 | Responsive viewport meta | ux | §2.1 |
-| HIG-DOC-005 | CLS-safe responsive images | ux | §2.1 |
+| HIG-DOC-005 | CLS-safe responsive images; formats by measured outcome | ux | §2.1 |
 | HIG-DOC-006 | Web font loading discipline | ux | §2.1 |
 | HIG-SEO-001 | Meta description and canonical URL | ux | §2.1 |
 | HIG-SEO-002 | Social metadata for shareable pages | ux | §2.1 |
@@ -113,7 +113,7 @@ Load alongside **architecture** when the task is framework-specific:
 | HIG-A11Y-001 | Reduced motion media query | animation | §1.3 |
 | HIG-A11Y-002 | WCAG 2.2 AA | accessibility | §5.1 |
 | HIG-A11Y-003 | Native HTML over ARIA | accessibility | §5.2 |
-| HIG-A11Y-004 | Accessible name on icon buttons | accessibility | §5.2 |
+| HIG-A11Y-004 | Accessible name on icon buttons (platform AccName) | accessibility | §5.2 |
 | HIG-A11Y-005 | Alt text on images | accessibility | §5.2 |
 | HIG-A11Y-006 | Visible focus styles | accessibility | §5.3 |
 | HIG-A11Y-007 | Min 24×24 px (WCAG 2.5.8 baseline); 44px touch is SHOULD ergonomics | accessibility | §5.4 |

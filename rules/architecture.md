@@ -1,6 +1,6 @@
 # Server-Driven Architecture — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §4.1–4.2](../HIG.md#41-server-driven--progressive-rendering-architecture) · **Rule IDs:** HIG-SSR-001–003
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §4.1–4.2](../HIG.md#41-server-driven--progressive-rendering-architecture) · **Rule IDs:** HIG-SSR-001–003
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md). Framework-specific adapters: [framework/](../framework/).
 

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AccName fixture — aria-description precedence</title>
+    <link rel="stylesheet" href="./fixture.css" />
+  </head>
+  <body>
+    <h1><code>aria-describedby</code> vs <code>aria-description</code></h1>
+    <p class="meta">
+      Probe: description computation precedence —
+      <code>aria-describedby</code> before <code>aria-description</code> per
+      AccName 1.2. Verify in the accessibility tree; support varies by engine.
+    </p>
+
+    <div class="case">
+      <h2>Both attributes present</h2>
+      <button
+        type="button"
+        id="both"
+        aria-describedby="desc-ref"
+        aria-description="From aria-description attribute"
+      >
+        Export
+      </button>
+      <p id="desc-ref">From aria-describedby target</p>
+      <p class="expected">
+        Expected description when both resolve:
+        <strong>From aria-describedby target</strong> (describedby wins).
+      </p>
+    </div>
+
+    <div class="case">
+      <h2>Only <code>aria-description</code></h2>
+      <button
+        type="button"
+        id="desc-only"
+        aria-description="Inline description only"
+      >
+        Import
+      </button>
+      <p class="expected">
+        Expected description where supported:
+        <strong>Inline description only</strong>.
+      </p>
+    </div>
+  </body>
+</html>

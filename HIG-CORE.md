@@ -1,6 +1,6 @@
 # The Web HIG — Core (Level 0)
 
-**Version:** v1.12.5 · **Quick Reference:** [HIG-QUICK.md](./HIG-QUICK.md) · **Practical:** [HIG-LITE.md](./HIG-LITE.md) · **Full spec:** [HIG.md](./HIG.md)
+**Version:** v1.13.0 · **Quick Reference:** [HIG-QUICK.md](./HIG-QUICK.md) · **Practical:** [HIG-LITE.md](./HIG-LITE.md) · **Full spec:** [HIG.md](./HIG.md)
 
 Session preamble: philosophy, vocabulary, archetype resolution, and simplicity rule. Load once per session alongside Layer 1 Quick Reference.
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AccName fixture — slotted label</title>
+    <link rel="stylesheet" href="./fixture.css" />
+  </head>
+  <body>
+    <h1>Slotted label</h1>
+    <p class="meta">
+      Probe: accessible name from light-DOM content projected into a shadow
+      <code>&lt;slot&gt;</code>. Prefer the browser accessibility tree over
+      attribute/light-DOM heuristics.
+    </p>
+
+    <div class="case">
+      <h2>Custom button with slotted text</h2>
+      <hig-icon-button id="slotted-btn">
+        <span slot="label">Save draft</span>
+      </hig-icon-button>
+      <p class="expected">
+        Expected name (typical): <strong>Save draft</strong> from the slotted
+        label text, not an empty name from the shadow host alone.
+      </p>
+    </div>
+
+    <script>
+      class HigIconButton extends HTMLElement {
+        constructor() {
+          super();
+          const root = this.attachShadow({ mode: "open" });
+          root.innerHTML = `
+            <style>
+              button {
+                align-items: center;
+                display: inline-flex;
+                gap: 0.35rem;
+                min-block-size: 2.5rem;
+                min-inline-size: 2.5rem;
+              }
+              .glyph::before { content: "★"; }
+            </style>
+            <button type="button">
+              <span class="glyph" aria-hidden="true"></span>
+              <slot name="label"></slot>
+            </button>
+          `;
+        }
+      }
+      customElements.define("hig-icon-button", HigIconButton);
+    </script>
+  </body>
+</html>

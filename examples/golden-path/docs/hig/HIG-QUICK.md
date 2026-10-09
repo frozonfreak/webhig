@@ -1,6 +1,6 @@
 # The Web HIG — Quick Reference (golden path pin)
 
-**Layer 1** · **Version:** v1.12.5
+**Layer 1** · **Version:** v1.13.0
 
 This fixture pins a minimal Quick Reference for agents. In a real product repo, copy the full [HIG-QUICK.md](https://github.com/frozonfreak/hig/blob/main/HIG-QUICK.md) or run `npx @web-hig/install`.
 

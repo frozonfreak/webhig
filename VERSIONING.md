@@ -12,7 +12,7 @@ The Web HIG uses [Semantic Versioning 2.0.0](https://semver.org/) for the **cont
 | [HIG.md](./HIG.md) title | Must match `VERSION` |
 | [HIG-QUICK.md](./HIG-QUICK.md), [HIG-LITE.md](./HIG-LITE.md), [HIG-CORE.md](./HIG-CORE.md) | Header version must match |
 | [rules/manifest.yaml](./rules/manifest.yaml) | `version:` field must match |
-| Git tag | `v{MAJOR}.{MINOR}.{PATCH}` (e.g. `v1.12.5`) |
+| Git tag | `v{MAJOR}.{MINOR}.{PATCH}` (e.g. `v1.13.0`) |
 
 CI runs `npm run validate` to enforce sync across these files.
 
@@ -59,7 +59,7 @@ docs/hig-scope.md          # your routes → archetypes
 | --- | --- |
 | **Vendor copy** | Fastest; you merge upstream on upgrade |
 | **Git submodule / subtree** | Pull upstream tags; path fixed in repo |
-| **Release URL** | Agent rules reference `.../blob/v1.12.5/HIG-QUICK.md` |
+| **Release URL** | Agent rules reference `.../blob/v1.13.0/HIG-QUICK.md` |
 
 Always record the pinned version in PR templates or `docs/hig/VERSION` so agents and CI agree.
 

@@ -69,6 +69,17 @@ This roadmap describes **contract and tooling** direction for the standard repos
 
 ---
 
+## Research watchlist (2026-10-09)
+
+Informational — not commitments. From the weekly Web HIG research brief:
+
+| Topic | Status |
+| --- | --- |
+| Core Web Vitals | No material metric, threshold, or measurement-policy change |
+| AI/agent interfaces | No new primary research strong enough to alter guidance; keep visible agent state, confirmation for consequential actions, reversibility, provenance, accessible status |
+| Modern CSS (Safari TP experiments) | Track `interpolate-size`, `calc-size()`, `symbols()`, linked parameters — no HIG recommendation or automated rule yet |
+| JPEG XL multi-engine + field evidence | Spec guidance landed in **HIG-DOC-005** (progressive enhancement only); consider a future informational audit for JXL-only delivery after stable multi-engine support |
+
 ## Explicit non-roadmap
 
 - Shipping a component library in this repository

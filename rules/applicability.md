@@ -1,6 +1,6 @@
 # Applicability & Scope — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §0](../HIG.md#layer-0-applicability--scope) · **Archetype packs:** [archetypes/](./archetypes/)
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §0](../HIG.md#layer-0-applicability--scope) · **Archetype packs:** [archetypes/](./archetypes/)
 
 > Resolve archetype **before** applying any other HIG rules. Load the matching archetype pack for default module set.
 
