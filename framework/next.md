@@ -1,6 +1,6 @@
 # Next.js Framework Adapter
 
-**Version:** v1.12.5 · **Base adapter:** [react.md](./react.md) · **Universal architecture:** [rules/architecture.md](../rules/architecture.md)
+**Version:** v1.13.0 · **Base adapter:** [react.md](./react.md) · **Universal architecture:** [rules/architecture.md](../rules/architecture.md)
 
 > Next.js App Router specifics. Normative requirements remain in the universal architecture module.
 

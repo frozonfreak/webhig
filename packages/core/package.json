@@ -1,6 +1,6 @@
 {
   "name": "@web-hig/core",
-  "version": "1.12.5",
+  "version": "1.13.0",
   "description": "Shared evaluator engine for The Web HIG conformance tooling",
   "homepage": "https://github.com/frozonfreak/hig/tree/main/packages/core#readme",
   "bugs": {

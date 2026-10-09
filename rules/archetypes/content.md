@@ -1,6 +1,6 @@
 # Archetype Pack — Content / Marketing
 
-**Version:** v1.12.5 · **Archetype:** `content` · **Matrix:** [applicability.md](../applicability.md)
+**Version:** v1.13.0 · **Archetype:** `content` · **Matrix:** [applicability.md](../applicability.md)
 
 Landing pages, blogs, docs, campaigns, portfolios, and studio sites. Read-mostly, SEO-critical; may be document-dominant or expressive (resolve **surface** in scope).
 

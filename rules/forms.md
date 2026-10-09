@@ -1,6 +1,6 @@
 # Forms — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §2.11](../HIG.md#211-forms-contract) · **Rule ID:** HIG-FRM-001
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §2.11](../HIG.md#211-forms-contract) · **Rule ID:** HIG-FRM-001
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 

@@ -1,6 +1,6 @@
 # Search — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §2.9](../HIG.md#29-search-standard-commerce--application) · **Rule IDs:** HIG-SRCH-001–006 · **Archetypes:** Commerce, Application
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §2.9](../HIG.md#29-search-standard-commerce--application) · **Rule IDs:** HIG-SRCH-001–006 · **Archetypes:** Commerce, Application
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 

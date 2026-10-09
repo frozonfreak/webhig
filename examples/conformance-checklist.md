@@ -10,7 +10,7 @@ Informative checklist for **Quick Reference** and **Practical** profiles. Adjust
 - [ ] **States** — loading, empty, error, success designed (not blank UI)
 - [ ] **Tokens** — no raw hex in app CSS (**HIG-TOK-001**)
 - [ ] **Motion** — no `transition: all`; `prefers-reduced-motion` respected (**HIG-MOT-001**, **HIG-A11Y-001**)
-- [ ] **A11y** — native HTML first, visible focus, names on icon buttons, alt on images (**HIG-A11Y-003**–**008**)
+- [ ] **A11y** — native HTML first, visible focus, names on icon buttons verified in the accessibility tree, alt on images (**HIG-A11Y-003**–**008**)
 - [ ] **Targets** — interactive targets ≥ 24×24 CSS px (**HIG-A11Y-007**)
 - [ ] **Layout** — `@container` when component reuse spans contexts (**HIG-CQ-002**)
 - [ ] **Mutations** — no optimistic destructive confirm (**HIG-MUT-001**)

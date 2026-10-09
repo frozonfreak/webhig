@@ -1,9 +1,9 @@
 # The Web HIG — machine-readable rule registry
-# Version: 1.12.5
+# Version: 1.13.0
 # Normative prose: HIG.md · Index: rules/INDEX.md · Tooling: NPM-TOOLING.md
 # Regenerate: node scripts/sync-registry.mjs
 
-version: "1.12.5"
+version: "1.13.0"
 
 rules:
   HIG-SIM-001:
@@ -101,7 +101,7 @@ rules:
 
   HIG-DOC-005:
     severity: error
-    requirement: CLS-safe responsive images
+    requirement: CLS-safe responsive images; formats by measured outcome / progressive enhancement
     profiles:
       - practical
       - full
@@ -497,7 +497,7 @@ rules:
 
   HIG-A11Y-004:
     severity: error
-    requirement: Accessible name on icon buttons
+    requirement: Accessible name on icon buttons (platform AccName / a11y tree)
     profiles:
       - quick
       - practical

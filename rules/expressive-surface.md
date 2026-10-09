@@ -1,6 +1,6 @@
 # Expressive Surface Baseline — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §0.3, §1.5](../HIG.md#15-expressive-surface-baseline) · **Rule IDs:** HIG-EXP-001–014 · **Registry:** [motion-tiers.yaml](./motion-tiers.yaml)
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §0.3, §1.5](../HIG.md#15-expressive-surface-baseline) · **Rule IDs:** HIG-EXP-001–014 · **Registry:** [motion-tiers.yaml](./motion-tiers.yaml)
 
 > Standalone extract for progressive loading. Covers fluid, scroll-driven, and motion-forward **content** surfaces (~60–70% of public marketing and portfolio web). Not a visual pattern library — behavioral obligations only.
 

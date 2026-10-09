@@ -1,6 +1,6 @@
 # Mutations, Conflicts & Idempotency — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §2.4, §4.5](../HIG.md#24-destructive-actions--permission-guardrails) · **Rule IDs:** HIG-MUT-001, HIG-MUT-002
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §2.4, §4.5](../HIG.md#24-destructive-actions--permission-guardrails) · **Rule IDs:** HIG-MUT-001, HIG-MUT-002
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 

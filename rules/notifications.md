@@ -1,6 +1,6 @@
 # Notifications — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §2.10](../HIG.md#210-notifications-taxonomy) · **Rule ID:** HIG-NTF-001
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §2.10](../HIG.md#210-notifications-taxonomy) · **Rule ID:** HIG-NTF-001
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 

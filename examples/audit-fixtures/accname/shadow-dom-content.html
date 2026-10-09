@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AccName fixture — shadow DOM content</title>
+    <link rel="stylesheet" href="./fixture.css" />
+  </head>
+  <body>
+    <h1>Shadow DOM content</h1>
+    <p class="meta">
+      Probe: name contributed by text that exists only inside a closed/open
+      shadow tree (no light-DOM label text).
+    </p>
+
+    <div class="case">
+      <h2>Host with name-only shadow content</h2>
+      <hig-named-control id="shadow-named"></hig-named-control>
+      <p class="expected">
+        Expected name (typical): <strong>Notify me</strong> from shadow text
+        content of the inner button. Light-DOM scrapers that ignore shadow
+        trees will disagree with browsers.
+      </p>
+    </div>
+
+    <script>
+      class HigNamedControl extends HTMLElement {
+        constructor() {
+          super();
+          const root = this.attachShadow({ mode: "open" });
+          root.innerHTML = `<button type="button">Notify me</button>`;
+        }
+      }
+      customElements.define("hig-named-control", HigNamedControl);
+    </script>
+  </body>
+</html>

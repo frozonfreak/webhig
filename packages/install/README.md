@@ -90,7 +90,7 @@ npx @web-hig/install --dry-run
 Example agent contract line:
 
 ```text
-Pinned contract: The Web HIG v1.12.5 · Practical profile · Application archetype
+Pinned contract: The Web HIG v1.13.0 · Practical profile · Application archetype
 ```
 
 ---

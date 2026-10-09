@@ -1,9 +1,9 @@
 # The Web HIG — Evaluator dimension map (machine-readable)
-# Version: 1.12.5
+# Version: 1.13.0
 # Used to bucket rule IDs and findings into report dimensions.
 # Normative report shape: EVALUATOR.md · Schema: schema/evaluator-report.schema.json
 
-version: "1.12.5"
+version: "1.13.0"
 
 # Maps Layer 8 gate levels to evaluator severity buckets
 severity_buckets:

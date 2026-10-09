@@ -10,6 +10,26 @@ Expanded adoption notes: [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
 ---
 
+## 1.13.0 - 2026-10-09
+
+### Changed
+
+- **§5.2 Accessible name and description** — Prefer the **platform AccName computation** / browser accessibility tree over a simplified attribute order. References [AccName 1.2 Working Draft](https://www.w3.org/TR/accname-1.2/) as documentation of the algorithm; WD wording is **not** an independent HIG conformance requirement ([HIG.md](./HIG.md), [rules/accessibility.md](./rules/accessibility.md)).
+- **HIG-DOC-005** — Outcome-based image transfer-format guidance; JPEG XL and similar formats only via progressive enhancement (typically `<picture>` + broadly supported fallback). No automated fail for absence of JXL.
+
+### Added
+
+- [examples/audit-fixtures/](./examples/audit-fixtures/) — AccName edge-case HTML fixtures (slots, shadow DOM, hidden ID refs, `aria-description`, CSS generated content, prohibited-name roles) and Safari TP 254 / VoiceOver manual review matrix.
+- Quick Reference and Lite cross-links for AccName tree verification and measured image formats.
+
+### Deferred / unchanged
+
+- No Core Web Vitals metric, threshold, or measurement-policy change.
+- No new AI/agent-interface requirements (existing visible state, confirmation, reversibility, provenance, and accessible status guidance stand).
+- Safari TP experimental CSS is watchlist-only — not HIG recommendations or audit rules.
+
+---
+
 ## 1.12.5 - 2026-09-21
 
 ### Added

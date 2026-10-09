@@ -1,6 +1,6 @@
 # UX & Information Architecture — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §2.1–2.4](../HIG.md#layer-2-information-architecture--product-standards) · **Rule IDs:** HIG-DOC-001–006, HIG-SEO-001–003, HIG-MUT-001, HIG-SIM-001
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §2.1–2.4](../HIG.md#layer-2-information-architecture--product-standards) · **Rule IDs:** HIG-DOC-001–006, HIG-SEO-001–003, HIG-MUT-001, HIG-SIM-001
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -16,7 +16,7 @@ Every page MUST ship:
 * **HIG-DOC-002 — Landmarks:** Exactly one primary `<main>` landmark. Use `<header>`, `<nav>`, `<footer>`, `<aside>` when corresponding regions exist. Interactive elements MUST use native semantics (`<button>`, `<a>`), never `<div onClick>`.
 * **HIG-DOC-003 — Title:** A unique, descriptive `<title>`.
 * **HIG-DOC-004 — Viewport:** Responsive viewport meta tag.
-* **HIG-DOC-005 — Responsive images (CLS-safe):** Every `<img>` declares intrinsic `width`/`height` or `aspect-ratio`; use `srcset`/`sizes`. Lazy-load non-critical images; avoid lazy-loading the LCP candidate.
+* **HIG-DOC-005 — Responsive images (CLS-safe):** Every `<img>` declares intrinsic `width`/`height` or `aspect-ratio`; use `srcset`/`sizes`. Lazy-load non-critical images; avoid lazy-loading the LCP candidate. Choose transfer formats by measured outcome (sizing, quality, transfer cost, LCP)—not format fashion. Emerging formats such as JPEG XL MAY be offered only via progressive enhancement (normally `<picture>` with a broadly supported fallback). Compare encodings on representative images; do not ship JXL-only as the sole source while multi-engine support and field evidence remain incomplete.
 * **HIG-DOC-006 — Fonts:** `font-display: swap` or `optional`. Preload only critical fonts when evidence supports it.
 
 ### SEO / shareable (Content, Commerce — where applicable)

@@ -1,9 +1,9 @@
 # The Web HIG — Motion tier registry (machine-readable)
-# Version: 1.12.5
+# Version: 1.13.0
 # Normative prose: rules/expressive-surface.md § Motion tier taxonomy
 # Enforced by: HIG-EXP-006, HIG-EXP-013, HIG-EXP-014
 
-version: "1.12.5"
+version: "1.13.0"
 
 # Numeric tiers (Tier 0–3) align with motion_class for functional/spatial/narrative.
 # "ambient" is a separate motion_class (environmental loops — not narrative structure).

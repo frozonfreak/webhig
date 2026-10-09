@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AccName fixture — prohibited-name roles</title>
+    <link rel="stylesheet" href="./fixture.css" />
+  </head>
+  <body>
+    <h1>Roles that prohibit naming</h1>
+    <p class="meta">
+      Probe: AccName initialization returns an empty string when the root
+      node’s role prohibits naming (e.g. generic / presentation patterns).
+      Naming attributes on those roles should not invent a control name.
+    </p>
+
+    <div class="case">
+      <h2>Generic host with <code>aria-label</code></h2>
+      <div id="generic-named" role="generic" aria-label="Should not name">
+        Visible text inside generic
+      </div>
+      <p class="expected">
+        Expected accessible name: <strong>empty</strong> when the role
+        prohibits naming. Heuristics that always prefer
+        <code>aria-label</code> will falsely report a name.
+      </p>
+    </div>
+
+    <div class="case">
+      <h2>Presentation / none</h2>
+      <div id="none-named" role="none" aria-label="Decorative label">
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" width="1" height="1" alt="" />
+      </div>
+      <p class="expected">
+        Expected: no usable name from <code>aria-label</code> on
+        <code>role="none"</code>. Prefer structural semantics over labeling
+        presentational containers.
+      </p>
+    </div>
+  </body>
+</html>

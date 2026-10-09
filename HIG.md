@@ -1,8 +1,8 @@
-# The Web HIG & Product Engine Contract — v1.12.5
+# The Web HIG & Product Engine Contract — v1.13.0
 
 ## Executive Summary
 
-The Web HIG v1.12.5 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
+The Web HIG v1.13.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
 
 This release adds a three-layer consumption model and archetype rule packs:
 
@@ -310,7 +310,7 @@ Every page MUST ship:
 * **HIG-DOC-002 — Landmarks:** A document MUST contain exactly one primary `<main>` landmark. Nested browsing contexts (e.g. iframes) are separate documents with their own landmark sets. Use `<header>`, `<nav>`, `<footer>`, `<aside>`, etc. when their corresponding semantic regions exist — they are not universally mandatory. Interactive elements MUST use native semantics (`<button>`, `<a>`), never `<div onClick>`.
 * **HIG-DOC-003 — Title:** A unique, descriptive `<title>`.
 * **HIG-DOC-004 — Viewport:** Responsive viewport meta tag.
-* **HIG-DOC-005 — Responsive images (CLS-safe):** Every `<img>` declares intrinsic `width`/`height` or an `aspect-ratio`; use `srcset`/`sizes` for resolution switching. Lazy-load non-critical images where appropriate; avoid lazy-loading the LCP candidate and other immediately needed content. The LCP candidate SHOULD be discoverable early and MAY use `fetchpriority="high"` when appropriate.
+* **HIG-DOC-005 — Responsive images (CLS-safe):** Every `<img>` declares intrinsic `width`/`height` or an `aspect-ratio`; use `srcset`/`sizes` for resolution switching. Lazy-load non-critical images where appropriate; avoid lazy-loading the LCP candidate and other immediately needed content. The LCP candidate SHOULD be discoverable early and MAY use `fetchpriority="high"` when appropriate. Choose image **transfer formats by measured outcome** — responsive sizing, quality appropriate to the content, transfer cost, and LCP impact — not by format fashion. Emerging formats such as JPEG XL MAY be offered only through progressive enhancement (normally `<picture>` with a broadly supported fallback such as AVIF, WebP, or JPEG). Teams SHOULD compare encodings on representative images for their actual sets. Do not treat JPEG XL (or any single next-gen format) as the default sole source while multi-engine support and field evidence remain incomplete.
 * **HIG-DOC-006 — Fonts:** Fonts MUST use `font-display: swap` or `optional`. Preload only critical font resources when field/lab evidence demonstrates a benefit — preloading every font can hurt performance.
 
 #### SEO / shareable (Content, Commerce — where applicable)
@@ -818,12 +818,16 @@ Applications that support offline operation MUST define sync, conflict resolutio
 
 Native semantic HTML MUST be preferred over ARIA when equivalent native semantics exist. Example: use `<button>` instead of `<div role="button">`.
 
-**Accessible name computation** — prefer in order:
+**Accessible name and description** — Every control that requires a name MUST expose a correct accessible name (and description when needed) as computed by the **user agent**, not by a simplified authoring checklist. The platform algorithm is documented in [Accessible Name and Description Computation 1.2](https://www.w3.org/TR/accname-1.2/) (Working Draft, updating [AccName 1.1](https://www.w3.org/TR/accname-1.1/)). Authors, linters, and agents MUST NOT treat a fixed attribute priority list as authoritative when it disagrees with the browser accessibility tree.
 
-1. Visible text content
-2. Accessible name from content (e.g. `<img alt>`, `<input>` associated with `<label>`)
-3. `aria-labelledby`
-4. `aria-label` (when visible text is insufficient)
+**Authoring preference** (ergonomic guidance — not a substitute for the platform algorithm):
+
+1. Prefer visible text and native labeling (`<label>`, button text, `<img alt>`).
+2. Use `aria-labelledby` when composing a name from existing visible text.
+3. Use `aria-label` only when visible text is insufficient.
+4. Prefer `aria-describedby` for descriptions; `aria-description` participates in description computation where supported — verify the result in the accessibility tree.
+
+Pay special attention when light-DOM or attribute heuristics diverge from browsers: shadow roots and slots, CSS-generated content and whitespace normalization, hidden referenced subtrees, embedded controls, and roles that prohibit naming. Prefer inspecting the browser accessibility tree for audits. AccName 1.2 remains a Working Draft — do **not** treat its newer wording as an independent HIG conformance requirement beyond what user agents already expose.
 
 Avoid unnecessary ARIA.
 
@@ -1374,6 +1378,7 @@ Logs MUST include timestamp, actor, action, and resource — but MUST NOT includ
 
 **Release documentation:** [CHANGELOG.md](./CHANGELOG.md) (Keep a Changelog) · [RELEASE_NOTES.md](./RELEASE_NOTES.md) (adoption notes) · [VERSIONING.md](./VERSIONING.md) (semver policy).
 
+* **v1.13.0 (2026-10-09):** Minor guidance release. Accessible name/description defers to platform AccName computation (AccName 1.2 WD referenced; not an independent conformance bar); **HIG-DOC-005** adds outcome-based image-format / progressive-enhancement guidance (JPEG XL via `<picture>` fallback). Audit fixtures for AccName edge cases and Safari/VoiceOver manual review notes. No Core Web Vitals threshold change; no new AI/agent-interface rules.
 * **v1.12.5 (2026-09-21):** Patch release. Quick ↔ rule ID map and agent-facing count guidance; expanded contract validation (manifest JSON Schema, Quick map); [examples/golden-path](./examples/golden-path/); npm workspaces and shared lint; `web-hig upgrade` pin report; roadmap/README tooling honesty. No normative rule IDs added, removed, or retightened.
 * **v1.12.4 (2026-09-20):** Patch release. Documentation site **npm packages** section with links to `@web-hig/install`, `@web-hig/cli`, and `@web-hig/core` on npm. No normative rule IDs added, removed, or retightened.
 * **v1.12.3 (2026-09-20):** Patch release. Detailed npm package READMEs for `@web-hig/core`, `@web-hig/cli`, and `@web-hig/install`. No normative rule IDs added, removed, or retightened.

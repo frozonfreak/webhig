@@ -86,7 +86,7 @@ cd packages/core
 npm publish --access public
 
 cd ../cli
-npm pkg set "dependencies[@web-hig/core]=1.12.5"
+npm pkg set "dependencies[@web-hig/core]=1.13.0"
 npm install --omit=dev
 npm publish --access public
 

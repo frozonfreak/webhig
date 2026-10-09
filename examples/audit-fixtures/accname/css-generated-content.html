@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AccName fixture — CSS generated content</title>
+    <link rel="stylesheet" href="./fixture.css" />
+    <style>
+      .rated::before {
+        content: "Rating: ";
+      }
+      .rated::after {
+        content: " stars";
+      }
+      .ws-name::before {
+        content: "Save";
+      }
+      .ws-name::after {
+        content: "\a0\a0changes";
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS generated content &amp; whitespace</h1>
+    <p class="meta">
+      Probe: whether <code>::before</code> / <code>::after</code>
+      <code>content</code> and whitespace normalization participate in the
+      accessible name. Engines differ; use the AX tree as source of truth.
+    </p>
+
+    <div class="case">
+      <h2>Pseudo-element content around visible text</h2>
+      <button type="button" class="rated">4</button>
+      <p class="expected">
+        Possible name: <strong>Rating: 4 stars</strong> when generated content
+        is included. Do not fail authors solely on pseudo-element omission if
+        the engine tree excludes it.
+      </p>
+    </div>
+
+    <div class="case">
+      <h2>Whitespace in generated content</h2>
+      <button type="button" class="ws-name"></button>
+      <p class="expected">
+        Flat-string normalization should collapse runs of whitespace. Confirm
+        the exposed name string in DevTools / AX API.
+      </p>
+    </div>
+  </body>
+</html>

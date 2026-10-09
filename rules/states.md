@@ -1,6 +1,6 @@
 # UI States — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §2.5–2.7, §4.3–4.6](../HIG.md#25-error-ux-taxonomy) · **Rule IDs:** HIG-ERR-001, HIG-EMP-001, HIG-LOD-001
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §2.5–2.7, §4.3–4.6](../HIG.md#25-error-ux-taxonomy) · **Rule IDs:** HIG-ERR-001, HIG-EMP-001, HIG-LOD-001
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 

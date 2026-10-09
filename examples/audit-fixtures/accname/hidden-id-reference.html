@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AccName fixture — hidden ID references</title>
+    <link rel="stylesheet" href="./fixture.css" />
+  </head>
+  <body>
+    <h1>Hidden ID references</h1>
+    <p class="meta">
+      Probe: AccName “hidden not referenced” rules for
+      <code>aria-labelledby</code> / <code>aria-describedby</code> traversals.
+      Compare both cases in the accessibility tree.
+    </p>
+
+    <div class="case">
+      <h2>A — Direct reference is hidden (name still accumulates)</h2>
+      <button type="button" id="btn-a" aria-labelledby="ref-a">?</button>
+      <span id="ref-a" class="hidden">Archive item</span>
+      <p class="expected">
+        Typical result: name <strong>Archive item</strong> because the
+        referenced node itself is hidden and starts the traversal.
+      </p>
+    </div>
+
+    <div class="case">
+      <h2>B — Visible reference wraps a hidden descendant</h2>
+      <button type="button" id="btn-b" aria-labelledby="ref-b">?</button>
+      <span id="ref-b">Prefix <span class="hidden">hidden suffix</span></span>
+      <p class="expected">
+        Typical result: name may be <strong>Prefix</strong> only — hidden
+        descendants of a <em>visible</em> referenced node are not included the
+        same way. Confirm in the browser AX tree.
+      </p>
+    </div>
+
+    <div class="case">
+      <h2>C — Description from hidden describedby target</h2>
+      <input id="email" type="email" aria-label="Email" aria-describedby="hint-hidden" />
+      <p id="hint-hidden" class="hidden">We never share your address.</p>
+      <p class="expected">
+        Typical description: <strong>We never share your address.</strong>
+        when the describedby target is the hidden referenced root.
+      </p>
+    </div>
+  </body>
+</html>

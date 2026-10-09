@@ -1,6 +1,6 @@
 # Archetype Pack — Commerce
 
-**Version:** v1.12.5 · **Archetype:** `commerce` · **Matrix:** [applicability.md](../applicability.md)
+**Version:** v1.13.0 · **Archetype:** `commerce` · **Matrix:** [applicability.md](../applicability.md)
 
 Product listings, PDPs, cart, checkout. Conversion-critical, payment-sensitive.
 

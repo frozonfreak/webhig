@@ -1,6 +1,6 @@
 # Design Tokens — Level 2 Module
 
-**Version:** v1.12.5 · **Canonical spec:** [HIG.md §3.1](../HIG.md#31-design-token-architecture) · **Rule IDs:** HIG-TOK-001, HIG-TOK-002, HIG-MOT-002
+**Version:** v1.13.0 · **Canonical spec:** [HIG.md §3.1](../HIG.md#31-design-token-architecture) · **Rule IDs:** HIG-TOK-001, HIG-TOK-002, HIG-MOT-002
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 

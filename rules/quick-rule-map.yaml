@@ -1,9 +1,9 @@
 # The Web HIG — Layer 1 Quick rule ↔ rule ID map
-# Version: 1.12.5
+# Version: 1.13.0
 # Normative Quick prose: HIG-QUICK.md · IDs: rules/registry.yaml
 # Regenerate: npm run sync:quick-map
 
-version: "1.12.5"
+version: "1.13.0"
 
 entries:
   - number: 1
