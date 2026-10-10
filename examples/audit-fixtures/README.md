@@ -9,6 +9,7 @@ Sourced from the **2026-10-09** Web HIG research brief.
 | AccName 1.2 Working Draft (2026-10-02) | HTML fixtures under [`accname/`](./accname/) |
 | Safari Technology Preview 254 (2026-10-08) | Manual review matrix in [`safari-tp-254-voiceover.md`](./safari-tp-254-voiceover.md) |
 | JPEG XL (Chrome 155) | Spec-only — see **HIG-DOC-005**; no automated failure here |
+| Scoped transitions vs `transition: all` | [motion-transition-regression/](./motion-transition-regression/) — illustrative; not a normative rule change |
 
 ## How to use
 

@@ -25,7 +25,12 @@ jobs:
         run: npm run lint
       - name: Validate contract, Markdown links, and rule IDs
         run: npm run validate
-      - name: Test installer and golden path
+      - name: Install Chrome for the motion regression fixture
+        run: |
+          wget -q -O /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt-get update
+          sudo apt-get install -y /tmp/chrome.deb
+      - name: Test installer, golden path, and motion fixture
         run: npm test
       - name: Documentation site artifacts
         run: npm run build:docs

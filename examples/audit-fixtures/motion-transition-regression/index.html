@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Motion transition regression fixture</title>
+    <link rel="stylesheet" href="fixture.css">
+    <script src="fixture.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <main id="main" class="fixture">
+      <h1 class="fixture-title">Motion transition regression</h1>
+      <p class="fixture-lead">
+        A validation result changes the check button’s width and shows an error on the reference
+        code. Press feedback may animate. The width change must not.
+      </p>
+      <p class="fixture-note" id="instrumentation-note">
+        The width change is fixture instrumentation so a test can observe a layout property on the
+        same control. It is not a recommended application layout.
+      </p>
+
+      <form class="fixture-form" data-fixture-form novalidate>
+        <div class="fixture-field-block">
+          <label class="fixture-label" for="reference-code">
+            Reference code <span class="fixture-required">(required)</span>
+          </label>
+          <input
+            class="fixture-field"
+            id="reference-code"
+            name="reference-code"
+            type="text"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            maxlength="6"
+            spellcheck="false"
+            required
+            aria-invalid="false"
+            aria-describedby="reference-code-error"
+          >
+          <p class="fixture-error" id="reference-code-error" hidden>
+            Error: Enter the 6-digit reference code.
+          </p>
+        </div>
+
+        <section class="fixture-case" aria-labelledby="conform-heading">
+          <h2 class="fixture-heading" id="conform-heading">Conforming control</h2>
+          <p>
+            Lists <code>background-color</code> and <code>transform</code> only. The validation
+            result appears on the reference code field.
+          </p>
+          <button
+            class="fixture-button"
+            id="conform-button"
+            type="submit"
+            aria-labelledby="conform-heading conform-button"
+          >
+            Check code
+          </button>
+        </section>
+
+        <section class="fixture-case" aria-labelledby="negative-heading">
+          <h2 class="fixture-heading" id="negative-heading">Deliberately non-conformant comparison</h2>
+          <p id="negative-note">
+            Uses an unscoped transition shorthand. Not shippable application CSS. The same field
+            error is revealed.
+          </p>
+          <button
+            class="fixture-button fixture-button--negative"
+            id="negative-button"
+            type="button"
+            aria-labelledby="negative-heading negative-button"
+            aria-describedby="negative-note"
+          >
+            Check code
+          </button>
+        </section>
+      </form>
+    </main>
+  </body>
+</html>

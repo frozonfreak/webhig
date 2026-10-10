@@ -20,7 +20,7 @@
     "format": "prettier --check \"scripts/**/*.mjs\" \"packages/**/*.mjs\" \"eslint.config.js\"",
     "format:write": "prettier --write \"scripts/**/*.mjs\" \"packages/**/*.mjs\" \"eslint.config.js\"",
     "pretest": "node --input-type=module -e \"import fs from 'node:fs'; if (!fs.existsSync('node_modules/@web-hig/core/package.json')) { console.error('Run npm install at repo root'); process.exit(1); }\"",
-    "test": "node scripts/test/validate-hig.test.mjs && node scripts/test/golden-path.test.mjs && node packages/install/test/install.test.mjs && node packages/cli/test/check.test.mjs && node packages/cli/test/evaluator-report.test.mjs"
+    "test": "node scripts/test/validate-hig.test.mjs && node scripts/test/golden-path.test.mjs && node packages/install/test/install.test.mjs && node packages/cli/test/check.test.mjs && node packages/cli/test/evaluator-report.test.mjs && node examples/audit-fixtures/motion-transition-regression/regression.spec.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

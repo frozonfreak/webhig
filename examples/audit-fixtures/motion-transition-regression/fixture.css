@@ -1,0 +1,234 @@
+/* Illustrative audit fixture. Not a normative Web HIG stylesheet.
+   The comparison control at the bottom is a planted violation. */
+
+:root {
+  --pr-blue-500: #2563eb;
+  --pr-blue-600: #1d4ed8;
+  --pr-blue-400: #60a5fa;
+  --pr-slate-900: #0f172a;
+  --pr-slate-600: #475569;
+  --pr-slate-500: #64748b;
+  --pr-slate-400: #94a3b8;
+  --pr-slate-100: #f1f5f9;
+  --pr-red-600: #dc2626;
+  --pr-red-700: #b91c1c;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  --size-radius-sm: 6px;
+  --size-measure-max: 75ch;
+  --size-control-height-md: 40px;
+  --size-border-width: 1px;
+  --size-border-width-focus: 3px;
+
+  --font-family-body: system-ui, sans-serif;
+  --font-size-body: 1rem;
+  --font-size-title: 1.5rem;
+  --font-size-section: 1.25rem;
+  --font-weight-strong: 600;
+  --line-height-body: 1.5;
+  --line-height-heading: 1.25;
+
+  --duration-fast: 100ms;
+  --ease-out-momentum: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-duration-fast: var(--duration-fast);
+  --motion-ease-out: var(--ease-out-momentum);
+
+  --surface-base: #ffffff;
+  --surface-raised: var(--pr-slate-100);
+  --text-primary: var(--pr-slate-900);
+  --text-secondary: var(--pr-slate-600);
+  --brand-primary: var(--pr-blue-500);
+  --brand-hover: var(--pr-blue-600);
+  --focus-ring: var(--pr-blue-600);
+  --status-danger: var(--pr-red-600);
+  --status-danger-text: var(--pr-red-700);
+
+  --radius-sm: var(--size-radius-sm);
+  --z-sticky: 200;
+
+  --button-bg: var(--brand-primary);
+  --button-bg-active: var(--brand-hover);
+  --button-fg: var(--surface-base);
+  --input-border: var(--text-secondary);
+
+  --fixture-button-inline-rest: 140px;
+  --fixture-button-inline-invalid: 240px;
+  --fixture-press-scale: 0.98;
+  --fixture-field-inline: 12rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-base: #090d16;
+    --surface-raised: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --brand-primary: #3b82f6;
+    --brand-hover: #60a5fa;
+    --focus-ring: #60a5fa;
+    --status-danger: #f87171;
+    --status-danger-text: #f87171;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+:focus-visible {
+  outline: var(--size-border-width-focus) solid var(--focus-ring);
+  outline-offset: var(--space-1);
+}
+
+.skip-link {
+  position: absolute;
+  inset-block-start: -100%;
+  inset-inline-start: var(--space-3);
+  z-index: var(--z-sticky);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-4);
+  background-color: var(--button-bg);
+  color: var(--button-fg);
+  font-weight: var(--font-weight-strong);
+  text-decoration: none;
+  border-end-start-radius: var(--radius-sm);
+  border-end-end-radius: var(--radius-sm);
+}
+
+.skip-link:focus {
+  inset-block-start: 0;
+}
+
+.fixture {
+  box-sizing: border-box;
+  max-inline-size: var(--size-measure-max);
+  margin-inline: auto;
+  padding-block: var(--space-8);
+  padding-inline: var(--space-6);
+}
+
+.fixture-title {
+  margin-block: 0 var(--space-4);
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-heading);
+}
+
+.fixture-heading {
+  margin-block: 0 var(--space-2);
+  font-size: var(--font-size-section);
+  line-height: var(--line-height-heading);
+}
+
+.fixture-lead,
+.fixture-note,
+.fixture-case p {
+  margin-block: 0 var(--space-4);
+}
+
+.fixture-note {
+  color: var(--text-secondary);
+}
+
+.fixture-field-block {
+  margin-block-end: var(--space-8);
+}
+
+.fixture-label {
+  display: block;
+  margin-block-end: var(--space-2);
+  font-weight: var(--font-weight-strong);
+}
+
+.fixture-required {
+  font-weight: normal;
+  color: var(--text-secondary);
+}
+
+.fixture-field {
+  box-sizing: border-box;
+  inline-size: var(--fixture-field-inline);
+  max-inline-size: 100%;
+  min-block-size: var(--size-control-height-md);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-3);
+  border-width: var(--size-border-width);
+  border-style: solid;
+  border-color: var(--input-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.fixture-field[aria-invalid='true'] {
+  border-color: var(--status-danger);
+}
+
+.fixture-error {
+  margin-block: var(--space-2) 0;
+  color: var(--status-danger-text);
+  font-weight: var(--font-weight-strong);
+}
+
+.fixture-case {
+  margin-block-start: var(--space-8);
+}
+
+.fixture-button {
+  box-sizing: border-box;
+  inline-size: var(--fixture-button-inline-rest);
+  min-block-size: var(--size-control-height-md);
+  padding-block: var(--space-2);
+  padding-inline: var(--space-3);
+  border-width: var(--size-border-width);
+  border-style: solid;
+  border-color: transparent;
+  border-radius: var(--radius-sm);
+  background-color: var(--button-bg);
+  color: var(--button-fg);
+  font: inherit;
+  font-weight: var(--font-weight-strong);
+  text-align: center;
+  white-space: nowrap;
+  transition-property: background-color, transform;
+  transition-duration: var(--motion-duration-fast);
+  transition-timing-function: var(--motion-ease-out);
+}
+
+.fixture-button.is-invalid {
+  inline-size: var(--fixture-button-inline-invalid);
+}
+
+.fixture-button:active {
+  background-color: var(--button-bg-active);
+  transform: scale(var(--fixture-press-scale));
+}
+
+.fixture-button--negative {
+  transition: all var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fixture-button,
+  .fixture-button--negative {
+    transition: none;
+    transform: none;
+  }
+
+  .fixture-button:active,
+  .fixture-button--negative:active {
+    background-color: var(--button-bg-active);
+    transform: none;
+  }
+}

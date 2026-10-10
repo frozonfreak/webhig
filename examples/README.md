@@ -15,6 +15,7 @@ Copy these into a **product** repository. They are not loaded when developing Th
 | Conformance levels | [PROFILES.md](../PROFILES.md) |
 | PR checklist (copy-paste) | [conformance-checklist.md](./conformance-checklist.md) |
 | AccName / AT audit fixtures | [audit-fixtures/](./audit-fixtures/) |
+| Motion transition regression | [audit-fixtures/motion-transition-regression/](./audit-fixtures/motion-transition-regression/) |
 | Public listing | [ADOPTERS.md](../ADOPTERS.md) |
 | Share badge (UTM) | [SHARE.md](../SHARE.md) |
 
