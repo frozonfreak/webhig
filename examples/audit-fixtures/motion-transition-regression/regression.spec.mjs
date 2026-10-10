@@ -5,6 +5,27 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
+// Node 20 exposes the WebSocket client only with --experimental-websocket.
+// Node 22+ provides globalThis.WebSocket without that flag. CI invokes this
+// file as `node regression.spec.mjs`, so relaunch once when the constructor
+// is missing. The env guard stops a loop if the flag does not enable it.
+if (typeof globalThis.WebSocket !== 'function') {
+  if (process.env.WEB_HIG_EXPERIMENTAL_WEBSOCKET === '1') {
+    throw new Error(
+      'globalThis.WebSocket is not a constructor. Use Node 22+, or Node 20.10+ with --experimental-websocket.',
+    );
+  }
+  const relaunched = spawnSync(
+    process.execPath,
+    ['--experimental-websocket', ...process.execArgv, ...process.argv.slice(1)],
+    {
+      stdio: 'inherit',
+      env: { ...process.env, WEB_HIG_EXPERIMENTAL_WEBSOCKET: '1' },
+    },
+  );
+  process.exit(relaunched.status === null ? 1 : relaunched.status);
+}
+
 const fixedDir = path.dirname(fileURLToPath(import.meta.url));
 const css = fs.readFileSync(path.join(fixedDir, 'fixture.css'), 'utf8');
 const html = fs.readFileSync(path.join(fixedDir, 'index.html'), 'utf8');
