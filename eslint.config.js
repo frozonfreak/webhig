@@ -20,6 +20,16 @@ export default [
     },
   },
   {
+    files: ['examples/audit-fixtures/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2024,
+      sourceType: 'script',
+      globals: {
+        ...globals.browser,
+      },
+    },
+  },
+  {
     ignores: [
       '**/node_modules/**',
       'docs/**',
