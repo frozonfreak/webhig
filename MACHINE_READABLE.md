@@ -96,7 +96,7 @@ Implementations may live in a separate `eslint-plugin-hig` repository to keep th
 Minimum:
 
 ```bash
-# In a clone of github.com/frozonfreak/hig at tag vX.Y.Z
+# In a clone of github.com/frozonfreak/webhig at tag vX.Y.Z
 npm run validate
 ```
 
