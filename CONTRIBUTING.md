@@ -6,6 +6,40 @@ Thank you for helping improve an **open behavioral standard** for the web. This 
 
 ---
 
+## Local setup
+
+Node.js **20** or newer (`engines` in [package.json](./package.json)).
+
+```bash
+git clone https://github.com/frozonfreak/webhig.git
+cd webhig
+npm ci
+```
+
+`npm ci` is what CI runs (`npm ci --include=dev` in [Validate HIG](./.github/workflows/validate.yml)). It installs from the lockfile, including the root workspaces.
+
+`npm test` includes a motion fixture that launches Chrome or Chromium. CI installs Google Chrome. Locally, `google-chrome`, `google-chrome-stable`, or `chromium` needs to be on your PATH.
+
+---
+
+## Checks
+
+Run these before opening a pull request. The same commands run on every pull request to `main`.
+
+| Command | What it covers |
+| --- | --- |
+| `npm run validate` | Local Markdown links and anchors, rule ID consistency, version headers, manifest schema |
+| `npm run lint` | ESLint for `scripts/` and `packages/` |
+| `npm test` | Installer, golden-path fixture, CLI report, and the motion fixture |
+| `npm run check:version-bump` | Compares `VERSION` with the base ref. Locally that is `origin/main`. A contract-file diff without a semver increase fails. See [VERSIONING.md](./VERSIONING.md). |
+| `npm run build:docs` | Regenerates `docs/robots.txt`, `docs/sitemap.xml`, and `docs/404.html`, and checks share metadata. Commit the generated files when they change. |
+
+`npm run format` runs Prettier on JavaScript (`scripts/`, `packages/`, `eslint.config.js`). It is not a CI gate. Run it when you edit those files.
+
+README and CONTRIBUTING edits do not, by themselves, require a `VERSION` bump. Contract files do: `HIG.md`, `HIG-CORE.md`, `HIG-LITE.md`, `EVALUATOR.md`, `rules/`, `framework/`, `schema/`, and numbered rules in `HIG-QUICK.md`.
+
+---
+
 ## What belongs here
 
 Good contributions:
@@ -30,15 +64,41 @@ Out of scope:
 
 ---
 
-## How to propose a spec change
+## Editorial fixes and rule changes
 
-1. **Search [issues](https://github.com/frozonfreak/webhig/issues)** for duplicates.
-2. Open a **[Spec change proposal](./.github/ISSUE_TEMPLATE/spec-change.yml)** — describe problem, affected layers, and backward compatibility.
-3. Fork, branch from `main`, implement focused edits.
-4. Run **`npm install`** (root workspaces), then **`npm run validate`**, **`npm run lint`**, and **`npm test`** — CI rejects contract integrity failures (Markdown links, rule ID consistency, manifest schema, version headers).
-5. Open a PR using [.github/PULL_REQUEST_TEMPLATE.md](./.github/PULL_REQUEST_TEMPLATE.md). Contract file changes must bump [VERSION](./VERSION) (see [VERSIONING.md](./VERSIONING.md)).
+**Editorial fixes** repair links, typos, contributor docs, or site copy without changing what a rule requires. They do not need governance review. Run the [checks](#checks) that apply. Skip a `VERSION` bump unless a contract file also changes.
+
+**Rule changes** add a requirement or revise one: normative text, severity, applicability, a stable ID, or the meaning of a MUST / SHOULD. Every new or revised rule goes through **governance review before merging**.
+
+### What a rule proposal must describe
+
+Search [issues](https://github.com/frozonfreak/webhig/issues) for duplicates, then open a **[Spec change proposal](./.github/ISSUE_TEMPLATE/spec-change.yml)**. The proposal must describe:
+
+- **User harm** — who is affected, and how, when the interface does not follow the guidance
+- **Capability condition** — when the requirement applies (archetype, surface, or capability)
+- **Evidence** — what you observed or measured
+- **Alternative implementations** — other ways to address the same harm, and why this one was chosen
+- **Test cases** — how a reviewer can check the requirement
+- **Exceptions** — cases that stay out of scope, and why
+- **Compatibility impact** — whether existing pins, severity, or behavior change (patch, minor, or major)
+
+The template records affected layers, the problem, the proposed wording, and the expected version impact. Include the seven items above in that issue, or in the pull request that links it, even when a template field does not ask for them by name.
+
+---
+
+## How to open a pull request
+
+1. Branch from `main`. Keep the change focused. Do not mix an editorial fix and a rule change in one pull request.
+2. Run the [checks](#checks).
+3. Open the pull request with [.github/PULL_REQUEST_TEMPLATE.md](./.github/PULL_REQUEST_TEMPLATE.md).
+
+Commit subjects in this repository are imperative sentences that name the change (`Add …`, `Fix …`, `Document …`). Use the body to say why when the subject is not enough.
+
+Contract file changes must bump [VERSION](./VERSION) (see [VERSIONING.md](./VERSIONING.md)).
 
 ### File sync checklist (substantive rule changes)
+
+After the spec-change proposal is open, keep these files in sync in the pull request:
 
 | Step | File(s) |
 | --- | --- |
@@ -77,11 +137,13 @@ Follow [Semantic Versioning](https://semver.org/) as documented in [VERSIONING.m
 
 ---
 
-## Governance (lightweight)
+## Governance
 
-- **Maintainers** merge PRs that pass CI and align with [RATIONALE.md](./RATIONALE.md) non-goals
-- **Major semver** changes should include migration notes in RELEASE_NOTES
-- **Disputes** defer to full [HIG.md](./HIG.md) text; open an issue if Layer 1/2 extracts disagree with Layer 3
+- **Editorial fixes** can merge after CI passes and a maintainer review.
+- **New or revised rules** wait for governance review before merging. The proposal must cover user harm, the capability condition, evidence, alternative implementations, test cases, exceptions, and compatibility impact. Start from the [spec change proposal](./.github/ISSUE_TEMPLATE/spec-change.yml).
+- **Maintainers** merge pull requests that pass CI and align with [RATIONALE.md](./RATIONALE.md) non-goals.
+- **Major semver** changes should include migration notes in RELEASE_NOTES.
+- **Disputes** defer to full [HIG.md](./HIG.md) text; open an issue if Layer 1/2 extracts disagree with Layer 3.
 
 Roadmap context: [ROADMAP.md](./ROADMAP.md)
 
@@ -99,17 +161,7 @@ regenerates `docs/robots.txt`, `docs/sitemap.xml`, and `docs/404.html`. Commit t
 
 ### Quality gates (every push/PR)
 
-| Check | How |
-| --- | --- |
-| Local Markdown links and anchors | `npm run validate` |
-| Rule ID consistency (INDEX, manifest, HIG.md, modules, registry, Quick map) | `npm run validate` |
-| Version header sync | `npm run validate` |
-| Version bump rules | `npm run check:version-bump` |
-| Offline Markdown/HTML link targets | GitHub Actions `lychee --offline` |
-| Docs share artifacts | `npm run build:docs` |
-| Manifest YAML vs JSON Schema | `npm run validate` |
-| JavaScript (scripts + packages) | `npm run lint` |
-| Installer + golden-path fixture | `npm test` |
+The [checks](#checks) above are the local equivalents. CI also runs an offline link check (`lychee --offline` on Markdown and `docs/**/*.html`) in the Validate HIG workflow.
 
 On a version tag (`vX.Y.Z`), [`.github/workflows/release.yml`](./.github/workflows/release.yml) drafts a GitHub Release from [CHANGELOG.md](./CHANGELOG.md) and [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
