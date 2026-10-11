@@ -1,9 +1,9 @@
 # The Web HIG — Layer 1 Quick rule ↔ rule ID map
-# Version: 1.13.0
+# Version: 1.13.1
 # Normative Quick prose: HIG-QUICK.md · IDs: rules/registry.yaml
 # Regenerate: npm run sync:quick-map
 
-version: "1.13.0"
+version: "1.13.1"
 
 entries:
   - number: 1
@@ -49,11 +49,11 @@ entries:
   - number: 20
     quick_only: true
   - number: 21
-    ids:
-      - HIG-DOC-005
+    quick_only: true
+    # canonical ID pending (F4)
   - number: 22
-    ids:
-      - HIG-DOC-006
+    quick_only: true
+    # canonical ID pending (F4)
   - number: 23
     quick_only: true
   - number: 24
@@ -72,6 +72,8 @@ entries:
   - number: 29
     ids:
       - HIG-SEO-001
+      - HIG-SEO-002
+      - HIG-SEO-003
   - number: 30
     ids:
       - HIG-SRCH-003
@@ -207,7 +209,8 @@ entries:
       - HIG-PERF-001
       - HIG-PERF-002
   - number: 83
-    quick_only: true
+    ids:
+      - HIG-DOC-005
   - number: 84
     quick_only: true
   - number: 85

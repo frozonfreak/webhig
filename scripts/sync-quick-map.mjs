@@ -41,10 +41,18 @@ const MANUAL_IDS = {
   92: ['HIG-SEC-002'],
   93: ['HIG-SEC-003'],
   94: ['HIG-SEC-004'],
-  21: ['HIG-DOC-005'],
-  22: ['HIG-DOC-006'],
   30: ['HIG-SRCH-003'],
   82: ['HIG-PERF-001', 'HIG-PERF-002'],
+  83: ['HIG-DOC-005'],
+};
+
+/**
+ * Quick bullets that stay quick_only until a canonical ID exists.
+ * Emitted as YAML comments (the map parser and validator have no note field).
+ */
+const QUICK_ONLY_NOTES = {
+  21: 'canonical ID pending (F4)',
+  22: 'canonical ID pending (F4)',
 };
 
 function read(file) {
@@ -78,6 +86,8 @@ for (const { number, line } of numbered) {
   lines.push(`  - number: ${number}`);
   if (quickOnly) {
     lines.push('    quick_only: true');
+    const note = QUICK_ONLY_NOTES[number];
+    if (note) lines.push(`    # ${note}`);
   } else {
     lines.push('    ids:');
     for (const id of ids) lines.push(`      - ${id}`);

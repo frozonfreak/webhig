@@ -4,8 +4,36 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+/**
+ * Collect canonical rule IDs from prose.
+ * A citation range expands to every ID in the inclusive span:
+ * `HIG-SEO-001–003` (en dash) and `HIG-SEO-001-003` (hyphen), including
+ * Markdown bold on either side (`**HIG-SEO-001**–**003**`).
+ */
 export function extractRuleIds(text) {
-  return new Set([...text.matchAll(/HIG-[A-Z0-9]+-\d+/g)].map((m) => m[0]));
+  const ids = new Set();
+  for (const match of text.matchAll(/HIG-[A-Z0-9]+-\d+/g)) {
+    ids.add(match[0]);
+  }
+
+  // Keep the span on one line so a YAML list marker on the next line is not a range dash.
+  const rangeRe = /HIG-([A-Z0-9]+)-(\d+)\*{0,2}[ \t]*[\u2013-][ \t]*\*{0,2}(\d+)/g;
+  for (const match of text.matchAll(rangeRe)) {
+    const moduleCode = match[1];
+    const startRaw = match[2];
+    const endRaw = match[3];
+    const start = Number(startRaw);
+    const end = Number(endRaw);
+    if (!Number.isInteger(start) || !Number.isInteger(end) || end < start || end - start > 30) {
+      continue;
+    }
+    const width = Math.max(startRaw.length, endRaw.length);
+    for (let n = start; n <= end; n += 1) {
+      ids.add(`HIG-${moduleCode}-${String(n).padStart(width, '0')}`);
+    }
+  }
+
+  return ids;
 }
 
 export function extractQuickNumberedRules(text) {
@@ -19,13 +47,12 @@ export function extractQuickNumberedRules(text) {
 }
 
 export function extractIndexRegistry(text) {
-  const block = text.split('## Complete rule ID registry')[1]?.split('## Archetype applicability')[0] ?? '';
+  const block =
+    text.split('## Complete rule ID registry')[1]?.split('## Archetype applicability')[0] ?? '';
   const rows = [];
   const seen = new Set();
   for (const line of block.split(/\r?\n/)) {
-    const match = line.match(
-      /^\|\s*(HIG-[A-Z0-9]+-\d+)\s*\|\s*([^|]+)\|\s*([^|]+)\|\s*([^|]+)\|/,
-    );
+    const match = line.match(/^\|\s*(HIG-[A-Z0-9]+-\d+)\s*\|\s*([^|]+)\|\s*([^|]+)\|\s*([^|]+)\|/);
     if (!match) continue;
     const id = match[1];
     if (seen.has(id)) {

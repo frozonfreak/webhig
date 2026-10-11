@@ -1,8 +1,8 @@
-# The Web HIG & Product Engine Contract — v1.13.0
+# The Web HIG & Product Engine Contract — v1.13.1
 
 ## Executive Summary
 
-The Web HIG v1.13.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
+The Web HIG v1.13.1 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
 
 This release adds a three-layer consumption model and archetype rule packs:
 
@@ -1378,6 +1378,7 @@ Logs MUST include timestamp, actor, action, and resource — but MUST NOT includ
 
 **Release documentation:** [CHANGELOG.md](./CHANGELOG.md) (Keep a Changelog) · [RELEASE_NOTES.md](./RELEASE_NOTES.md) (adoption notes) · [VERSIONING.md](./VERSIONING.md) (semver policy).
 
+* **v1.13.1 (2026-10-11):** Patch release. Corrected Quick ↔ rule ID mappings: Quick #21 and #22 are quick_only pending canonical IDs (F4); Quick #29 expands to **HIG-SEO-001**–**003**; Quick #83 maps to **HIG-DOC-005**. No normative rule IDs added, removed, or retightened.
 * **v1.13.0 (2026-10-09):** Minor guidance release. Accessible name/description defers to platform AccName computation (AccName 1.2 WD referenced; not an independent conformance bar); **HIG-DOC-005** adds outcome-based image-format / progressive-enhancement guidance (JPEG XL via `<picture>` fallback). Audit fixtures for AccName edge cases and Safari/VoiceOver manual review notes. No Core Web Vitals threshold change; no new AI/agent-interface rules.
 * **v1.12.5 (2026-09-21):** Patch release. Quick ↔ rule ID map and agent-facing count guidance; expanded contract validation (manifest JSON Schema, Quick map); [examples/golden-path](./examples/golden-path/); npm workspaces and shared lint; `web-hig upgrade` pin report; roadmap/README tooling honesty. No normative rule IDs added, removed, or retightened.
 * **v1.12.4 (2026-09-20):** Patch release. Documentation site **npm packages** section with links to `@web-hig/install`, `@web-hig/cli`, and `@web-hig/core` on npm. No normative rule IDs added, removed, or retightened.
