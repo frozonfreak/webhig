@@ -2,12 +2,13 @@
 
 Fixtures and manual review notes for **[HIG Audit](https://hig.aruviflow.com/)** and local assistive-technology checks. They are **not** a substitute for the normative contract in [HIG.md](../../HIG.md).
 
-Sourced from the **2026-10-09** Web HIG research brief.
+Sourced from the **2026-10-09** and **2026-10-16** Web HIG research briefs.
 
 | Item | Action in this folder |
 | --- | --- |
 | AccName 1.2 Working Draft (2026-10-02) | HTML fixtures under [`accname/`](./accname/) |
 | Safari Technology Preview 254 (2026-10-08) | Manual review matrix in [`safari-tp-254-voiceover.md`](./safari-tp-254-voiceover.md) |
+| Firefox 158 Android `aria-busy` (2026-10-13) | Manual review checklist in [`firefox-158-android-talkback.md`](./firefox-158-android-talkback.md); device testing pending |
 | JPEG XL (Chrome 155) | Spec-only — see **HIG-DOC-005**; no automated failure here |
 | Scoped transitions vs `transition: all` | [motion-transition-regression/](./motion-transition-regression/) — illustrative; not a normative rule change |
 
