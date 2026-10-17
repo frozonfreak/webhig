@@ -1,6 +1,6 @@
 # @web-hig/core
 
-Shared evaluator engine for [The Web HIG](https://github.com/frozonfreak/hig) — load the rule registry, parse project contracts, and build multidimensional conformance reports.
+Shared evaluator engine for [The Web HIG](https://github.com/frozonfreak/webhig) — load the rule registry, parse project contracts, and build multidimensional conformance reports.
 
 This package is **not** a UI library. It implements tooling around the HIG **behavioural contract** (accessibility, motion, SSR, tokens, and related rule IDs).
 
@@ -23,7 +23,7 @@ The engine reads **`rules/registry.yaml`** from a HIG contract tree on disk. It 
 | Setup | `WEB_HIG_ROOT` |
 | --- | --- |
 | [ `@web-hig/install` ](../install/) with **`practical`** or **`full`** profile | `docs/hig` (contains `rules/registry.yaml`) |
-| Git clone of [frozonfreak/hig](https://github.com/frozonfreak/hig) | repository root |
+| Git clone of [frozonfreak/webhig](https://github.com/frozonfreak/webhig) | repository root |
 | Custom vendor layout | directory that contains `rules/registry.yaml` |
 
 ```bash
@@ -92,7 +92,7 @@ console.log(`Applicable static rules: ${staticRules.length}`);
 | `loadProjectConfig(cwd, fileName?)` | Parse `web-hig.yaml` (default name) |
 | `defaultProjectConfig(higVersion)` | Defaults when no config file exists |
 
-See [web-hig.example.yaml](https://github.com/frozonfreak/hig/blob/main/examples/web-hig.example.yaml).
+See [web-hig.example.yaml](https://github.com/frozonfreak/webhig/blob/main/examples/web-hig.example.yaml).
 
 ### Reports (Layer 8 / evaluator)
 
@@ -102,7 +102,7 @@ See [web-hig.example.yaml](https://github.com/frozonfreak/hig/blob/main/examples
 | `printTerminalReport(report)` | Human-readable summary |
 | `severityBucketForRule(severity)` | Maps `error` → `blocking`, `warning` → `warnings`, `info` → `observations` |
 
-Finding shape aligns with [EVALUATOR.md](https://github.com/frozonfreak/hig/blob/main/EVALUATOR.md):
+Finding shape aligns with [EVALUATOR.md](https://github.com/frozonfreak/webhig/blob/main/EVALUATOR.md):
 
 ```json
 {
@@ -128,7 +128,7 @@ Each registry entry includes:
 - `module`, `hig_section` — links into the spec
 - `eslint_rule` — planned linter id (when present)
 
-Normative source: [HIG.md](https://github.com/frozonfreak/hig/blob/main/HIG.md) · Registry: [rules/registry.yaml](https://github.com/frozonfreak/hig/blob/main/rules/registry.yaml)
+Normative source: [HIG.md](https://github.com/frozonfreak/webhig/blob/main/HIG.md) · Registry: [rules/registry.yaml](https://github.com/frozonfreak/webhig/blob/main/rules/registry.yaml)
 
 ---
 
@@ -139,10 +139,10 @@ Normative source: [HIG.md](https://github.com/frozonfreak/hig/blob/main/HIG.md) 
 | [`@web-hig/cli`](../cli/) | `web-hig check`, `explain`, `init` |
 | [`@web-hig/install`](../install/) | Pin HIG docs and agent rules into your repo |
 
-Architecture: [NPM-TOOLING.md](https://github.com/frozonfreak/hig/blob/main/NPM-TOOLING.md)
+Architecture: [NPM-TOOLING.md](https://github.com/frozonfreak/webhig/blob/main/NPM-TOOLING.md)
 
 ---
 
 ## License
 
-MIT · [The Web HIG](https://github.com/frozonfreak/hig)
+MIT · [The Web HIG](https://github.com/frozonfreak/webhig)

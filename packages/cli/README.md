@@ -1,6 +1,6 @@
 # @web-hig/cli
 
-Command-line conformance tooling for [The Web HIG](https://github.com/frozonfreak/hig). Evaluate a pinned HIG contract against your repository with **`web-hig check`**, inspect rules with **`web-hig explain`**, and onboard with **`web-hig init`**.
+Command-line conformance tooling for [The Web HIG](https://github.com/frozonfreak/webhig). Evaluate a pinned HIG contract against your repository with **`web-hig check`**, inspect rules with **`web-hig explain`**, and onboard with **`web-hig init`**.
 
 **Not a component library** — use your existing design system (React, Vue, Tailwind, MUI, shadcn, etc.). HIG defines **behaviour** you can cite, test, and enforce.
 
@@ -51,7 +51,7 @@ $env:WEB_HIG_ROOT = "docs/hig"
 
 ### 3. Add `web-hig.yaml` (optional but recommended)
 
-Copy [web-hig.example.yaml](https://github.com/frozonfreak/hig/blob/main/examples/web-hig.example.yaml) to your repo root:
+Copy [web-hig.example.yaml](https://github.com/frozonfreak/webhig/blob/main/examples/web-hig.example.yaml) to your repo root:
 
 ```yaml
 version: "1.13.0"
@@ -134,7 +134,7 @@ OBSERVATIONS    0
 npx web-hig explain HIG-A11Y-004
 ```
 
-Shows requirement, severity, profiles, archetypes, evaluation methods, autofix policy, and HIG section from [rules/registry.yaml](https://github.com/frozonfreak/hig/blob/main/rules/registry.yaml).
+Shows requirement, severity, profiles, archetypes, evaluation methods, autofix policy, and HIG section from [rules/registry.yaml](https://github.com/frozonfreak/webhig/blob/main/rules/registry.yaml).
 
 ---
 
@@ -148,9 +148,9 @@ Shows requirement, severity, profiles, archetypes, evaluation methods, autofix p
 | `practical` | Default production CI |
 | `full` | Formal review (+ manual / observational rules in future audit) |
 
-**Archetypes:** `content` · `commerce` · `application` · `auth` — resolve from [hig-scope](https://github.com/frozonfreak/hig/blob/main/examples/hig-scope.example.md).
+**Archetypes:** `content` · `commerce` · `application` · `auth` — resolve from [hig-scope](https://github.com/frozonfreak/webhig/blob/main/examples/hig-scope.example.md).
 
-Details: [PROFILES.md](https://github.com/frozonfreak/hig/blob/main/PROFILES.md)
+Details: [PROFILES.md](https://github.com/frozonfreak/webhig/blob/main/PROFILES.md)
 
 ---
 
@@ -196,7 +196,7 @@ Commit `docs/hig/` and `web-hig.yaml` so CI does not re-init every run.
 
 ## Monorepo / HIG development
 
-From a clone of [github.com/frozonfreak/hig](https://github.com/frozonfreak/hig):
+From a clone of [github.com/frozonfreak/webhig](https://github.com/frozonfreak/webhig):
 
 ```bash
 cd packages/cli && npm install
@@ -212,10 +212,10 @@ node bin/cli.mjs explain HIG-MOT-001
 | [`@web-hig/core`](../core/) | Registry, config, report APIs |
 | [`@web-hig/install`](../install/) | Low-level pin installer |
 
-Design: [NPM-TOOLING.md](https://github.com/frozonfreak/hig/blob/main/NPM-TOOLING.md) · Evaluator: [EVALUATOR.md](https://github.com/frozonfreak/hig/blob/main/EVALUATOR.md)
+Design: [NPM-TOOLING.md](https://github.com/frozonfreak/webhig/blob/main/NPM-TOOLING.md) · Evaluator: [EVALUATOR.md](https://github.com/frozonfreak/webhig/blob/main/EVALUATOR.md)
 
 ---
 
 ## License
 
-MIT · [The Web HIG](https://github.com/frozonfreak/hig)
+MIT · [The Web HIG](https://github.com/frozonfreak/webhig)

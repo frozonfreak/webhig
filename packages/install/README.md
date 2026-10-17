@@ -1,6 +1,6 @@
 # @web-hig/install
 
-Pin [The Web HIG](https://github.com/frozonfreak/hig) into your product repository: **version file**, **HIG-QUICK** (and optional LITE / full spec), **rules/** modules, **framework/** adapters, and **agent rules** for Cursor, Claude Code, Copilot, and Windsurf.
+Pin [The Web HIG](https://github.com/frozonfreak/webhig) into your product repository: **version file**, **HIG-QUICK** (and optional LITE / full spec), **rules/** modules, **framework/** adapters, and **agent rules** for Cursor, Claude Code, Copilot, and Windsurf.
 
 **Not a component library.** You keep your stack and design system; this installs the **behavioural contract** agents and CI can reference.
 
@@ -85,7 +85,7 @@ npx @web-hig/install --dry-run
 1. **Customize scope** — Edit `docs/hig-scope.md` (archetypes per route/product area).
 2. **Tell agents** — e.g. *“Follow The Web HIG Quick Reference; pin is in docs/hig/.”*
 3. **Optional conformance CLI** — Install [`@web-hig/cli`](../cli/) and set `WEB_HIG_ROOT=docs/hig` for `web-hig check`.
-4. **Upgrade** — Re-run install when [VERSION](https://github.com/frozonfreak/hig/blob/main/VERSION) bumps, or follow [RELEASE_NOTES.md](https://github.com/frozonfreak/hig/blob/main/RELEASE_NOTES.md).
+4. **Upgrade** — Re-run install when [VERSION](https://github.com/frozonfreak/webhig/blob/main/VERSION) bumps, or follow [RELEASE_NOTES.md](https://github.com/frozonfreak/webhig/blob/main/RELEASE_NOTES.md).
 
 Example agent contract line:
 
@@ -102,7 +102,7 @@ Pinned contract: The Web HIG v1.13.0 · Practical profile · Application archety
 | **Install profile** (`quick` / `practical` / `full`) | How much documentation is **copied** into `docs/hig/` |
 | **CLI profile** (in `web-hig.yaml`) | How much of the contract **`web-hig check`** evaluates |
 
-See [PROFILES.md](https://github.com/frozonfreak/hig/blob/main/PROFILES.md).
+See [PROFILES.md](https://github.com/frozonfreak/webhig/blob/main/PROFILES.md).
 
 ---
 
@@ -110,8 +110,8 @@ See [PROFILES.md](https://github.com/frozonfreak/hig/blob/main/PROFILES.md).
 
 You can vendor files by hand instead of this package:
 
-1. Copy [VERSION](https://github.com/frozonfreak/hig/blob/main/VERSION) and [HIG-QUICK.md](https://github.com/frozonfreak/hig/blob/main/HIG-QUICK.md) into `docs/hig/`.
-2. Copy templates from [examples/agent-rules/](https://github.com/frozonfreak/hig/tree/main/examples/agent-rules).
+1. Copy [VERSION](https://github.com/frozonfreak/webhig/blob/main/VERSION) and [HIG-QUICK.md](https://github.com/frozonfreak/webhig/blob/main/HIG-QUICK.md) into `docs/hig/`.
+2. Copy templates from [examples/agent-rules/](https://github.com/frozonfreak/webhig/tree/main/examples/agent-rules).
 
 The installer keeps pins aligned with the published npm version’s bundled payload.
 
@@ -119,7 +119,7 @@ The installer keeps pins aligned with the published npm version’s bundled payl
 
 ## Integration guide
 
-Full adoption path: [INTEGRATION.md](https://github.com/frozonfreak/hig/blob/main/INTEGRATION.md)
+Full adoption path: [INTEGRATION.md](https://github.com/frozonfreak/webhig/blob/main/INTEGRATION.md)
 
 ---
 
@@ -134,7 +134,7 @@ Full adoption path: [INTEGRATION.md](https://github.com/frozonfreak/hig/blob/mai
 
 ## Publish (maintainers)
 
-From this directory, after contract [VERSION](https://github.com/frozonfreak/hig/blob/main/VERSION) matches `package.json`:
+From this directory, after contract [VERSION](https://github.com/frozonfreak/webhig/blob/main/VERSION) matches `package.json`:
 
 See [packages/PUBLISHING.md](../PUBLISHING.md) for npm org `@web-hig`, **Automation** tokens, and CI.
 
@@ -149,4 +149,4 @@ npm publish --access public
 
 ## License
 
-MIT · [The Web HIG](https://github.com/frozonfreak/hig)
+MIT · [The Web HIG](https://github.com/frozonfreak/webhig)

@@ -4,7 +4,7 @@
 
 **Pin this file — that is the whole onboarding path.** You do not need the rest of the repository to start.
 
-- **Pin:** copy `HIG-QUICK.md` and `VERSION` into `docs/hig/`, use the [current Quick Reference](https://github.com/frozonfreak/hig/blob/main/HIG-QUICK.md), or run the installer in [packages/install](./packages/install/).
+- **Pin:** copy `HIG-QUICK.md` and `VERSION` into `docs/hig/`, use the [current Quick Reference](https://github.com/frozonfreak/webhig/blob/main/HIG-QUICK.md), or run the installer in [packages/install](./packages/install/).
 - **Prompt:** *"Follow The Web HIG Quick Reference."*
 - **Escalate only if needed:** [HIG-LITE.md](./HIG-LITE.md) for rule IDs · [HIG.md](./HIG.md) for edge cases.
 
