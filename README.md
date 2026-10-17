@@ -1,8 +1,9 @@
 # The Web HIG
 
-[![Version](https://img.shields.io/github/v/tag/frozonfreak/webhig?label=version\&color=1d4ed8)](https://github.com/frozonfreak/webhig/releases)
+[![Version](https://img.shields.io/github/v/release/frozonfreak/webhig?label=version&color=1d4ed8)](https://github.com/frozonfreak/webhig/releases)
 [![License: MIT](https://img.shields.io/github/license/frozonfreak/webhig)](./LICENSE)
-[![CI](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml/badge.svg)](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml)
+[![Try HIG Audit](https://img.shields.io/badge/Try_HIG_Audit-0f766e)](https://hig.aruviflow.com)
+[![Validate HIG](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml/badge.svg)](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml)
 [![Pin me](https://img.shields.io/badge/Pin_me-HIG--QUICK.md-0f172a)](./HIG-QUICK.md)
 
 **A practical standard for how modern web interfaces should behave.**
