@@ -6,6 +6,24 @@ Versions follow [Semantic Versioning](https://semver.org/). Newest first.
 
 ---
 
+## [v1.13.1](./HIG.md) — 2026-10-11
+
+Patch release: **Quick rule map corrections**. No normative rule was added, removed, or retightened.
+
+### Highlights
+
+- **Quick #21 and #22** no longer cite **HIG-DOC-005** or **HIG-DOC-006**. Both are quick_only pending canonical IDs (F4).
+- **Quick #29** maps to **HIG-SEO-001**, **HIG-SEO-002**, and **HIG-SEO-003**.
+- **Quick #83** maps to **HIG-DOC-005**. Quick #84 stays unmapped.
+
+### Upgrade from v1.13.0
+
+1. Pin **[VERSION](./VERSION)** (`1.13.1`) or run `npx @web-hig/install` when you next refresh docs.
+2. Anyone pinning Quick #21 or #22 to **HIG-DOC-005** / **HIG-DOC-006** will see those links removed.
+3. Run `npm run validate` (or `npm test` if you vendor full tooling).
+
+---
+
 ## [v1.13.0](./HIG.md) — 2026-10-09
 
 Minor guidance release from the **2026-10-09** research brief: AccName platform computation, outcome-based image formats, and audit fixtures. **No** Core Web Vitals threshold change and **no** new AI/agent-interface rules.

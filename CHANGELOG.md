@@ -10,6 +10,14 @@ Expanded adoption notes: [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
 ---
 
+## [1.13.1] - 2026-10-11
+
+### Fixed
+
+- Corrected Layer 1 Quick ↔ rule ID mappings in [rules/quick-rule-map.yaml](./rules/quick-rule-map.yaml). Quick #21 and #22 are quick_only pending canonical IDs (F4). Quick #29 maps to HIG-SEO-001, HIG-SEO-002, and HIG-SEO-003. Quick #83 maps to HIG-DOC-005.
+
+---
+
 ## [1.13.0] - 2026-10-09
 
 ### Changed
