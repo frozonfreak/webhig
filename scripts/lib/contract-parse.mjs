@@ -3,6 +3,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import YAML from 'yaml';
 
 /**
  * Collect canonical rule IDs from prose.
@@ -69,24 +70,28 @@ export function extractIndexRegistry(text) {
   return rows;
 }
 
-export function parseQuickRuleMapYaml(yaml) {
-  const version = yaml.match(/^version:\s*"([^"]+)"/m)?.[1];
-  const entries = [];
-  let current = null;
-  for (const line of yaml.split(/\r?\n/)) {
-    const num = line.match(/^  - number:\s*(\d+)/);
-    if (num) {
-      if (current) entries.push(current);
-      current = { number: Number(num[1]), ids: [], quick_only: false };
-      continue;
+export function parseQuickRuleMapYaml(text) {
+  const doc = YAML.parse(text) ?? {};
+  const version = doc.version === undefined ? undefined : String(doc.version);
+  const entries = (Array.isArray(doc.entries) ? doc.entries : []).map((raw) => {
+    const entry = {
+      number: Number(raw?.number),
+      ids: Array.isArray(raw?.ids) ? raw.ids.map(String) : [],
+      quick_only: raw?.quick_only === true,
+    };
+    if (raw?.hig_section !== undefined && raw?.hig_section !== null) {
+      entry.hig_section = String(raw.hig_section);
     }
-    if (!current) continue;
-    if (/^\s+quick_only:\s*true/.test(line)) current.quick_only = true;
-    const id = line.match(/^\s+- (HIG-[A-Z0-9]+-\d+)/);
-    if (id) current.ids.push(id[1]);
-  }
-  if (current) entries.push(current);
-  return { version, entries };
+    return entry;
+  });
+  const sectionExceptions = (
+    Array.isArray(doc.section_exceptions) ? doc.section_exceptions : []
+  ).map((raw) => ({
+    quick: Number(raw?.quick),
+    id: String(raw?.id ?? ''),
+    reason: raw?.reason === undefined || raw?.reason === null ? '' : String(raw.reason),
+  }));
+  return { version, entries, sectionExceptions };
 }
 
 export function readRepoFile(root, file) {

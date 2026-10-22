@@ -13,6 +13,7 @@ import {
   extractRuleIds,
   parseQuickRuleMapYaml,
 } from './lib/contract-parse.mjs';
+import { checkQuickMapSections } from './lib/quick-map.mjs';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const errors = [];
@@ -340,7 +341,13 @@ if (!exists(quickMapPath)) {
   fail(`missing ${quickMapPath}`);
 } else {
   const quickMapYaml = read(quickMapPath);
-  const { version: quickMapVersion, entries: quickMapEntries } = parseQuickRuleMapYaml(quickMapYaml);
+  let parsedQuickMap = { version: undefined, entries: [], sectionExceptions: [] };
+  try {
+    parsedQuickMap = parseQuickRuleMapYaml(quickMapYaml);
+  } catch (err) {
+    fail(`quick-rule-map.yaml: ${err.message}`);
+  }
+  const { version: quickMapVersion, entries: quickMapEntries, sectionExceptions } = parsedQuickMap;
   if (!quickMapVersion) fail('quick-rule-map.yaml: missing version field');
   if (quickMapVersion !== versionFile) {
     fail(`quick-rule-map.yaml (${quickMapVersion}) !== VERSION (${versionFile})`);
@@ -369,6 +376,16 @@ if (!exists(quickMapPath)) {
   for (let n = 1; n <= 98; n += 1) {
     if (!mapNumbers.has(n)) fail(`quick-rule-map.yaml missing Quick number ${n}`);
   }
+
+  // Each linked ID's hig_section must match the Quick bullet's reviewed hig_section,
+  // unless the pair is listed in section_exceptions with a reason.
+  const sectionErrors = checkQuickMapSections({
+    entries: quickMapEntries,
+    sectionExceptions,
+    registrySections: new Map(registry.map((row) => [row.id, row.hig_section])),
+    higText,
+  });
+  for (const message of sectionErrors) fail(`quick-rule-map.yaml: ${message}`);
 }
 
 // --- HIG-LITE rule ID links ---

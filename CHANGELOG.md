@@ -10,6 +10,19 @@ Expanded adoption notes: [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
 ---
 
+## [1.13.2] - 2026-10-22
+
+### Fixed
+
+- Corrected Layer 1 Quick ↔ rule ID mappings in [rules/quick-rule-map.yaml](./rules/quick-rule-map.yaml) after a section-by-section audit. Quick #93 (sanitize user content) and #94 (CSRF) no longer cite HIG-SEC-003 or HIG-SEC-004; both belong to HIG.md §9.2, which has no rule ID, and are quick_only pending canonical IDs (F4). Quick #31 (no longer HIG-LOD-001), #41 (no longer HIG-MUT-001), and #46 (no longer HIG-MUT-002) are quick_only pending canonical IDs (F4) because the linked rule states a different obligation. All other links are unchanged.
+
+### Changed
+
+- `npm run sync:quick-map` links Quick bullets by section and by IDs written in the bullet, never by position. Each linked bullet records a reviewed `hig_section`, and each reviewed row is anchored to its bullet text. `npm run sync:quick-map -- --check` reports a stale map.
+- `npm run validate` fails when a linked ID's registry `hig_section` does not match the Quick bullet's `hig_section`. Cross-section links are allowed only through `section_exceptions` in the map, each with a reason.
+
+---
+
 ## [1.13.1] - 2026-10-11
 
 ### Fixed

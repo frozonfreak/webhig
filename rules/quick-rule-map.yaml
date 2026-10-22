@@ -1,12 +1,32 @@
 # The Web HIG — Layer 1 Quick rule ↔ rule ID map
-# Version: 1.13.1
+# Version: 1.13.2
 # Normative Quick prose: HIG-QUICK.md · IDs: rules/registry.yaml
 # Regenerate: npm run sync:quick-map
+#
+# hig_section: the HIG.md section whose prose states the Quick bullet's obligation
+# (reviewed in scripts/sync-quick-map.mjs; required on linked entries). Every linked
+# ID's registry hig_section must include it. Cross-section links are allowed only
+# when listed in section_exceptions with a reason (npm run validate enforces this).
 
-version: "1.13.1"
+version: "1.13.2"
+
+section_exceptions:
+  - quick: 1
+    id: HIG-EXP-001
+    reason: "Quick #1 covers two Layer 0 steps: resolve the archetype (§0.1) and, for content, resolve the surface (§0.3). It cites HIG-EXP-* inline for the surface step, and HIG-EXP-001 (declare surface in scope) is that step."
+  - quick: 65
+    id: HIG-SIM-001
+    reason: "Quick #65 is a §3.2 container-query bullet that cites HIG-SIM-001 inline to forbid adding containers only to satisfy the rule. HIG.md states that guard in the Exception System agent rule (registry: Exception System, §7.2)."
+  - quick: 82
+    id: HIG-PERF-002
+    reason: "Quick #82 states the §6.1 Core Web Vitals thresholds and cites HIG-PERF-002 inline because INP is judged in the field. The lab/field gate split it points to is §6.2–6.3."
+  - quick: 87
+    id: HIG-MOT-002
+    reason: "Quick #87 restates the §1.4 \"Tokenized timing\" rule (do not invent per-component millisecond values). HIG-MOT-002 is filed under §3.1, where the motion duration tokens are defined."
 
 entries:
   - number: 1
+    hig_section: "§0.1"
     ids:
       - HIG-EXP-001
   - number: 2
@@ -14,6 +34,7 @@ entries:
   - number: 3
     quick_only: true
   - number: 4
+    hig_section: "Exception System"
     ids:
       - HIG-SIM-001
   - number: 5
@@ -59,34 +80,42 @@ entries:
   - number: 24
     quick_only: true
   - number: 25
+    hig_section: "§2.1"
     ids:
       - HIG-DOC-002
   - number: 26
+    hig_section: "§2.1"
     ids:
       - HIG-DOC-001
   - number: 27
+    hig_section: "§2.1"
     ids:
       - HIG-DOC-003
   - number: 28
     quick_only: true
   - number: 29
+    hig_section: "§2.1"
     ids:
       - HIG-SEO-001
       - HIG-SEO-002
       - HIG-SEO-003
   - number: 30
+    hig_section: "§2.9"
     ids:
       - HIG-SRCH-003
   - number: 31
-    ids:
-      - HIG-LOD-001
+    quick_only: true
+    # canonical ID pending (F4)
   - number: 32
+    hig_section: "§2.7"
     ids:
       - HIG-LOD-001
   - number: 33
+    hig_section: "§2.6"
     ids:
       - HIG-EMP-001
   - number: 34
+    hig_section: "§2.5"
     ids:
       - HIG-ERR-001
   - number: 35
@@ -98,26 +127,31 @@ entries:
   - number: 38
     quick_only: true
   - number: 39
+    hig_section: "§2.10"
     ids:
       - HIG-NTF-001
   - number: 40
     quick_only: true
   - number: 41
-    ids:
-      - HIG-MUT-001
+    hig_section: "§2.4"
+    quick_only: true
+    # canonical ID pending (F4)
   - number: 42
     quick_only: true
   - number: 43
+    hig_section: "§2.4"
     ids:
       - HIG-MUT-001
   - number: 44
     quick_only: true
   - number: 45
+    hig_section: "§4.2"
     ids:
       - HIG-SSR-003
   - number: 46
-    ids:
-      - HIG-MUT-002
+    hig_section: "§4.2"
+    quick_only: true
+    # canonical ID pending (F4)
   - number: 47
     quick_only: true
   - number: 48
@@ -125,6 +159,7 @@ entries:
   - number: 49
     quick_only: true
   - number: 50
+    hig_section: "§2.11"
     ids:
       - HIG-FRM-001
   - number: 51
@@ -142,9 +177,11 @@ entries:
   - number: 57
     quick_only: true
   - number: 58
+    hig_section: "§3.1"
     ids:
       - HIG-TOK-001
   - number: 59
+    hig_section: "§3.1"
     ids:
       - HIG-TOK-002
   - number: 60
@@ -158,39 +195,49 @@ entries:
   - number: 64
     quick_only: true
   - number: 65
+    hig_section: "§3.2"
     ids:
       - HIG-CQ-001
       - HIG-CQ-002
       - HIG-SIM-001
   - number: 66
+    hig_section: "§5.1"
     ids:
       - HIG-A11Y-002
   - number: 67
+    hig_section: "§5.2"
     ids:
       - HIG-A11Y-003
   - number: 68
+    hig_section: "§5.2"
     ids:
       - HIG-A11Y-003
   - number: 69
+    hig_section: "§5.2"
     ids:
       - HIG-A11Y-004
   - number: 70
+    hig_section: "§5.2"
     ids:
       - HIG-A11Y-005
   - number: 71
     quick_only: true
   - number: 72
+    hig_section: "§5.3"
     ids:
       - HIG-A11Y-006
   - number: 73
+    hig_section: "§5.3"
     ids:
       - HIG-A11Y-008
   - number: 74
     quick_only: true
   - number: 75
+    hig_section: "§5.4"
     ids:
       - HIG-A11Y-007
   - number: 76
+    hig_section: "§1.3"
     ids:
       - HIG-A11Y-001
   - number: 77
@@ -202,27 +249,34 @@ entries:
   - number: 80
     quick_only: true
   - number: 81
+    hig_section: "§4.1"
     ids:
       - HIG-SSR-001
   - number: 82
+    hig_section: "§6.1"
     ids:
       - HIG-PERF-001
       - HIG-PERF-002
   - number: 83
+    hig_section: "§2.1"
     ids:
       - HIG-DOC-005
   - number: 84
     quick_only: true
   - number: 85
+    hig_section: "§1.1"
     ids:
       - HIG-MOT-001
   - number: 86
+    hig_section: "§1.4"
     ids:
       - HIG-MOT-004
   - number: 87
+    hig_section: "§1.4"
     ids:
       - HIG-MOT-002
   - number: 88
+    hig_section: "§3.3"
     ids:
       - HIG-DEN-007
       - HIG-DEN-008
@@ -231,17 +285,21 @@ entries:
   - number: 90
     quick_only: true
   - number: 91
+    hig_section: "§9.4"
     ids:
       - HIG-SEC-001
   - number: 92
+    hig_section: "§9.1"
     ids:
       - HIG-SEC-002
   - number: 93
-    ids:
-      - HIG-SEC-003
+    hig_section: "§9.2"
+    quick_only: true
+    # canonical ID pending (F4)
   - number: 94
-    ids:
-      - HIG-SEC-004
+    hig_section: "§9.2"
+    quick_only: true
+    # canonical ID pending (F4)
   - number: 95
     quick_only: true
   - number: 96

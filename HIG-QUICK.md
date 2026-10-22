@@ -1,6 +1,6 @@
 # The Web HIG — Quick Reference
 
-**Layer 1** · ~5 minutes · **Version:** v1.13.1
+**Layer 1** · ~5 minutes · **Version:** v1.13.2
 
 **Pin this file — that is the whole onboarding path.** You do not need the rest of the repository to start.
 

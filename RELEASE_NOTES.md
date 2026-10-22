@@ -6,6 +6,39 @@ Versions follow [Semantic Versioning](https://semver.org/). Newest first.
 
 ---
 
+## [v1.13.2](./HIG.md) — 2026-10-22
+
+Patch release: **Quick rule map section sweep**. No normative rule was added, removed, or retightened. HIG.md and HIG-QUICK.md wording is unchanged.
+
+### Highlights
+
+- **Quick #93** no longer cites **HIG-SEC-003** (PII masked, §9.4), and **Quick #94** no longer cites **HIG-SEC-004** (secure cookies, §9.3). Both belong to §9.2 XSS & CSRF Mitigation, which has no rule ID yet. Both are quick_only pending canonical IDs (F4).
+- **Quick #31** no longer cites **HIG-LOD-001**. The bullet asks for a defined state on every async operation; HIG-LOD-001 covers the loading-state taxonomy only (Quick #32 keeps it).
+- **Quick #41** no longer cites **HIG-MUT-001**. The bullet asks for confirmation proportional to severity; HIG-MUT-001 forbids optimistic destructive confirmation (Quick #43 keeps it).
+- **Quick #46** no longer cites **HIG-MUT-002**. The bullet is §4.2 optimistic eligibility; HIG-MUT-002 is §4.5 idempotency.
+- Every linked Quick entry now records a reviewed `hig_section`, and `npm run validate` rejects links whose rule sits in another section unless `section_exceptions` lists them with a reason (Quick #1, #65, #82, #87 today).
+
+### Quick numbers that lost or changed an ID link
+
+| Quick # | v1.13.1 | v1.13.2 |
+| --- | --- | --- |
+| 31 | HIG-LOD-001 | quick_only (canonical ID pending, F4) |
+| 41 | HIG-MUT-001 | quick_only (canonical ID pending, F4) |
+| 46 | HIG-MUT-002 | quick_only (canonical ID pending, F4) |
+| 93 | HIG-SEC-003 | quick_only (canonical ID pending, F4) |
+| 94 | HIG-SEC-004 | quick_only (canonical ID pending, F4) |
+
+No Quick number gained a link. The other 35 linked entries keep their IDs.
+
+### Upgrade from v1.13.1
+
+1. Pin **[VERSION](./VERSION)** (`1.13.2`) or run `npx @web-hig/install` when you next refresh docs.
+2. Anyone pinning Quick #31, #41, #46, #93, or #94 to the IDs above will see those links removed. Cite the Quick bullet (or HIG.md §9.2 for #93/#94) until canonical IDs land.
+3. Tools that read `rules/quick-rule-map.yaml` with a YAML parser keep working: `number`, `ids`, and `quick_only` are unchanged. New fields are `hig_section` on entries and a top-level `section_exceptions` list.
+4. Run `npm run validate` (or `npm test` if you vendor full tooling).
+
+---
+
 ## [v1.13.1](./HIG.md) — 2026-10-11
 
 Patch release: **Quick rule map corrections**. No normative rule was added, removed, or retightened.

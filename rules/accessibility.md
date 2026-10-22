@@ -1,6 +1,6 @@
 # Accessibility — Level 2 Module
 
-**Version:** v1.13.1 · **Canonical spec:** [HIG.md §5](../HIG.md#layer-5-accessibility-a11y--keyboard-navigation) · **Rule IDs:** HIG-A11Y-001–008
+**Version:** v1.13.2 · **Canonical spec:** [HIG.md §5](../HIG.md#layer-5-accessibility-a11y--keyboard-navigation) · **Rule IDs:** HIG-A11Y-001–008
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 

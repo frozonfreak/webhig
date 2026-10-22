@@ -1,5 +1,5 @@
 # Example HIG contract for a product repository (copy to web-hig.yaml)
-version: "1.13.1"
+version: "1.13.2"
 
 profile: practical
 

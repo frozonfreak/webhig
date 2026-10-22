@@ -1,6 +1,6 @@
 # HIG scope (golden path example)
 
-Pinned contract: The Web HIG v1.13.1 — see `docs/hig/HIG-QUICK.md`.
+Pinned contract: The Web HIG v1.13.2 — see `docs/hig/HIG-QUICK.md`.
 
 | Route / area | Archetype | Notes |
 | --- | --- | --- |

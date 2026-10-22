@@ -1,8 +1,8 @@
 # The Web HIG — Progressive loading manifest
-# Version: 1.13.1
+# Version: 1.13.2
 # Human-readable index: rules/INDEX.md
 
-version: "1.13.1"
+version: "1.13.2"
 
 registries:
   - rules/registry.yaml
