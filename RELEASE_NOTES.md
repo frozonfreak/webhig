@@ -16,7 +16,7 @@ Patch release: **Quick rule map section sweep**. No normative rule was added, re
 - **Quick #31** no longer cites **HIG-LOD-001**. The bullet asks for a defined state on every async operation; HIG-LOD-001 covers the loading-state taxonomy only (Quick #32 keeps it).
 - **Quick #41** no longer cites **HIG-MUT-001**. The bullet asks for confirmation proportional to severity; HIG-MUT-001 forbids optimistic destructive confirmation (Quick #43 keeps it).
 - **Quick #46** no longer cites **HIG-MUT-002**. The bullet is §4.2 optimistic eligibility; HIG-MUT-002 is §4.5 idempotency.
-- Every linked Quick entry now records a reviewed `hig_section`, and `npm run validate` rejects links whose rule sits in another section unless `section_exceptions` lists them with a reason (Quick #1, #65, #82, #87 today).
+- Every linked Quick entry now records a reviewed `hig_section`, and `npm run validate` rejects links whose rule sits in another section unless `section_exceptions` lists them with a reason (Quick #1, #65, #82, #87, #91 today). Quick #91 keeps **HIG-SEC-001** and is recorded under §7.2, where HIG.md states it; its exception covers the registry's §9.4 entry until that metadata is corrected.
 
 ### Quick numbers that lost or changed an ID link
 

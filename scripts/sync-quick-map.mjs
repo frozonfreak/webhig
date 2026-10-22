@@ -10,7 +10,8 @@
  * Every linked bullet carries a reviewed `section`: the HIG.md section whose prose
  * states the bullet's obligation. When HIG.md states an obligation only in the
  * §7.2 agent-guardrail YAML, the section HIG-LITE.md and the Level 2 module file it
- * under is used. Each link must match the ID's registry hig_section, or be listed in
+ * under is used (Quick #91 is recorded under §7.2 instead; see SECTION_EXCEPTIONS).
+ * Each link must match the ID's registry hig_section, or be listed in
  * SECTION_EXCEPTIONS with a reason; otherwise this script fails.
  * Each review row carries an `anchor` that must appear in that bullet's text, so a
  * renumbered Quick list fails loudly instead of shifting links onto other bullets.
@@ -88,7 +89,7 @@ export const QUICK_REVIEW = {
   86: { anchor: 'must complete within 300 ms', section: '§1.4', ids: ['HIG-MOT-004'] },
   87: { anchor: 'Use motion duration tokens', section: '§1.4', ids: ['HIG-MOT-002'] },
   88: { anchor: 'virtual scrolling', section: '§3.3' },
-  91: { anchor: 'Never embed secrets', section: '§9.4', ids: ['HIG-SEC-001'] },
+  91: { anchor: 'Never embed secrets', section: '§7.2', ids: ['HIG-SEC-001'] },
   92: { anchor: 'Content Security Policy', section: '§9.1', ids: ['HIG-SEC-002'] },
   93: {
     anchor: 'Sanitize all user-generated content',
@@ -110,7 +111,7 @@ export const SECTION_EXCEPTIONS = [
     quick: 65,
     id: 'HIG-SIM-001',
     reason:
-      'Quick #65 is a §3.2 container-query bullet that cites HIG-SIM-001 inline to forbid adding containers only to satisfy the rule. HIG.md states that guard in the Exception System agent rule (registry: Exception System, §7.2).',
+      'Quick #65 is a §3.2 container-query bullet that cites HIG-SIM-001 inline. HIG.md §3.2 itself states the HIG-SIM-001 guard against adding containers only to satisfy the rule. The registry files HIG-SIM-001 under Exception System, §7.2 without §3.2, a metadata gap tracked separately.',
   },
   {
     quick: 82,
@@ -123,6 +124,12 @@ export const SECTION_EXCEPTIONS = [
     id: 'HIG-MOT-002',
     reason:
       'Quick #87 restates the §1.4 "Tokenized timing" rule (do not invent per-component millisecond values). HIG-MOT-002 is filed under §3.1, where the motion duration tokens are defined.',
+  },
+  {
+    quick: 91,
+    id: 'HIG-SEC-001',
+    reason:
+      'HIG.md states HIG-SEC-001 (no_secrets_in_client_code) only in the §7.2 security_constraints list; §9.4 covers PII, not secrets. The registry hig_section §9.4 follows the rules/security.md heading and is a known metadata defect tracked separately. Remove this exception once the registry reads §7.2.',
   },
 ];
 

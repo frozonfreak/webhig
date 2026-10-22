@@ -53,6 +53,7 @@ assert.ok(!sectionMatches('§2.1', '§2.10'), '§2.1 does not match §2.10');
 assert.ok(sectionMatches('§6.3', '§6.2–6.3'), 'range member matches');
 assert.ok(sectionMatches('Exception System', 'Exception System, §7.2'), 'named section matches');
 assert.ok(higHasSection(higText, '§9.2'), 'HIG.md has §9.2');
+assert.ok(higHasSection(higText, '§7.2'), 'HIG.md has §7.2');
 assert.ok(higHasSection(higText, 'Exception System'), 'HIG.md has the Exception System section');
 assert.ok(!higHasSection(higText, '§9.9'), 'HIG.md has no §9.9');
 
@@ -61,6 +62,11 @@ assert.deepEqual(check(map.entries), [], 'committed quick-rule-map.yaml passes t
 
 const byNumber = new Map(map.entries.map((entry) => [entry.number, entry]));
 assert.deepEqual(byNumber.get(91).ids, ['HIG-SEC-001'], 'Quick #91 keeps HIG-SEC-001');
+assert.equal(byNumber.get(91).hig_section, '§7.2', 'Quick #91 is filed under §7.2');
+assert.ok(
+  map.sectionExceptions.some((e) => e.quick === 91 && e.id === 'HIG-SEC-001'),
+  'Quick #91 → HIG-SEC-001 is a reviewed section exception',
+);
 assert.deepEqual(byNumber.get(92).ids, ['HIG-SEC-002'], 'Quick #92 keeps HIG-SEC-002');
 for (const n of [93, 94]) {
   assert.equal(byNumber.get(n).quick_only, true, `Quick #${n} is quick_only`);

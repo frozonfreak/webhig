@@ -16,13 +16,16 @@ section_exceptions:
     reason: "Quick #1 covers two Layer 0 steps: resolve the archetype (§0.1) and, for content, resolve the surface (§0.3). It cites HIG-EXP-* inline for the surface step, and HIG-EXP-001 (declare surface in scope) is that step."
   - quick: 65
     id: HIG-SIM-001
-    reason: "Quick #65 is a §3.2 container-query bullet that cites HIG-SIM-001 inline to forbid adding containers only to satisfy the rule. HIG.md states that guard in the Exception System agent rule (registry: Exception System, §7.2)."
+    reason: "Quick #65 is a §3.2 container-query bullet that cites HIG-SIM-001 inline. HIG.md §3.2 itself states the HIG-SIM-001 guard against adding containers only to satisfy the rule. The registry files HIG-SIM-001 under Exception System, §7.2 without §3.2, a metadata gap tracked separately."
   - quick: 82
     id: HIG-PERF-002
     reason: "Quick #82 states the §6.1 Core Web Vitals thresholds and cites HIG-PERF-002 inline because INP is judged in the field. The lab/field gate split it points to is §6.2–6.3."
   - quick: 87
     id: HIG-MOT-002
     reason: "Quick #87 restates the §1.4 \"Tokenized timing\" rule (do not invent per-component millisecond values). HIG-MOT-002 is filed under §3.1, where the motion duration tokens are defined."
+  - quick: 91
+    id: HIG-SEC-001
+    reason: "HIG.md states HIG-SEC-001 (no_secrets_in_client_code) only in the §7.2 security_constraints list; §9.4 covers PII, not secrets. The registry hig_section §9.4 follows the rules/security.md heading and is a known metadata defect tracked separately. Remove this exception once the registry reads §7.2."
 
 entries:
   - number: 1
@@ -285,7 +288,7 @@ entries:
   - number: 90
     quick_only: true
   - number: 91
-    hig_section: "§9.4"
+    hig_section: "§7.2"
     ids:
       - HIG-SEC-001
   - number: 92
