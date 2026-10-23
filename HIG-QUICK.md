@@ -1,6 +1,6 @@
 # The Web HIG — Quick Reference
 
-**Layer 1** · ~5 minutes · **Version:** v1.13.2
+**Layer 1** · ~5 minutes · **Version:** v1.14.0
 
 **Pin this file — that is the whole onboarding path.** You do not need the rest of the repository to start.
 
@@ -84,6 +84,8 @@ Bullets that name **`HIG-*` inline** use the canonical ID. Machine-readable Quic
 38. Disabled controls must look disabled; do not hide actions without explanation when RBAC blocks them.
 39. Notifications must follow the taxonomy: toast for transient, banner for persistent, inline for field-level.
 40. Success feedback must confirm what happened — not just that "it worked."
+
+Route/feature chunk failures are error states too: keep meaningful error text and keyboard-operable recovery outside the failed module, preserve input, and select recovery for the supported browser matrix. See [§2.5](./HIG.md#25-error-ux-taxonomy); repeated `import()` is not universally supported recovery.
 
 ---
 

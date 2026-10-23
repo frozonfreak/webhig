@@ -4,6 +4,16 @@ User-facing notes for each published version of The Web HIG. The brief machine-o
 
 Versions follow [Semantic Versioning](https://semver.org/). Newest first.
 
+## [v1.14.0](./HIG.md) — 2026-10-23
+
+Minor guidance update: recoverable module failures, dynamic-control AT review and agent tool-schema review.
+
+- Route/feature chunk failures use the existing error contract: meaningful text, keyboard-operable recovery and retained drafts. Keep recovery outside the failed module and test repeated failure. Choose a strategy for supported browsers; Chrome's change does not guarantee same-URL retries elsewhere.
+- New [module recovery](./examples/audit-fixtures/module-load-recovery/README.md) and [Safari TP 255/VoiceOver](./examples/audit-fixtures/safari-tp-255-voiceover.md) fixtures cover runtime failures, changed options, required radios and AT activation. Execution is pending; the separate audit site is not deployed by this update.
+- [§7.4](./HIG.md#74-agent-tool-schema-review-informative) adds informative execution review: validate current schemas, reject unknown tools, constrain repairs and log redacted outcomes. No automated website audit rule or required repair layer.
+
+Upgrade by refreshing the contract pin and reviewing fixtures against your browser matrix. No stable IDs, severity, Layer 0 applicability, WCAG or Core Web Vitals thresholds change. Experimental CSS and W3C meeting proposals remain deferred. See the [research disposition](./docs/research/2026-10-23-brief.md) for evidence and governance context.
+
 ---
 
 ## [v1.13.2](./HIG.md) — 2026-10-22

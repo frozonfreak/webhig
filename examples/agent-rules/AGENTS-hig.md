@@ -1,6 +1,6 @@
 # Agent instructions — The Web HIG
 
-Pinned contract: The Web HIG v1.13.2  
+Pinned contract: The Web HIG v1.14.0
 Default context: `docs/hig/HIG-QUICK.md` — *Follow The Web HIG Quick Reference.*  
 Practical guide: `docs/hig/HIG-LITE.md`  
 Topic index: `docs/hig/rules/manifest.yaml`  

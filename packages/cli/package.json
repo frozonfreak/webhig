@@ -1,6 +1,6 @@
 {
   "name": "@web-hig/cli",
-  "version": "1.13.2",
+  "version": "1.14.0",
   "description": "Command-line conformance tooling for The Web HIG",
   "homepage": "https://github.com/frozonfreak/hig/tree/main/packages/cli#readme",
   "bugs": {

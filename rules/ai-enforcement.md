@@ -1,6 +1,6 @@
 # AI & Agent Enforcement — Level 2 Module
 
-**Version:** v1.13.2 · **Canonical spec:** [HIG.md §7–8](../HIG.md#layer-7-ai--agent-enforcement-contract) · **Rule ID:** HIG-SIM-001 + all Layer 7 IDs
+**Version:** v1.14.0 · **Canonical spec:** [HIG.md §7–8](../HIG.md#layer-7-ai--agent-enforcement-contract) · **Rule ID:** HIG-SIM-001 + all Layer 7 IDs
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -60,6 +60,12 @@ Intended `eslint-plugin-hig` rules:
 * `hig/micro-animation-budget`
 * `hig/no-optimistic-destructive`
 * `hig/no-transition-all`
+
+## 7.4 Agent tool-schema review (informative)
+
+Review validation against the current tool names and argument schemas before execution and after repair. Reject unknown/renamed tools and invalid arguments without side effects. A repair must stay within authorized intent and must not silently substitute a consequential action, target or scope; changed actions return to the existing confirmation flow. Record the original call, validation failure, repair and final execution/rejection with correlated, redacted evidence (§9.4).
+
+Test interface drift with renamed/removed tools, distractor candidates, schema changes and invalid repairs. See [HIG.md §7.4](../HIG.md#74-agent-tool-schema-review-informative) for the complete review guidance. This does not add an automated website audit rule or require a repair layer.
 
 ## Layer 8: CI/CD Gates
 

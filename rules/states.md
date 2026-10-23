@@ -1,6 +1,6 @@
 # UI States — Level 2 Module
 
-**Version:** v1.13.2 · **Canonical spec:** [HIG.md §2.5–2.7, §4.3–4.6](../HIG.md#25-error-ux-taxonomy) · **Rule IDs:** HIG-ERR-001, HIG-EMP-001, HIG-LOD-001
+**Version:** v1.14.0 · **Canonical spec:** [HIG.md §2.5–2.7, §4.3–4.6](../HIG.md#25-error-ux-taxonomy) · **Rule IDs:** HIG-ERR-001, HIG-EMP-001, HIG-LOD-001
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -25,6 +25,10 @@ Every error state MUST map to a defined category (**HIG-ERR-001**):
 | **Unknown** | Fallback error with retry and support contact |
 
 Errors MUST NOT rely on color alone. Each error MUST include text and, where applicable, an icon or pattern.
+
+**Route and feature module failures** — The error recovery contract also applies when a code-split route or feature fails to load. Show meaningful error text and a visible, keyboard-operable recovery action; preserve user input through failure and recovery. Keep the fallback and recovery control outside the failed module so they remain available. A retry that fails again returns to the error state rather than leaving an indefinite spinner or blank screen.
+
+Choose recovery for the supported browser matrix: retrying `import()` is one option, not a prescribed implementation. Some engines cache failed module loads; a refreshed or versioned module URL, or a reload with draft restoration, may be needed. Do not replay consequential mutations as part of module recovery ([§4.5](../HIG.md#45-concurrency-conflict--idempotency)). See the [module failure review fixture](../examples/audit-fixtures/module-load-recovery/README.md).
 
 ## 2.6 Empty-State Taxonomy
 

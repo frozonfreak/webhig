@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dynamic native control accessibility fixture</title>
+  <link rel="stylesheet" href="./accname/fixture.css">
+  <main>
+    <h1>Dynamic native controls</h1>
+    <label for="options">Available options</label>
+    <select id="options" size="4">
+      <option>Alpha</option>
+      <option>Beta</option>
+    </select>
+    <button id="add" type="button">Add option</button>
+    <button id="remove" type="button" disabled>Remove added option</button>
+    <form id="choice-form">
+      <fieldset>
+        <legend>Delivery (required)</legend>
+        <label><input type="radio" name="delivery" value="collect" required> Collect</label>
+        <label><input type="radio" name="delivery" value="ship"> Ship</label>
+      </fieldset>
+      <button type="submit">Submit delivery</button>
+    </form>
+    <p id="form-status" role="status"></p>
+    <button id="activate" type="button">Activate once</button>
+    <p id="activation-status" role="status">Activation count: 0</p>
+  </main>
+  <script type="module">
+    const options = document.querySelector('#options');
+    const add = document.querySelector('#add');
+    const remove = document.querySelector('#remove');
+    add.addEventListener('click', () => {
+      options.add(new Option('Gamma', 'gamma'));
+      add.disabled = true;
+      remove.disabled = false;
+      remove.focus();
+    });
+    remove.addEventListener('click', () => {
+      options.querySelector('[value="gamma"]').remove();
+      if (options.selectedIndex < 0) options.selectedIndex = 0;
+      add.disabled = false;
+      remove.disabled = true;
+      add.focus();
+    });
+    document.querySelector('#choice-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      document.querySelector('#form-status').textContent = 'Delivery selection accepted.';
+    });
+    let count = 0;
+    document.querySelector('#activate').addEventListener('click', (event) => {
+      count += 1;
+      document.querySelector('#activation-status').textContent =
+        `Activation count: ${count}; last click detail: ${event.detail}`;
+    });
+  </script>
+</html>

@@ -1,6 +1,6 @@
 # The Web HIG — Rule Index (Level 2)
 
-**Version:** v1.13.2 · **Machine-readable:** [manifest.yaml](./manifest.yaml), [registry.yaml](./registry.yaml) · **Quick Reference:** [HIG-QUICK.md](../HIG-QUICK.md) · **Practical:** [HIG-LITE.md](../HIG-LITE.md) · **Full spec:** [HIG.md](../HIG.md)
+**Version:** v1.14.0 · **Machine-readable:** [manifest.yaml](./manifest.yaml), [registry.yaml](./registry.yaml) · **Quick Reference:** [HIG-QUICK.md](../HIG-QUICK.md) · **Practical:** [HIG-LITE.md](../HIG-LITE.md) · **Full spec:** [HIG.md](../HIG.md)
 
 This index maps rule IDs to standalone Layer 2 modules and tells agents **when** to load them. Each module is a self-contained extract; [HIG.md](../HIG.md) remains the complete normative contract (Layer 3).
 
@@ -64,7 +64,7 @@ The registry is the authoritative ID list for CI, `web-hig explain`, and normati
 | **notifications** | [notifications.md](./notifications.md) | toast, snackbar, banner, alert, inline status | HIG-NTF-001 |
 | **i18n** | [i18n.md](./i18n.md) | locale, RTL, pluralization, translation | HIG-I18N-001, HIG-UX-001 |
 | **security** | [security.md](./security.md) | CSP, XSS, CSRF, cookie, PII, auth UX, secrets | HIG-SEC-001–004 |
-| **ai-enforcement** | [ai-enforcement.md](./ai-enforcement.md) | agent rules, linter, CI gate, rule ID | HIG-SIM-001 + Layer 7 |
+| **ai-enforcement** | [ai-enforcement.md](./ai-enforcement.md) | agent rules, tool schema, interface drift, linter, CI gate, rule ID | HIG-SIM-001 + Layer 7 |
 
 ---
 

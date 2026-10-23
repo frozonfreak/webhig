@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module load recovery fixture</title>
+  <link rel="stylesheet" href="../accname/fixture.css">
+  <main>
+    <h1>Module load recovery</h1>
+    <p>The first load deliberately fails. Retry uses an available module URL.</p>
+    <label for="notes">Notes (retained through recovery)</label>
+    <textarea id="notes"></textarea>
+    <button id="load" type="button">Load feature</button>
+    <p id="status" role="status"></p>
+    <section id="feature" aria-label="Loaded feature"></section>
+  </main>
+  <script type="module">
+    const button = document.querySelector('#load');
+    const status = document.querySelector('#status');
+    let failed = false;
+    button.addEventListener('click', async () => {
+      if (button.getAttribute('aria-disabled') === 'true') return;
+      button.setAttribute('aria-disabled', 'true');
+      status.textContent = 'Loading feature…';
+      try {
+        const feature = await import(failed ? './feature.mjs' : './unavailable-feature.mjs');
+        feature.mount(document.querySelector('#feature'));
+        status.textContent = 'Feature loaded. Your notes are preserved.';
+        button.textContent = 'Load feature again';
+      } catch {
+        failed = true;
+        status.textContent = 'The feature could not load. Your notes are preserved. Retry to load the feature.';
+        button.textContent = 'Retry';
+      } finally {
+        button.removeAttribute('aria-disabled');
+      }
+    });
+  </script>
+</html>

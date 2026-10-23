@@ -1,6 +1,6 @@
 # Vue Framework Adapter
 
-**Version:** v1.13.2 · **Universal architecture:** [rules/architecture.md](../rules/architecture.md) · **Canonical spec:** [HIG.md §4.1](../HIG.md#41-server-driven--progressive-rendering-architecture)
+**Version:** v1.14.0 · **Universal architecture:** [rules/architecture.md](../rules/architecture.md) · **Canonical spec:** [HIG.md §4.1](../HIG.md#41-server-driven--progressive-rendering-architecture)
 
 > Framework-specific guidance for Vue 3 applications.
 

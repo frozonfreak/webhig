@@ -1,6 +1,6 @@
 # The Web HIG — Practical Guide (Layer 2)
 
-**Version:** v1.13.2 · **Quick Reference:** [HIG-QUICK.md](./HIG-QUICK.md) · **Core:** [HIG-CORE.md](./HIG-CORE.md) · **Full spec:** [HIG.md](./HIG.md) · **Topic index:** [rules/INDEX.md](./rules/INDEX.md)
+**Version:** v1.14.0 · **Quick Reference:** [HIG-QUICK.md](./HIG-QUICK.md) · **Core:** [HIG-CORE.md](./HIG-CORE.md) · **Full spec:** [HIG.md](./HIG.md) · **Topic index:** [rules/INDEX.md](./rules/INDEX.md)
 
 Practical documentation with rule IDs and checklists. Start with [HIG-QUICK.md](./HIG-QUICK.md) (Layer 1, ~5 min); open this file when you need rule ID links and archetype guidance. Load [rules/manifest.yaml](./rules/manifest.yaml) topic modules when the task requires depth beyond this summary.
 
@@ -66,6 +66,8 @@ Server mutations MUST show pending UI (**HIG-SSR-003** → [§4.2](./HIG.md#42-a
 
 Forms MUST have labels and error summary (**HIG-FRM-001** → [§2.11](./HIG.md#211-forms-contract)). Notifications MUST use taxonomy (**HIG-NTF-001** → [§2.10](./HIG.md#210-notifications-taxonomy)).
 
+Code-split route/feature load failures follow the same error recovery contract: meaningful text, a visible keyboard-operable recovery action and preserved input. Keep recovery outside the failed module; choose a strategy that works across supported browsers ([§2.5](./HIG.md#25-error-ux-taxonomy)).
+
 ## 5. Interaction & motion
 
 - Application CSS MUST NOT use `transition: all` — enumerate properties (**HIG-MOT-001** → [§1.1](./HIG.md#11-direct-manipulation--motion-ergonomics))
@@ -130,6 +132,7 @@ Load [rules/expressive-surface.md](./rules/expressive-surface.md) when scope dec
 - Don't duplicate existing functionality
 - Don't introduce dependencies without justification
 - Don't over-engineer to satisfy the HIG
+- For agent tool execution, review current-schema validation, rejection of unknown tools, constrained repair and redacted audit trails ([§7.4](./HIG.md#74-agent-tool-schema-review-informative), informative; no automated website audit rule).
 - Critical mutations SHOULD be idempotent (**HIG-MUT-002** → [§4.5](./HIG.md#45-concurrency-conflict--idempotency))
 
 ## 9. Security (universal)

@@ -6,7 +6,7 @@ Layer 7 defines how requirements become **deterministic** for linters, CI, and A
 
 ---
 
-## Today (v1.13.2)
+## Today (v1.14.0)
 
 | Artifact | Format | Purpose |
 | --- | --- | --- |

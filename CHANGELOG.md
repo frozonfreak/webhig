@@ -10,6 +10,24 @@ Expanded adoption notes: [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
 ---
 
+## [1.14.0] - 2026-10-23
+
+### Changed
+
+- Clarified §2.5 error recovery for failed route/feature modules: meaningful errors, keyboard-operable recovery, preserved input and fallbacks outside failed modules. Same-URL import retry is not mandated.
+- Added informative §7.4 review guidance for schema validation, fail-closed handling, constrained repair and redacted execution trails. No new website audit rule, stable ID or blocking gate.
+
+### Added
+
+- Runnable module-failure and dynamic native-control fixtures, plus recovery and Safari TP 255/VoiceOver review procedures. Browser/AT execution pending.
+- [23 October research disposition](./docs/research/2026-10-23-brief.md) with primary sources and compatibility rationale.
+
+### Unchanged
+
+- WCAG baseline, Core Web Vitals metrics/thresholds/measurement policy and existing IDs/severities. Experimental CSS and MATF proposals remain deferred.
+
+---
+
 ## [1.13.2] - 2026-10-22
 
 ### Fixed

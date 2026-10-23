@@ -1,9 +1,9 @@
 # The Web HIG — machine-readable rule registry
-# Version: 1.13.2
+# Version: 1.14.0
 # Normative prose: HIG.md · Index: rules/INDEX.md · Tooling: NPM-TOOLING.md
 # Regenerate: node scripts/sync-registry.mjs
 
-version: "1.13.2"
+version: "1.14.0"
 
 rules:
   HIG-SIM-001:

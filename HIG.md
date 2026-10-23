@@ -1,8 +1,8 @@
-# The Web HIG & Product Engine Contract — v1.13.2
+# The Web HIG & Product Engine Contract — v1.14.0
 
 ## Executive Summary
 
-The Web HIG v1.13.2 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
+The Web HIG v1.14.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
 
 This release adds a three-layer consumption model and archetype rule packs:
 
@@ -379,6 +379,10 @@ Every error state MUST map to a defined category with prescribed UI behavior:
 | **Unknown** | Fallback error with retry and support contact; never silent failure |
 
 Errors MUST NOT rely on color alone. Each error MUST include text and, where applicable, an icon or pattern.
+
+**Route and feature module failures** — The error recovery contract also applies when a code-split route or feature fails to load. Show meaningful error text and a visible, keyboard-operable recovery action; preserve user input through failure and recovery. Keep the fallback and recovery control outside the failed module so they remain available. A retry that fails again returns to the error state rather than leaving an indefinite spinner or blank screen.
+
+Choose recovery for the supported browser matrix: retrying `import()` is one option, not a prescribed implementation. Some engines cache failed module loads; a refreshed or versioned module URL, or a reload with draft restoration, may be needed. Do not replay consequential mutations as part of module recovery (§4.5). See the [module failure review fixture](./examples/audit-fixtures/module-load-recovery/README.md).
 
 ### 2.6 Empty-State Taxonomy
 
@@ -1236,6 +1240,18 @@ agent_enforcement_rules:
 
 ---
 
+### 7.4 Agent tool-schema review (informative)
+
+For systems that execute agent tool calls, review the execution boundary as well as the generated call:
+
+* Validate the tool name and arguments against the current advertised tool set and schema before execution, including after any repair.
+* Fail closed on unknown or renamed tools and invalid arguments: do not dispatch a guessed replacement. Refresh discovery or return an actionable validation error.
+* Constrain repairs to the authorized intent. A repair must not silently substitute a consequential action, change its target or expand its scope; return to the existing confirmation flow if the proposed action changes.
+* Record the original call, validation failure, proposed repair and final execution or rejection in a correlated audit trail. Redact secrets and sensitive values according to §9.4; retain enough safe structure to explain the decision.
+* Exercise renamed tools, added distractor tools, removed candidates, changed schemas and a repair that still fails validation. Verify that invalid calls produce no side effects and rejected repairs never execute.
+
+This is specification review guidance, not a new automated website audit rule, mandatory repair layer or agent-readiness score. The [interface-drift study](https://arxiv.org/abs/2610.23342) supplies model-specific evidence for validation and constrained repair; it does not establish general accuracy or authorize silent action substitution. See the [research disposition](./docs/research/2026-10-23-brief.md).
+
 ## Layer 8: Quality Assurance & CI/CD Gates
 
 CI gates are classified by enforcement level:
@@ -1378,6 +1394,7 @@ Logs MUST include timestamp, actor, action, and resource — but MUST NOT includ
 
 **Release documentation:** [CHANGELOG.md](./CHANGELOG.md) (Keep a Changelog) · [RELEASE_NOTES.md](./RELEASE_NOTES.md) (adoption notes) · [VERSIONING.md](./VERSIONING.md) (semver policy).
 
+* **v1.14.0 (2026-10-23):** Minor guidance release. Clarifies module-load recovery under §2.5; adds informative §7.4 tool-schema review and runtime/AT fixtures. No new IDs, severity changes, WCAG or Core Web Vitals threshold changes.
 * **v1.13.2 (2026-10-22):** Patch release. Quick ↔ rule ID map section sweep: Quick #93 and #94 (§9.2) no longer cite **HIG-SEC-003** / **HIG-SEC-004** and are quick_only pending canonical IDs (F4), as are Quick #31, #41, and #46, whose linked rules state a different obligation. Quick map links now come from section/ID matching, and validation rejects cross-section links not listed as reviewed exceptions. No normative rule IDs added, removed, or retightened.
 * **v1.13.1 (2026-10-11):** Patch release. Corrected Quick ↔ rule ID mappings: Quick #21 and #22 are quick_only pending canonical IDs (F4); Quick #29 expands to **HIG-SEO-001**–**003**; Quick #83 maps to **HIG-DOC-005**. No normative rule IDs added, removed, or retightened.
 * **v1.13.0 (2026-10-09):** Minor guidance release. Accessible name/description defers to platform AccName computation (AccName 1.2 WD referenced; not an independent conformance bar); **HIG-DOC-005** adds outcome-based image-format / progressive-enhancement guidance (JPEG XL via `<picture>` fallback). Audit fixtures for AccName edge cases and Safari/VoiceOver manual review notes. No Core Web Vitals threshold change; no new AI/agent-interface rules.
