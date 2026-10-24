@@ -4,6 +4,8 @@ This roadmap describes **contract and tooling** direction for the standard repos
 
 **Current version:** [VERSION](./VERSION)
 
+**Tooling and adoption program:** [readiness implementation and acceptance gates](./READINESS.md). The first reliability foundation is implemented in source; browser helpers, agent benchmarks, baseline-aware PR reporting, complete reference apps and external pilots remain tracked there. Target maturity is not a measured score.
+
 ---
 
 ## Shipped (foundation)

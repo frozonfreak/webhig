@@ -3,6 +3,8 @@ import { runCheck } from './commands/check.mjs';
 import { runExplain } from './commands/explain.mjs';
 import { runInit } from './commands/init.mjs';
 import { runUpgrade } from './commands/upgrade.mjs';
+import { runDoctor } from './commands/doctor.mjs';
+import { runCoverage } from './commands/coverage.mjs';
 
 const HELP = `Usage: web-hig <command> [options]
 
@@ -12,6 +14,8 @@ Commands:
   audit      Runtime evaluation (experimental — not shipped; use check)
   explain    Show documentation for a rule ID
   upgrade    Report outdated pins; use --dry-run for upgrade checklist
+  doctor     Diagnose project configuration, pins, and agent integrations
+  coverage   Inventory applicable rules and implemented verification coverage
 
 Options:
   --help     Show help
@@ -32,6 +36,10 @@ export async function runCli(argv) {
   switch (command) {
     case 'init':
       return runInit(rest);
+    case 'doctor':
+      return runDoctor(rest);
+    case 'coverage':
+      return runCoverage(rest);
     case 'check':
       return runCheck(rest);
     case 'audit':

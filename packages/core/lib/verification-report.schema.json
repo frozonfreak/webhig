@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hig.dev/schema/verification-report.schema.json",
+  "title": "Web HIG verification evidence v1",
+  "description": "Additive evidence envelope for CLI and independent evaluators. Scores are not inferred from detector silence.",
+  "type": "object",
+  "required": ["schema_version", "hig_version", "profile", "archetype", "summary", "assessments"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "hig_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "profile": { "enum": ["quick", "practical", "full"] },
+    "archetype": { "enum": ["content", "commerce", "application", "auth"] },
+    "summary": {
+      "type": "object",
+      "required": ["passed", "failed", "manual_review", "not_assessed"],
+      "additionalProperties": false,
+      "properties": {
+        "passed": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "manual_review": { "type": "integer", "minimum": 0 },
+        "not_assessed": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule_id", "severity_bucket", "verification_modes", "coverage", "result", "reason", "evidence"],
+        "properties": {
+          "rule_id": { "type": "string", "pattern": "^HIG-[A-Z0-9]+-\\d+$" },
+          "severity_bucket": { "enum": ["blocking", "warnings", "observations"] },
+          "verification_modes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["static", "runtime", "manual", "observation"] } },
+          "coverage": { "enum": ["none", "partial", "full"] },
+          "result": { "enum": ["passed", "failed", "manual_review", "not_assessed"] },
+          "reason": { "type": "string", "minLength": 1 },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["mode", "message"],
+              "additionalProperties": false,
+              "properties": {
+                "mode": { "enum": ["static", "runtime", "manual", "observation"] },
+                "message": { "type": "string", "minLength": 1 },
+                "location": { "type": "string" }
+              }
+            }
+          }
+        },
+        "allOf": [
+          { "if": { "properties": { "result": { "enum": ["passed", "failed"] } } }, "then": { "properties": { "evidence": { "type": "array", "minItems": 1 } } } },
+          { "if": { "properties": { "result": { "const": "passed" } } }, "then": { "properties": { "coverage": { "const": "full" } } } }
+        ]
+      }
+    }
+  }
+}

@@ -1,6 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { parse } from 'yaml';
 
+const PROFILES = ['quick', 'practical', 'full'];
+const ARCHETYPES = ['content', 'commerce', 'application', 'auth'];
 const DEFAULTS = {
   profile: 'practical',
   archetype: 'application',
@@ -8,92 +11,54 @@ const DEFAULTS = {
   scope: { files: ['src/**'], exclude: [], routes: ['/**'] },
   gates: { blocking: 'fail', warnings: 'report', observations: 'report' },
 };
-
-export function defaultProjectConfig(higVersion) {
-  return {
-    version: higVersion,
-    ...structuredClone(DEFAULTS),
-  };
+export function defaultProjectConfig(version) {
+  return { version, ...structuredClone(DEFAULTS) };
 }
 
-function parseScalar(line) {
-  const trimmed = line.trim();
-  if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
-    return trimmed.slice(1, -1);
+export function validateProjectConfig(input) {
+  const object = (value) => value && typeof value === 'object' && !Array.isArray(value);
+  if (!object(input)) throw new Error('web-hig.yaml must contain a YAML mapping.');
+  for (const key of Object.keys(input)) {
+    if (!['version', ...Object.keys(DEFAULTS)].includes(key))
+      throw new Error(`Unknown configuration key: ${key}`);
   }
-  return trimmed;
+  if (typeof input.version !== 'string' || !/^\d+\.\d+\.\d+$/.test(input.version)) {
+    throw new Error('version must be a quoted stable semver, e.g. "1.15.0".');
+  }
+  const config = { ...defaultProjectConfig(input.version), ...input };
+  if (!PROFILES.includes(config.profile)) throw new Error(`Unknown profile: ${config.profile}`);
+  if (!ARCHETYPES.includes(config.archetype))
+    throw new Error(`Unknown archetype: ${config.archetype}`);
+  for (const section of ['framework', 'scope', 'gates']) {
+    if (input[section] === undefined) continue;
+    if (!object(input[section])) throw new Error(`${section} must be a mapping.`);
+    for (const key of Object.keys(input[section])) {
+      if (!Object.hasOwn(DEFAULTS[section], key)) throw new Error(`Unknown ${section} key: ${key}`);
+    }
+    config[section] = { ...structuredClone(DEFAULTS[section]), ...input[section] };
+  }
+  if (config.framework.name !== null && typeof config.framework.name !== 'string') {
+    throw new Error('framework.name must be a string or null.');
+  }
+  for (const [key, value] of Object.entries(config.scope)) {
+    if (!Array.isArray(value) || value.some((v) => typeof v !== 'string' || !v.trim())) {
+      throw new Error(`scope.${key} must be an array of nonempty strings.`);
+    }
+  }
+  for (const [key, value] of Object.entries(config.gates)) {
+    if (!['fail', 'report'].includes(value))
+      throw new Error(`gates.${key} must be fail or report.`);
+  }
+  return config;
 }
 
-/** Minimal web-hig.yaml parser (no dependency). */
 export function loadProjectConfig(cwd, fileName = 'web-hig.yaml') {
-  const configPath = path.join(cwd, fileName);
-  if (!fs.existsSync(configPath)) {
-    return { configPath: null, config: null, exists: false };
+  const configPath = path.resolve(cwd, fileName);
+  if (!fs.existsSync(configPath)) return { configPath, config: null, exists: false };
+  try {
+    const input = parse(fs.readFileSync(configPath, 'utf8'));
+    return { configPath, exists: true, config: validateProjectConfig(input) };
+  } catch (error) {
+    throw new Error(`${configPath}: ${error.message}`);
   }
-
-  const text = fs.readFileSync(configPath, 'utf8');
-  const config = structuredClone(DEFAULTS);
-  let version = null;
-  let section = null;
-
-  for (const rawLine of text.split(/\r?\n/)) {
-    const line = rawLine.replace(/#.*$/, '').trimEnd();
-    if (!line.trim() || line.trim().startsWith('#')) continue;
-
-    if (/^scope:\s*$/.test(line)) {
-      section = 'scope';
-      continue;
-    }
-    if (/^framework:\s*$/.test(line)) {
-      section = 'framework';
-      continue;
-    }
-    if (/^gates:\s*$/.test(line)) {
-      section = 'gates';
-      continue;
-    }
-
-    const top = line.match(/^(\w+):\s*(.*)$/);
-    if (top && !line.startsWith(' ')) {
-      section = null;
-      const [, key, value] = top;
-      if (key === 'version') version = parseScalar(value);
-      if (key === 'profile') config.profile = parseScalar(value);
-      if (key === 'archetype') config.archetype = parseScalar(value);
-      continue;
-    }
-
-    const nested = line.match(/^\s{2}(\w+):\s*(.*)$/);
-    if (!nested) continue;
-    const [, key, value] = nested;
-
-    if (section === 'framework' && key === 'name') {
-      config.framework.name = parseScalar(value);
-    }
-    if (section === 'gates') {
-      config.gates[key] = parseScalar(value);
-    }
-    if (section === 'scope' && (key === 'files' || key === 'exclude' || key === 'routes')) {
-      if (!Array.isArray(config.scope[key])) config.scope[key] = [];
-    }
-  }
-
-  const lines = text.split(/\r?\n/);
-  let scopeList = null;
-  for (let i = 0; i < lines.length; i += 1) {
-    const line = lines[i];
-    if (/^\s{2}files:\s*$/.test(line)) scopeList = 'files';
-    else if (/^\s{2}exclude:\s*$/.test(line)) scopeList = 'exclude';
-    else if (/^\s{2}routes:\s*$/.test(line)) scopeList = 'routes';
-    else if (/^\s{2}\w/.test(line) && !/^\s{4}-/.test(line)) scopeList = null;
-    else if (scopeList && /^\s{4}-\s+(.+)$/.test(line)) {
-      config.scope[scopeList].push(parseScalar(line.match(/^\s{4}-\s+(.+)$/)[1]));
-    }
-  }
-
-  return {
-    configPath,
-    exists: true,
-    config: { version, ...config },
-  };
 }

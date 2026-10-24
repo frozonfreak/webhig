@@ -8,6 +8,13 @@ Expanded adoption notes: [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
 ## Unreleased
 
+### Tooling
+
+- Add `doctor`, scoped verification coverage, strict check preconditions, and a shared versioned evidence schema. Partial static checks never imply verified passes.
+- Validate YAML settings and registry metadata; fix glob scope selection, automatic vendored-registry discovery, and configured severity gates.
+- Make Quick installation usable by the CLI, generate initial project configuration, preserve user settings, reject incompatible pins and malformed merge blocks before writes, and resolve `init` through its declared installer dependency.
+- Add metadata impact previews for upgrades, source-layout installation regressions, and a Windows/Linux/macOS tooling test matrix. Track remaining adoption and behavioral verification gates in [READINESS.md](./READINESS.md).
+
 ---
 
 ## [1.15.0] - 2026-10-24

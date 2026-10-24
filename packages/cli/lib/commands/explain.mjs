@@ -1,6 +1,8 @@
 import { loadRegistry, resolveHigRoot } from '@web-hig/core';
 
 export async function runExplain(argv) {
+  if (argv.length !== 1 || argv[0].startsWith('-'))
+    throw new Error('Usage: web-hig explain <rule-id>');
   const ruleId = argv.find((a) => !a.startsWith('-'));
   if (!ruleId || argv.includes('--help')) {
     console.log('Usage: web-hig explain <rule-id>\n\nExample: web-hig explain HIG-A11Y-004');

@@ -22,7 +22,9 @@
     "web-hig": "./bin/cli.mjs"
   },
   "dependencies": {
-    "@web-hig/core": "file:../core"
+    "@web-hig/core": "file:../core",
+    "@web-hig/install": "file:../install",
+    "yaml": "^2.8.1"
   },
   "files": [
     "README.md",

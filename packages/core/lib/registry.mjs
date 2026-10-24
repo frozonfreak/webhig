@@ -1,55 +1,55 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { parse } from 'yaml';
 
 export function parseRegistryYaml(yaml) {
-  const version = yaml.match(/^version:\s*"([^"]+)"/m)?.[1];
-  const rules = new Map();
-  for (const match of yaml.matchAll(/^  (HIG-[A-Z0-9]+-\d+):\r?\n((?:    .+\r?\n)*)/gm)) {
-    const id = match[1];
-    const body = match[2];
-    const pick = (key) => body.match(new RegExp(`^    ${key}:\\s*(.+)$`, 'm'))?.[1]?.trim();
-    const profiles = [...body.matchAll(/^    profiles:\r?\n((?:      - \S+\r?\n)*)/gm)][0];
-    const profileList = profiles
-      ? [...profiles[1].matchAll(/^      - (\S+)/gm)].map((m) => m[1])
-      : [];
-    const archetypeBlock = [...body.matchAll(/^    archetypes:\r?\n((?:      - \S+\r?\n)*)/gm)][0];
-    const archetypeList = archetypeBlock
-      ? [...archetypeBlock[1].matchAll(/^      - (\S+)/gm)].map((m) => m[1])
-      : [];
-    const evalBlock = [...body.matchAll(/^    evaluation:\r?\n((?:      - \S+\r?\n)*)/gm)][0];
-    const evaluationList = evalBlock
-      ? [...evalBlock[1].matchAll(/^      - (\S+)/gm)].map((m) => m[1])
-      : [];
-
-    rules.set(id, {
-      id,
-      severity: pick('severity'),
-      requirement: pick('requirement')?.replace(/^"|"$/g, ''),
-      profiles: profileList,
-      archetypes: archetypeList,
-      evaluation: evaluationList,
-      autofix: pick('autofix'),
-      module: pick('module'),
-      hig_section: pick('hig_section')?.replace(/^"|"$/g, ''),
-      eslint_rule: pick('eslint_rule'),
-    });
+  const data = parse(yaml);
+  if (
+    !data ||
+    typeof data.version !== 'string' ||
+    !/^\d+\.\d+\.\d+$/.test(data.version) ||
+    !data.rules ||
+    typeof data.rules !== 'object' ||
+    !Object.keys(data.rules).length
+  ) {
+    throw new Error('Invalid registry: expected version and a nonempty rules mapping.');
   }
-  return { version, rules };
+  const rules = new Map();
+  for (const [id, row] of Object.entries(data.rules)) {
+    if (
+      !/^HIG-[A-Z0-9]+-\d+$/.test(id) ||
+      !row ||
+      typeof row.requirement !== 'string' ||
+      !row.requirement.trim() ||
+      !['error', 'warning', 'info'].includes(row.severity)
+    )
+      throw new Error(`Invalid registry rule: ${id}`);
+    for (const [key, allowed] of Object.entries({
+      profiles: ['quick', 'practical', 'full'],
+      archetypes: ['content', 'commerce', 'application', 'auth'],
+      evaluation: ['static', 'runtime', 'manual', 'observation'],
+    })) {
+      if (
+        !Array.isArray(row[key]) ||
+        !row[key].length ||
+        row[key].some((v) => !allowed.includes(v))
+      )
+        throw new Error(`${id}: invalid ${key}`);
+    }
+    rules.set(id, { ...row, id });
+  }
+  return { version: data.version, rules };
 }
 
 export function loadRegistry(higRoot) {
-  const filePath = path.join(higRoot, 'rules', 'registry.yaml');
-  const yaml = fs.readFileSync(filePath, 'utf8');
-  return parseRegistryYaml(yaml);
+  return parseRegistryYaml(fs.readFileSync(path.join(higRoot, 'rules', 'registry.yaml'), 'utf8'));
 }
 
-export function filterRulesByContract(registry, { profile, archetype }) {
-  const applicable = [];
-  for (const rule of registry.rules.values()) {
-    if (!rule.profiles.includes(profile)) continue;
-    if (!rule.archetypes.includes(archetype)) continue;
-    if (!rule.evaluation.includes('static')) continue;
-    applicable.push(rule);
-  }
-  return applicable;
+export function filterRulesByContract(registry, { profile, archetype, evaluation = 'static' }) {
+  return [...registry.rules.values()].filter(
+    (rule) =>
+      rule.profiles.includes(profile) &&
+      rule.archetypes.includes(archetype) &&
+      (!evaluation || rule.evaluation.includes(evaluation)),
+  );
 }

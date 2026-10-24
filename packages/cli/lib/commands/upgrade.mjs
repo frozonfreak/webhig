@@ -1,22 +1,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadProjectConfig, loadRegistry, resolveHigRoot } from '@web-hig/core';
+import { parseOptions } from '../options.mjs';
 
 function parseFlags(argv) {
-  const flags = { dryRun: false, config: 'web-hig.yaml' };
-  for (let i = 0; i < argv.length; i += 1) {
-    const arg = argv[i];
-    if (arg === '--dry-run') flags.dryRun = true;
-    else if (arg === '--config') flags.config = argv[++i];
-  }
-  return flags;
+  const flags = parseOptions(argv, ['--config'], ['--dry-run']);
+  return { ...flags, dryRun: flags['dry-run'] };
 }
 
 function readPinnedVersion(cwd) {
   const candidates = [
     path.join(cwd, 'docs', 'hig', 'VERSION'),
     path.join(cwd, 'docs', 'hig', 'version'),
-    path.join(cwd, 'VERSION'),
   ];
   for (const file of candidates) {
     if (!fs.existsSync(file)) continue;
@@ -53,7 +48,9 @@ Options:
   const cwd = process.cwd();
   const higRoot = resolveHigRoot(cwd);
   if (!higRoot) {
-    console.error('Cannot find rules/registry.yaml. Set WEB_HIG_ROOT or run from the HIG repository.');
+    console.error(
+      'Cannot find rules/registry.yaml. Set WEB_HIG_ROOT or run from the HIG repository.',
+    );
     return 1;
   }
 
@@ -63,10 +60,18 @@ Options:
   const configVersion = loaded.exists ? loaded.config.version : null;
   const pinVersion = configVersion || pinned?.version || null;
 
+  if (configVersion && pinned && configVersion !== pinned.version) {
+    throw new Error(
+      'Configuration and vendored VERSION disagree. Run web-hig doctor before upgrading.',
+    );
+  }
+
   if (!pinVersion) {
     console.error('No pinned version found. Add web-hig.yaml version or docs/hig/VERSION.');
     return 1;
   }
+  if (!/^\d+\.\d+\.\d+$/.test(pinVersion))
+    throw new Error('Invalid pinned semver. Run web-hig doctor.');
 
   const cmp = compareSemver(pinVersion, registry.version);
   console.log(`Pinned contract: v${pinVersion}${pinned ? ` (${pinned.source})` : ''}`);
@@ -83,9 +88,38 @@ Options:
   }
 
   console.log('\nUpgrade available.');
+  const previousRoot = path.join(cwd, 'docs', 'hig');
+  if (fs.existsSync(path.join(previousRoot, 'rules', 'registry.yaml'))) {
+    const previous = loadRegistry(previousRoot);
+    if (previous.version !== pinVersion)
+      throw new Error('Vendored registry and pinned version disagree. Run web-hig doctor.');
+    const keys = ['requirement', 'severity', 'profiles', 'archetypes', 'evaluation', 'autofix'];
+    const added = [...registry.rules.keys()].filter((id) => !previous.rules.has(id));
+    const removed = [...previous.rules.keys()].filter((id) => !registry.rules.has(id));
+    const changed = [...registry.rules.keys()].filter(
+      (id) =>
+        previous.rules.has(id) &&
+        keys.some(
+          (key) =>
+            JSON.stringify(previous.rules.get(id)[key]) !==
+            JSON.stringify(registry.rules.get(id)[key]),
+        ),
+    );
+    console.log('\nRegistry impact (metadata only; review release notes for prose changes):');
+    for (const [label, ids] of [
+      ['Added', added],
+      ['Removed', removed],
+      ['Changed', changed],
+    ]) {
+      console.log(`  ${label}: ${ids.length}${ids.length ? ` — ${ids.join(', ')}` : ''}`);
+    }
+  } else
+    console.log(
+      '\nPrevious registry unavailable: requirement impact is unknown. Review release notes before replacing pins.',
+    );
   const steps = [
     `Review RELEASE_NOTES.md / CHANGELOG.md for v${registry.version}.`,
-    'Update docs/hig/VERSION and vendored HIG files (or re-run npx @web-hig/install).',
+    'After reviewing changes, replace dedicated pins with the target installer version using --force (preview with --dry-run first).',
     `Set web-hig.yaml version: "${registry.version}".`,
     'Run your project test suite and npm run validate on vendored pins if applicable.',
   ];
@@ -96,6 +130,8 @@ Options:
     return 0;
   }
 
-  console.log('\nRe-run with --dry-run to preview only. Automatic file rewrites are not implemented yet.');
+  console.log(
+    '\nRe-run with --dry-run to preview only. Automatic file rewrites are not implemented yet.',
+  );
   return 2;
 }

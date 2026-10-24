@@ -19,7 +19,8 @@
     "node": ">=20"
   },
   "exports": {
-    ".": "./index.mjs"
+    ".": "./index.mjs",
+    "./verification-report.schema.json": "./lib/verification-report.schema.json"
   },
   "files": [
     "README.md",
@@ -34,5 +35,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "yaml": "^2.9.1"
   }
 }

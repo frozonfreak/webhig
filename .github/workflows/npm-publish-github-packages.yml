@@ -93,7 +93,7 @@ jobs:
 
       - name: Pre-publish checklist (dry-run)
         run: |
-          echo "Publish order: @web-hig/core → @web-hig/cli (core dep rewritten) → @web-hig/install"
+          echo "Publish order: @web-hig/core → @web-hig/install → @web-hig/cli (dependencies rewritten)"
           echo "VERSION file matches release tag; npm run validate and npm test passed above."
           echo "See packages/PUBLISHING.md if npm returns 404 or EOTP."
 
@@ -106,18 +106,19 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --access public
 
+      - name: Publish @web-hig/install
+        working-directory: packages/install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
+
       - name: Publish @web-hig/cli
         working-directory: packages/cli
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm pkg set \
-            "dependencies[@web-hig/core]=${{ steps.version.outputs.version }}"
+            "dependencies[@web-hig/core]=${{ steps.version.outputs.version }}" \
+            "dependencies[@web-hig/install]=${{ steps.version.outputs.version }}"
           npm install --omit=dev
           npm publish --access public
-
-      - name: Publish @web-hig/install
-        working-directory: packages/install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public

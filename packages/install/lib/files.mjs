@@ -13,6 +13,17 @@ export function readText(filePath) {
 }
 
 export function mergeMarked(existing, incoming) {
+  const starts = existing.split(MARKER_START).length - 1;
+  const ends = existing.split(MARKER_END).length - 1;
+  if (
+    starts !== ends ||
+    starts > 1 ||
+    (starts && existing.indexOf(MARKER_END) < existing.indexOf(MARKER_START))
+  ) {
+    throw new Error(
+      'Broken or duplicate web-hig merge markers. Repair the integration file before reinstalling.',
+    );
+  }
   const block = `${MARKER_START}\n${incoming.trim()}\n${MARKER_END}`;
   if (!existing) return `${block}\n`;
   if (existing.includes(MARKER_START) && existing.includes(MARKER_END)) {

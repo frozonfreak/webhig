@@ -33,6 +33,8 @@ Default target: current directory. Default pin directory: **`docs/hig/`**.
 | `docs/hig/VERSION` | Semver pin (must match agent rules) |
 | `docs/hig/HIG-QUICK.md` | Layer 1 — daily dev + AI default context |
 | `docs/hig/HIG-CORE.md` | Archetypes, philosophy, simplicity rule |
+| `docs/hig/rules/registry.yaml`, `manifest.yaml` | Rule inventory and progressive-loading metadata for CLI discovery |
+| `web-hig.yaml` | Initial profile, version, and detected source scope; created only if absent |
 | `docs/hig-scope.md` | Example scope map (only if missing) |
 | Editor rules + `web-hig` skill | Cursor, Claude, Copilot, Windsurf, `AGENTS.md` |
 
@@ -46,7 +48,7 @@ Everything in **quick**, plus:
 | `docs/hig/rules/` | Topic modules, archetype packs, **`registry.yaml`** |
 | `docs/hig/framework/` | React, Next, Vue, Nuxt, Astro adapters |
 
-Required for **`web-hig check`** / **`@web-hig/core`** (registry on disk).
+Quick also supports **`web-hig check`** / **`@web-hig/core`**. Practical supplies the detailed module documents referenced by the manifest.
 
 ### Full profile
 
@@ -84,8 +86,10 @@ npx @web-hig/install --dry-run
 
 1. **Customize scope** — Edit `docs/hig-scope.md` (archetypes per route/product area).
 2. **Tell agents** — e.g. *“Follow The Web HIG Quick Reference; pin is in docs/hig/.”*
-3. **Optional conformance CLI** — Install [`@web-hig/cli`](../cli/) and set `WEB_HIG_ROOT=docs/hig` for `web-hig check`.
-4. **Upgrade** — Re-run install when [VERSION](https://github.com/frozonfreak/webhig/blob/main/VERSION) bumps, or follow [RELEASE_NOTES.md](https://github.com/frozonfreak/webhig/blob/main/RELEASE_NOTES.md).
+3. **Optional conformance CLI** — Install [`@web-hig/cli`](../cli/) and run `web-hig doctor`, `web-hig check --strict`, and `web-hig coverage --format json`. The default pin directory is discovered automatically.
+4. **Upgrade** — Preview the target installer with `--dry-run --force` after reviewing [RELEASE_NOTES.md](https://github.com/frozonfreak/webhig/blob/main/RELEASE_NOTES.md). An existing configuration or VERSION pin that differs from the payload stops installation before writes unless `--force` is explicit. Existing `web-hig.yaml` is preserved even with `--force`; update its version after reviewing changes.
+
+Repeated installation preserves user instructions outside the managed HIG block. Broken or duplicate merge markers stop the entire plan before writes. Dedicated files remain unchanged without `--force`. Review generated scope and archetype before enforcement; source-layout detection is not a framework build or behavior check. With `--docs-dir`, also set `WEB_HIG_ROOT` to that directory and review agent references, which use the default layout.
 
 Example agent contract line:
 

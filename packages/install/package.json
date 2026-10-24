@@ -3,6 +3,9 @@
   "version": "1.15.0",
   "description": "Install The Web HIG Quick Reference, agent rules, and editor skills into a project",
   "type": "module",
+  "dependencies": {
+    "yaml": "^2.8.1"
+  },
   "bin": {
     "web-hig-install": "./bin/cli.mjs"
   },

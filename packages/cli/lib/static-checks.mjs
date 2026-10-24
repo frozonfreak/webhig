@@ -11,42 +11,79 @@ const SOURCE_EXTENSIONS = new Set([
   '.ts',
   '.html',
   '.astro',
+  '.php',
 ]);
 
+// These detectors cover only part of each rule; absence of a match is not a pass.
+export const STATIC_CHECKS = [
+  {
+    rule_id: 'HIG-MOT-001',
+    mode: 'static',
+    coverage: 'partial',
+    description: 'Detects transition: all in source text.',
+  },
+  {
+    rule_id: 'HIG-A11Y-001',
+    mode: 'static',
+    coverage: 'partial',
+    description: 'Detects motion styles without a reduced-motion query in the same file.',
+  },
+];
+
 export function collectScopedFiles(projectRoot, scope) {
-  const patterns = scope?.files?.length ? scope.files : ['**/*'];
+  const patterns = scope?.files ?? ['**/*'];
   const excludes = scope?.exclude ?? [];
   const files = [];
 
   for (const pattern of patterns) {
-    const base = pattern.replace(/\/\*\*$/, '').replace(/\*\*$/, '');
-    const scanRoot = path.join(projectRoot, base);
+    const segments = pattern.split('/');
+    const wildcard = segments.findIndex((s) => /[*?]/.test(s));
+    const base = wildcard < 0 ? pattern : segments.slice(0, wildcard).join('/');
+    const scanRoot = path.resolve(projectRoot, base);
+    const relative = path.relative(projectRoot, scanRoot);
+    if (relative.startsWith('..') || path.isAbsolute(relative))
+      throw new Error(`Scope escapes project: ${pattern}`);
     if (!fs.existsSync(scanRoot)) continue;
-    walk(scanRoot, files);
+    if (fs.lstatSync(scanRoot).isSymbolicLink()) continue;
+    if (fs.statSync(scanRoot).isDirectory()) walk(scanRoot, files);
+    else files.push(scanRoot);
   }
 
-  return files.filter((file) => {
-    const rel = path.relative(projectRoot, file).split(path.sep).join('/');
-    if (!SOURCE_EXTENSIONS.has(path.extname(file))) return false;
-    return !excludes.some((ex) => matchGlob(rel, ex));
-  });
+  return [...new Set(files)]
+    .filter((file) => {
+      const rel = path.relative(projectRoot, file).split(path.sep).join('/');
+      if (!SOURCE_EXTENSIONS.has(path.extname(file))) return false;
+      if (!patterns.some((pattern) => matchGlob(rel, pattern))) return false;
+      return !excludes.some((ex) => matchGlob(rel, ex));
+    })
+    .sort();
 }
 
 function walk(dir, out) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (entry.name === 'node_modules' || entry.name === '.git') continue;
     const filePath = path.join(dir, entry.name);
+    if (entry.isSymbolicLink()) continue;
     if (entry.isDirectory()) walk(filePath, out);
     else out.push(filePath);
   }
 }
 
 function matchGlob(rel, pattern) {
-  const escaped = pattern
-    .replace(/[.+^${}()|[\]\\]/g, '\\$&')
-    .replace(/\*\*/g, '.*')
-    .replace(/\*/g, '[^/]*');
-  return new RegExp(`^${escaped}$`).test(rel);
+  let expression = '';
+  for (let i = 0; i < pattern.length; i += 1) {
+    const char = pattern[i];
+    if (char === '*' && pattern[i + 1] === '*') {
+      i += 1;
+      if (pattern[i + 1] === '/') {
+        expression += '(?:.*/)?';
+        i += 1;
+      } else expression += '.*';
+    } else if (char === '*') expression += '[^/]*';
+    else if (char === '?') expression += '[^/]';
+    else expression += char.replace(/[.+^${}()|[\]\\]/g, '\\$&');
+  }
+  return new RegExp(`^${expression}$`).test(rel);
 }
 
 export function runStaticChecks(files, { applicableRuleIds }) {

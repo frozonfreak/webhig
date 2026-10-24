@@ -22,7 +22,7 @@ The engine reads **`rules/registry.yaml`** from a HIG contract tree on disk. It 
 
 | Setup | `WEB_HIG_ROOT` |
 | --- | --- |
-| [ `@web-hig/install` ](../install/) with **`practical`** or **`full`** profile | `docs/hig` (contains `rules/registry.yaml`) |
+| [ `@web-hig/install` ](../install/) with any profile | Automatically discovered `docs/hig` (contains `rules/registry.yaml`) |
 | Git clone of [frozonfreak/webhig](https://github.com/frozonfreak/webhig) | repository root |
 | Custom vendor layout | directory that contains `rules/registry.yaml` |
 
@@ -30,7 +30,7 @@ The engine reads **`rules/registry.yaml`** from a HIG contract tree on disk. It 
 export WEB_HIG_ROOT=docs/hig   # typical product repo after init
 ```
 
-If unset, `resolveHigRoot()` walks up from `process.cwd()` looking for `rules/registry.yaml`.
+If unset, `resolveHigRoot()` walks up from `process.cwd()` looking for `rules/registry.yaml` or `docs/hig/rules/registry.yaml`. An explicit invalid override returns null.
 
 ---
 
@@ -91,6 +91,7 @@ console.log(`Applicable static rules: ${staticRules.length}`);
 | --- | --- |
 | `loadProjectConfig(cwd, fileName?)` | Parse `web-hig.yaml` (default name) |
 | `defaultProjectConfig(higVersion)` | Defaults when no config file exists |
+| `validateProjectConfig(input)` | Validate profile, archetype, version, scope and gates; reject unknown keys and wrong types |
 
 See [web-hig.example.yaml](https://github.com/frozonfreak/webhig/blob/main/examples/web-hig.example.yaml).
 
@@ -114,6 +115,14 @@ Finding shape aligns with [EVALUATOR.md](https://github.com/frozonfreak/webhig/b
   "evaluation": "static"
 }
 ```
+
+### Verification evidence
+
+`filterRulesByContract(registry, { profile, archetype, evaluation: null })` includes all applicable rules, including manual/runtime rules. The default remains the static subset for compatibility.
+
+`createAssessments({ rules, checks, findings, files })` records each rule's declared modes, detector coverage, result, reason and evidence. `summarizeAssessments(assessments)` counts outcomes. Current static detectors are partial: they can identify a potential failure but never prove a pass from absence of findings. Manual-only rules require human review; unsupported or incompletely checked rules remain not assessed.
+
+The tooling-owned, independently versioned [verification report schema](./lib/verification-report.schema.json) is exported as `@web-hig/core/verification-report.schema.json`. It requires affirmative evidence and full coverage for any future `passed` result. CLI `check --json` and `coverage --format json` are schema-tested. This additive evidence format does not replace the standard's draft multidimensional report or claim compatibility with a deployed HIG Audit version.
 
 ---
 

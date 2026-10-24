@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { parse } from 'yaml';
 import { helpText, parseArgs } from './args.mjs';
 import { mergeMarked, posixRel, readText, walkFiles } from './files.mjs';
 import { resolvePayload } from './payload.mjs';
@@ -26,8 +27,42 @@ export async function run(argv, { packageRoot, cwd = process.cwd(), log = consol
   const targetRoot = options.dir;
   const docsDir = path.resolve(targetRoot, options.docsDir);
   const results = [];
+  const configFile = path.join(targetRoot, 'web-hig.yaml');
+  if (fs.existsSync(configFile)) {
+    const config = parse(readText(configFile));
+    if (
+      !config ||
+      typeof config !== 'object' ||
+      Array.isArray(config) ||
+      typeof config.version !== 'string'
+    ) {
+      throw new Error(
+        'Existing web-hig.yaml must be a mapping with a version pin. No files changed.',
+      );
+    }
+    if (config.version !== payload.version && !options.force) {
+      throw new Error(
+        `Existing configuration pins ${config.version}, not ${payload.version}. No files changed. Review the upgrade before using --force.`,
+      );
+    }
+  }
+
+  const versionFile = path.join(docsDir, 'VERSION');
+  if (
+    fs.existsSync(versionFile) &&
+    readText(versionFile).trim() !== payload.version &&
+    !options.force
+  ) {
+    throw new Error(
+      `Existing HIG pin differs from v${payload.version}. No files changed. Review the upgrade, then use --force to replace dedicated files.`,
+    );
+  }
 
   const plan = buildPlan(payload, targetRoot, docsDir, options);
+  // Validate merge markers before any writes, including partially configured projects.
+  for (const item of plan.filter((entry) => entry.kind === 'merge')) {
+    if (fs.existsSync(item.dest)) mergeMarked(readText(item.dest), readText(item.src));
+  }
   for (const item of plan) {
     results.push(applyItem(item, options, targetRoot));
   }
@@ -38,6 +73,28 @@ export async function run(argv, { packageRoot, cwd = process.cwd(), log = consol
 
 function buildPlan(payload, targetRoot, docsDir, options) {
   const plan = [];
+  // Quick installations need the registry too: check/explain should work immediately.
+  if (options.profile === 'quick') {
+    for (const name of ['registry.yaml', 'manifest.yaml']) {
+      plan.push({
+        kind: 'copy',
+        src: path.join(payload.files.rules, name),
+        dest: path.join(docsDir, 'rules', name),
+      });
+    }
+  }
+  const configPath = path.join(targetRoot, 'web-hig.yaml');
+  if (!fs.existsSync(configPath)) {
+    const source = ['src', 'resources', 'app'].find((name) =>
+      fs.existsSync(path.join(targetRoot, name)),
+    );
+    const scope = source ? `${source}/**` : '**/*';
+    plan.push({
+      kind: 'text',
+      dest: configPath,
+      text: `version: "${payload.version}"\nprofile: ${options.profile}\narchetype: application\nscope:\n  files:\n    - "${scope}"\n  exclude:\n    - "docs/**"\n    - ".*/**"\n    - "vendor/**"\n    - "dist/**"\n    - "build/**"\n`,
+    });
+  }
   const pinNames = ['VERSION', 'HIG-QUICK.md', 'HIG-CORE.md'];
   if (options.profile === 'practical' || options.profile === 'full') {
     pinNames.push('HIG-LITE.md');
@@ -72,31 +129,59 @@ function buildPlan(payload, targetRoot, docsDir, options) {
   const editors = new Set(options.editors);
   if (editors.has('cursor')) {
     plan.push(
-      { kind: 'copy', src: payload.files.cursorRule, dest: path.join(targetRoot, '.cursor', 'rules', 'hig.mdc') },
-      { kind: 'copy', src: payload.files.skill, dest: path.join(targetRoot, '.cursor', 'skills', 'web-hig', 'SKILL.md') },
+      {
+        kind: 'copy',
+        src: payload.files.cursorRule,
+        dest: path.join(targetRoot, '.cursor', 'rules', 'hig.mdc'),
+      },
+      {
+        kind: 'copy',
+        src: payload.files.skill,
+        dest: path.join(targetRoot, '.cursor', 'skills', 'web-hig', 'SKILL.md'),
+      },
     );
   }
   if (editors.has('claude')) {
     plan.push(
       { kind: 'merge', src: payload.files.claudeRule, dest: path.join(targetRoot, 'CLAUDE.md') },
-      { kind: 'copy', src: payload.files.skill, dest: path.join(targetRoot, '.claude', 'skills', 'web-hig', 'SKILL.md') },
+      {
+        kind: 'copy',
+        src: payload.files.skill,
+        dest: path.join(targetRoot, '.claude', 'skills', 'web-hig', 'SKILL.md'),
+      },
     );
   }
   if (editors.has('copilot')) {
     plan.push(
-      { kind: 'merge', src: payload.files.copilotRule, dest: path.join(targetRoot, '.github', 'copilot-instructions.md') },
+      {
+        kind: 'merge',
+        src: payload.files.copilotRule,
+        dest: path.join(targetRoot, '.github', 'copilot-instructions.md'),
+      },
       {
         kind: 'copy',
         src: payload.files.copilotPathRule,
         dest: path.join(targetRoot, '.github', 'instructions', 'hig.instructions.md'),
       },
-      { kind: 'copy', src: payload.files.skill, dest: path.join(targetRoot, '.github', 'skills', 'web-hig', 'SKILL.md') },
+      {
+        kind: 'copy',
+        src: payload.files.skill,
+        dest: path.join(targetRoot, '.github', 'skills', 'web-hig', 'SKILL.md'),
+      },
     );
   }
   if (editors.has('windsurf')) {
     plan.push(
-      { kind: 'copy', src: payload.files.windsurfRule, dest: path.join(targetRoot, '.windsurf', 'rules', 'hig.md') },
-      { kind: 'copy', src: payload.files.skill, dest: path.join(targetRoot, '.windsurf', 'skills', 'web-hig', 'SKILL.md') },
+      {
+        kind: 'copy',
+        src: payload.files.windsurfRule,
+        dest: path.join(targetRoot, '.windsurf', 'rules', 'hig.md'),
+      },
+      {
+        kind: 'copy',
+        src: payload.files.skill,
+        dest: path.join(targetRoot, '.windsurf', 'skills', 'web-hig', 'SKILL.md'),
+      },
     );
   }
   if (editors.has('agents')) {
@@ -116,6 +201,16 @@ function applyItem(item, options, targetRoot) {
   }
   if (item.kind === 'merge') {
     return applyMerge(item, options, targetRoot);
+  }
+  if (item.kind === 'text') {
+    if (!options.dryRun) {
+      fs.mkdirSync(path.dirname(item.dest), { recursive: true });
+      fs.writeFileSync(item.dest, item.text, 'utf8');
+    }
+    return {
+      action: options.dryRun ? 'would-write' : 'written',
+      path: posixRel(targetRoot, item.dest),
+    };
   }
   return applyCopy(item, options, targetRoot);
 }
