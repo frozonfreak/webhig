@@ -2,7 +2,7 @@
 
 This guide shows an **efficient** way to adopt The Web HIG in a product repo: progressive loading, thin agent rules, then lint/CI — without pasting the full contract into every prompt.
 
-**Current contract:** [HIG.md](./HIG.md) v1.14.0 (see [VERSION](./VERSION)). **Profiles:** [PROFILES.md](./PROFILES.md) · **Adopters:** [ADOPTERS.md](./ADOPTERS.md).
+**Current contract:** [HIG.md](./HIG.md) v1.15.0 (see [VERSION](./VERSION)). **Profiles:** [PROFILES.md](./PROFILES.md) · **Adopters:** [ADOPTERS.md](./ADOPTERS.md).
 
 ---
 
@@ -65,7 +65,7 @@ Pick one pinning strategy and stick to it:
 | --- | --- |
 | **Vendor copy** | Fastest: copy `HIG-QUICK.md`, `HIG-LITE.md`, `HIG.md`, `VERSION`, `rules/`, and `framework/` into e.g. `docs/hig/` |
 | **Git submodule / subtree** | You want upstream pulls without manual copy |
-| **Raw URL pin** | Agent rules link to tagged release files (e.g. `.../blob/v1.14.0/HIG-LITE.md`) |
+| **Raw URL pin** | Agent rules link to tagged release files (e.g. `.../blob/v1.15.0/HIG-LITE.md`) |
 
 **Minimum pin set for agents:**
 
@@ -90,7 +90,7 @@ Create a short product-local scope file (example: `docs/hig-scope.md`):
 ```markdown
 # HIG scope for this product
 
-Pinned contract: The Web HIG v1.14.0
+Pinned contract: The Web HIG v1.15.0
 - Quick Reference: `docs/hig/HIG-QUICK.md`
 - Practical guide: `docs/hig/HIG-LITE.md`
 - Full spec: `docs/hig/HIG.md`

@@ -1,5 +1,5 @@
 # The Web HIG — Layer 1 Quick rule ↔ rule ID map
-# Version: 1.14.0
+# Version: 1.15.0
 # Normative Quick prose: HIG-QUICK.md · IDs: rules/registry.yaml
 # Regenerate: npm run sync:quick-map
 #
@@ -8,7 +8,7 @@
 # ID's registry hig_section must include it. Cross-section links are allowed only
 # when listed in section_exceptions with a reason (npm run validate enforces this).
 
-version: "1.14.0"
+version: "1.15.0"
 
 section_exceptions:
   - quick: 1

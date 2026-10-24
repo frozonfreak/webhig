@@ -16,6 +16,8 @@ Sourced from the **2026-10-09**, **2026-10-16** and [**2026-10-23**](../../docs/
 
 ## How to use
 
+For landing-page semantics, responsive review and scoped enhancement/reduced-motion parity, use the [Content / Marketing fixtures](./content-marketing/README.md). These are a separate informative guidance addition; their execution status is recorded in that folder.
+
 1. Open each AccName fixture in Chromium, Firefox, and Safari/WebKit.
 2. Inspect the **accessibility tree** (or AX API) for name and description — prefer that over attribute heuristics.
 3. For Safari TP scenarios, follow the VoiceOver matrix; do **not** encode WebKit bugs as author failures.

@@ -10,6 +10,25 @@ Expanded adoption notes: [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
 ---
 
+## [1.15.0] - 2026-10-24
+
+### Added
+
+- Informative [Content / Marketing guide](./examples/content-marketing/README.md) with optional composition examples, scoped responsive/enhancement comparisons, conditional metadata and exact requirement citations.
+- [Manual review worksheet](./examples/content-marketing/review-worksheet.md) with pass/fail/not tested/not applicable evidence states; explicitly distinct from a full evaluator report.
+- [Document and hybrid fixtures](./examples/audit-fixtures/content-marketing/README.md) for semantics, image alternatives, keyboard navigation, reflow and applicable reduced-motion/client-enhancement parity. The manual matrix starts untested; repository checks do not establish browser/AT results.
+
+### Changed
+
+- Content archetype pack and examples index link to the new guidance. Current version pins, package versions and release artifacts synchronized for this minor guidance release.
+- README and GitHub Pages home, adoption and reference pages introduce the Content / Marketing resources and their evidence boundaries.
+
+### Unchanged
+
+- Existing requirement meaning, stable IDs, severity, archetype/surface applicability, motion permissions, WCAG baseline, Core Web Vitals thresholds, Quick imperatives and evaluator/CLI contracts. No universal no-JavaScript, page-composition or conversion requirement added.
+
+---
+
 ## [1.14.0] - 2026-10-23
 
 ### Changed

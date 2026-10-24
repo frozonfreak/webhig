@@ -4,6 +4,19 @@ User-facing notes for each published version of The Web HIG. The brief machine-o
 
 Versions follow [Semantic Versioning](https://semver.org/). Newest first.
 
+## [v1.15.0](./HIG.md) — 2026-10-24
+
+Minor informative guidance update for content and marketing routes. The [content archetype pack](./rules/archetypes/content.md) now links to optional [applied examples](./examples/content-marketing/README.md), a [manual worksheet](./examples/content-marketing/review-worksheet.md) and [document/hybrid fixtures](./examples/audit-fixtures/content-marketing/README.md).
+
+- Review semantic context, actions, imagery, responsive information and applicable motion/enhancement fallbacks without prescribing a hero, screenshot, palette, section count or sales CTA.
+- Resolve each check's surface and capability conditions. HIG-EXP-010 is not a blanket no-JavaScript gate for document routes; retain existing document spatial-motion conditions where the matrix invokes parity rules.
+- Use exact IDs or normative sections for findings. Metadata retains its existing conditions; third-party script review cites §9.6 rather than borrowing an unrelated security ID.
+- Record untested checks honestly. The worksheet supplies supporting evidence, not a complete evaluator report; fixtures do not establish production performance or business outcomes. Their manual matrix starts untested.
+
+Upgrade the pin through the usual workflow and use the examples for selected checks in your supported browser matrix. Existing rule meaning, IDs, severities, applicability, motion permissions, WCAG and Core Web Vitals thresholds remain unchanged. No new automated audit or blocking gate is introduced. Quick remains 98 imperatives and the registry remains 76 stable IDs.
+
+---
+
 ## [v1.14.0](./HIG.md) — 2026-10-23
 
 Minor guidance update: recoverable module failures, dynamic-control AT review and agent tool-schema review.

@@ -8,9 +8,9 @@ Products and repositories that **pin** The Web HIG (semver + profile) and use it
 
 | Project | Version / profile | Stack | Notes |
 | --- | --- | --- | --- |
-| [HIG documentation site](https://frozonfreak.github.io/webhig/) | v1.14.0 · Full | Static docs | Source pin updated; deployment verification pending |
-| [Live demo (Aruvi Flow)](https://hig.aruviflow.com/) | v1.14.0 · Practical | Web app | Target pin for this release; live upgrade verification pending |
-| [This repository](https://github.com/frozonfreak/webhig) | v1.14.0 · Full | Markdown, CI | Source of truth; `examples/agent-rules/` consumed by downstream repos |
+| [HIG documentation site](https://frozonfreak.github.io/webhig/) | v1.15.0 · Full | Static docs | Source pin updated; deployment verification pending |
+| [Live demo (Aruvi Flow)](https://hig.aruviflow.com/) | v1.15.0 · Practical | Web app | Target pin for this release; live upgrade verification pending |
+| [This repository](https://github.com/frozonfreak/webhig) | v1.15.0 · Full | Markdown, CI | Source of truth; `examples/agent-rules/` consumed by downstream repos |
 
 ---
 
@@ -26,7 +26,7 @@ Add your project with a pull request. Copy a row from the template below into th
 ### Table row template
 
 ```markdown
-| [Project name](https://example.com) | v1.14.0 · Practical | Application, Auth | Cursor rule + `docs/hig-scope.md` | [repo](https://github.com/example/project) |
+| [Project name](https://example.com) | v1.15.0 · Practical | Application, Auth | Cursor rule + `docs/hig-scope.md` | [repo](https://github.com/example/project) |
 ```
 
 ---

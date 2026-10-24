@@ -1,8 +1,8 @@
-# The Web HIG & Product Engine Contract — v1.14.0
+# The Web HIG & Product Engine Contract — v1.15.0
 
 ## Executive Summary
 
-The Web HIG v1.14.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
+The Web HIG v1.15.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
 
 This release adds a three-layer consumption model and archetype rule packs:
 
@@ -1394,6 +1394,7 @@ Logs MUST include timestamp, actor, action, and resource — but MUST NOT includ
 
 **Release documentation:** [CHANGELOG.md](./CHANGELOG.md) (Keep a Changelog) · [RELEASE_NOTES.md](./RELEASE_NOTES.md) (adoption notes) · [VERSIONING.md](./VERSIONING.md) (semver policy).
 
+* **v1.15.0 (2026-10-24):** Minor informative guidance release. Content/Marketing applied examples, scoped manual worksheet and document/hybrid fixtures. No new rule IDs, requirement meaning, severity, applicability, WCAG or Core Web Vitals threshold changes.
 * **v1.14.0 (2026-10-23):** Minor guidance release. Clarifies module-load recovery under §2.5; adds informative §7.4 tool-schema review and runtime/AT fixtures. No new IDs, severity changes, WCAG or Core Web Vitals threshold changes.
 * **v1.13.2 (2026-10-22):** Patch release. Quick ↔ rule ID map section sweep: Quick #93 and #94 (§9.2) no longer cite **HIG-SEC-003** / **HIG-SEC-004** and are quick_only pending canonical IDs (F4), as are Quick #31, #41, and #46, whose linked rules state a different obligation. Quick map links now come from section/ID matching, and validation rejects cross-section links not listed as reviewed exceptions. No normative rule IDs added, removed, or retightened.
 * **v1.13.1 (2026-10-11):** Patch release. Corrected Quick ↔ rule ID mappings: Quick #21 and #22 are quick_only pending canonical IDs (F4); Quick #29 expands to **HIG-SEO-001**–**003**; Quick #83 maps to **HIG-DOC-005**. No normative rule IDs added, removed, or retightened.

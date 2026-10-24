@@ -1,6 +1,6 @@
 # The Web HIG
 
-[![Version](https://img.shields.io/badge/version-1.14.0-1d4ed8)](./VERSION)
+[![Version](https://img.shields.io/badge/version-1.15.0-1d4ed8)](./VERSION)
 [![License: MIT](https://img.shields.io/github/license/frozonfreak/webhig)](./LICENSE)
 [![Try HIG Audit](https://img.shields.io/badge/Try_HIG_Audit-0f766e)](https://hig.aruviflow.com)
 [![Validate HIG](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml/badge.svg)](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml)
@@ -166,7 +166,15 @@ Most people only need **HIG-QUICK**.
 | I want to understand why HIG exists         | [RATIONALE.md](./RATIONALE.md)          |
 | I want to audit an existing website         | [HIG Audit](https://hig.aruviflow.com/) |
 
-**Current release:** [v1.14.0](./VERSION) · [Changelog](./CHANGELOG.md) · [Release notes](./RELEASE_NOTES.md)
+**Current release:** [v1.15.0](./VERSION) · [Changelog](./CHANGELOG.md) · [Release notes](./RELEASE_NOTES.md)
+
+### New in v1.15.0: Content / Marketing examples
+
+Apply the existing standard to landing pages, portfolios and other content routes with the [applied guide](./examples/content-marketing/README.md), [manual review worksheet](./examples/content-marketing/review-worksheet.md), and [document/hybrid fixtures](./examples/audit-fixtures/content-marketing/README.md).
+
+The examples cover semantic hierarchy, keyboard actions, responsive information, image delivery, conditional metadata, and applicable reduced-motion/enhancement fallbacks. Each check identifies its surface and capability conditions. The worksheet records pass, fail, not tested or not applicable; it supplies evidence rather than a complete evaluator report.
+
+This is an informative guidance release. Existing requirements, severity and applicability are unchanged: **98 Quick imperatives and 76 stable rule IDs**. No prescribed layout, sales CTA or universal no-JavaScript requirement is added. Manual browser and assistive-technology checks for the new fixtures remain untested; see their execution record.
 
 **[Documentation site](https://frozonfreak.github.io/webhig/)** · **[HIG Audit](https://hig.aruviflow.com/)** · **[Integration guide](./INTEGRATION.md)** · **[Adopters](./ADOPTERS.md)**
 

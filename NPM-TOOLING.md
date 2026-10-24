@@ -1,6 +1,6 @@
 # The Web HIG — npm Tooling and Conformance CLI Design
 
-**Status:** Phase 1–3 started in this repository (v1.14.0).
+**Status:** Phase 1–3 started in this repository (v1.15.0).
 **Related:** [MACHINE_READABLE.md](./MACHINE_READABLE.md) · [PROFILES.md](./PROFILES.md) · [EVALUATOR.md](./EVALUATOR.md)
 
 ## Implementation map (this repo)
@@ -54,7 +54,7 @@ See [PROFILES.md](./PROFILES.md) for documentation profiles; CLI profile names a
 Recommended file: **`web-hig.yaml`** at the repository root ([example](./examples/web-hig.example.yaml)).
 
 ```yaml
-version: "1.14.0"
+version: "1.15.0"
 profile: practical
 archetype: application
 framework:

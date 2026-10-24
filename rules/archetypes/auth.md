@@ -1,6 +1,6 @@
 # Archetype Pack — Auth / Account
 
-**Version:** v1.14.0 · **Archetype:** `auth` · **Matrix:** [applicability.md](../applicability.md)
+**Version:** v1.15.0 · **Archetype:** `auth` · **Matrix:** [applicability.md](../applicability.md)
 
 Sign-in, sign-up, recovery, settings. Security- and privacy-sensitive.
 

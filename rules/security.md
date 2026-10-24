@@ -1,6 +1,6 @@
 # Security & Privacy — Level 2 Module
 
-**Version:** v1.14.0 · **Canonical spec:** [HIG.md §9](../HIG.md#layer-9-security--privacy) · **Rule IDs:** HIG-SEC-001–004 · **Archetypes:** Universal
+**Version:** v1.15.0 · **Canonical spec:** [HIG.md §9](../HIG.md#layer-9-security--privacy) · **Rule IDs:** HIG-SEC-001–004 · **Archetypes:** Universal
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 

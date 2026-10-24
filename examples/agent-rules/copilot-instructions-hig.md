@@ -1,6 +1,6 @@
 # The Web HIG — Copilot instructions
 
-Follow The Web HIG v1.14.0.
+Follow The Web HIG v1.15.0.
 
 - **Quick Reference:** `docs/hig/HIG-QUICK.md` (Layer 1) — *Follow The Web HIG Quick Reference.* Do not load full HIG unless needed.
 - **Practical guide:** `docs/hig/HIG-LITE.md` + `docs/hig/rules/manifest.yaml` (Layer 2) — load matching `rules/*.md` on topic match; `framework/*.md` when stack-specific

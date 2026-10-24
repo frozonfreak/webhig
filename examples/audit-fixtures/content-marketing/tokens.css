@@ -1,0 +1,22 @@
+/* Local fixture choices, not required Web HIG colors, dimensions or type. */
+:root {
+  --surface-base: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --brand-primary: #1d4ed8;
+  --focus-ring: #1d4ed8;
+  --space-1: 0.25rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --size-measure-max: 65ch;
+  --size-control-height-md: 2.75rem;
+  --size-border-width-focus: 3px;
+  --font-family-body: system-ui, sans-serif;
+  --font-size-body: 1rem;
+  --font-size-title: 2rem;
+  --font-size-section: 1.5rem;
+  --line-height-body: 1.5;
+  --motion-duration-demo: 600ms;
+  --motion-offset-demo: 0.75rem;
+}

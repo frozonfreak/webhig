@@ -16,6 +16,9 @@ Copy these into a **product** repository. They are not loaded when developing Th
 | PR checklist (copy-paste) | [conformance-checklist.md](./conformance-checklist.md) |
 | AccName / AT audit fixtures | [audit-fixtures/](./audit-fixtures/) |
 | Motion transition regression | [audit-fixtures/motion-transition-regression/](./audit-fixtures/motion-transition-regression/) |
+| Content / Marketing examples and scoped review | [content-marketing/](./content-marketing/) |
+| Manual content-route worksheet | [content-marketing/review-worksheet.md](./content-marketing/review-worksheet.md) |
+| Document / hybrid content fixtures | [audit-fixtures/content-marketing/](./audit-fixtures/content-marketing/) |
 | Public listing | [ADOPTERS.md](../ADOPTERS.md) |
 | Share badge (UTM) | [SHARE.md](../SHARE.md) |
 
