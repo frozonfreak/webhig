@@ -1,6 +1,6 @@
 # The Web HIG — Quick Reference
 
-**Layer 1** · ~5 minutes · **Version:** v1.15.0
+**Layer 1** · ~5 minutes · **Version:** v1.16.0
 
 **Pin this file — that is the whole onboarding path.** You do not need the rest of the repository to start.
 
@@ -141,7 +141,7 @@ Route/feature chunk failures are error states too: keep meaningful error text an
 73. Modals must trap focus inside and restore focus to the trigger on close.
 74. Provide a "Skip to main content" link as the first tabbable element.
 75. Interactive targets MUST be at least 24×24 CSS px (**HIG-A11Y-007**) — WCAG 2.5.8 AA baseline; WCAG exceptions apply. Primary touch actions SHOULD use 44×44 CSS px as an HIG ergonomic recommendation — not mandatory for conformance.
-76. Respect `prefers-reduced-motion` — replace motion with instant state changes or minimal opacity fade.
+76. Respect `prefers-reduced-motion` — replace time-based motion with instant state changes or a minimal opacity fade. Scroll-linked movement (`animation-timeline`, `scroll()`, `view()`) is still motion; shortening `animation-duration` does not stop it.
 77. Content must remain usable at 200% zoom without loss of functionality.
 78. Dynamic content updates must be announced to screen readers (`aria-live` or focus management).
 79. Do not disable browser zoom or pinch-to-zoom.
@@ -152,7 +152,7 @@ Route/feature chunk failures are error states too: keep meaningful error text an
 ## Performance & engineering
 
 81. Default to server rendering — add client JavaScript only when interaction requires it.
-82. Protect Core Web Vitals: LCP ≤2.5 s, INP ≤200 ms (field), CLS ≤0.1 (**HIG-PERF-001**, **HIG-PERF-002**).
+82. Protect Core Web Vitals: LCP ≤2.5 s, INP ≤200 ms (field), CLS ≤0.1 (**HIG-PERF-001**, **HIG-PERF-002**). Report experimental CrUX soft-navigation variants separately, with the dataset month and an experimental label, and do not merge their pass/fail with these stable thresholds.
 83. Images must declare dimensions or aspect ratio to prevent layout shift. Choose formats by measured transfer cost and LCP; offer emerging formats (e.g. JPEG XL) only via `<picture>` progressive enhancement with a broadly supported fallback.
 84. Lazy-load below-the-fold media; never lazy-load the LCP candidate.
 85. Application CSS must not use `transition: all` — enumerate animated properties explicitly.

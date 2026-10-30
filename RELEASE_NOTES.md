@@ -4,6 +4,18 @@ User-facing notes for each published version of The Web HIG. The brief machine-o
 
 Versions follow [Semantic Versioning](https://semver.org/). Newest first.
 
+## [v1.16.0](./HIG.md) — 2026-10-30
+
+Minor guidance update for field performance reporting and scroll-driven motion. Stable Core Web Vitals thresholds do not change.
+
+- Keep LCP, INP, and CLS judgments on the stable series used by Search Console. When a report also shows Chrome's experimental soft-navigation variants, label them experimental, include the CrUX dataset month, and do not merge the two pass/fail results. The first published set is the September 2026 dataset (13 October 2026). Chrome's possible May 2027 graduation is not a HIG date.
+- Treat CSS `animation-timeline`, `scroll()`, and `view()` as motion. Firefox 159 enables them by default; the feature is still limited availability, not Baseline. Reset the timeline or disable the animation under reduced motion, and retest with keyboard scrolling, zoom, and programmatic scrolling. A static finding means the guard is missing. It does not decide whether the motion is necessary.
+- Retest streamed live regions in Safari 27.2 with both append and re-render, and inspect names or descriptions that reference a list, table, tree, or canvas. Then repeat on other browser/AT pairs. The WebKit fixes are not a universal pass.
+
+Upgrade by refreshing the contract pin and reviewing the [research disposition](./docs/research/2026-10-30-brief.md). No new stable IDs, severity changes, WCAG baseline, or Core Web Vitals thresholds. Grid Lanes is not a required layout. The separate audit site is not deployed by this update. Quick remains 98 imperatives and the registry remains 76 stable IDs.
+
+---
+
 ## [v1.15.0](./HIG.md) — 2026-10-24
 
 Minor informative guidance update for content and marketing routes. The [content archetype pack](./rules/archetypes/content.md) now links to optional [applied examples](./examples/content-marketing/README.md), a [manual worksheet](./examples/content-marketing/review-worksheet.md) and [document/hybrid fixtures](./examples/audit-fixtures/content-marketing/README.md).

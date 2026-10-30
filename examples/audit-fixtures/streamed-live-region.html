@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Streamed live region — append and re-render</title>
+    <link rel="stylesheet" href="./accname/fixture.css" />
+    <style>
+      button {
+        min-block-size: 1.5rem;
+        min-inline-size: 1.5rem;
+        margin-inline-end: 0.5rem;
+        padding-block: 0.25rem;
+        padding-inline: 0.75rem;
+      }
+      .log {
+        border-block-start: 1px solid CanvasText;
+        margin-block: 0.5rem 1.25rem;
+        min-block-size: 3rem;
+        padding-block-start: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Streamed live region</h1>
+      <p>
+        Compare append and re-render with the same sentences. Safari 27.2 fixed repeated
+        VoiceOver announcements when a stream replaces an <code>aria-live</code> region.
+        That fix does not establish other browser and assistive-technology pairs.
+      </p>
+      <h2>Append</h2>
+      <p><button type="button" id="append-step">Append next sentence</button></p>
+      <div id="append-log" class="log" aria-live="polite">The assistant is writing.</div>
+      <h2>Re-render</h2>
+      <p><button type="button" id="rerender-step">Re-render next sentence</button></p>
+      <div id="rerender-log" class="log" aria-live="polite" aria-atomic="true">The assistant is writing.</div>
+      <p><button type="button" id="reset">Reset both</button></p>
+    </main>
+    <script>
+      const chunks = [' First sentence.', ' Second sentence.'];
+      let appendIndex = 0;
+      let rerenderIndex = 0;
+      const appendLog = document.querySelector('#append-log');
+      const rerenderLog = document.querySelector('#rerender-log');
+
+      document.querySelector('#append-step').addEventListener('click', () => {
+        if (appendIndex >= chunks.length) return;
+        appendIndex += 1;
+        appendLog.append(document.createTextNode(chunks[appendIndex - 1]));
+      });
+      document.querySelector('#rerender-step').addEventListener('click', () => {
+        if (rerenderIndex >= chunks.length) return;
+        rerenderIndex += 1;
+        rerenderLog.textContent = `The assistant is writing.${chunks.slice(0, rerenderIndex).join('')}`;
+      });
+      document.querySelector('#reset').addEventListener('click', () => {
+        appendIndex = 0;
+        rerenderIndex = 0;
+        appendLog.textContent = 'The assistant is writing.';
+        rerenderLog.textContent = 'The assistant is writing.';
+      });
+    </script>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 # AI & Agent Enforcement — Level 2 Module
 
-**Version:** v1.15.0 · **Canonical spec:** [HIG.md §7–8](../HIG.md#layer-7-ai--agent-enforcement-contract) · **Rule ID:** HIG-SIM-001 + all Layer 7 IDs
+**Version:** v1.16.0 · **Canonical spec:** [HIG.md §7–8](../HIG.md#layer-7-ai--agent-enforcement-contract) · **Rule ID:** HIG-SIM-001 + all Layer 7 IDs
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -73,7 +73,7 @@ Test interface drift with renamed/removed tools, distractor candidates, schema c
 | --- | --- | --- |
 | **BLOCKING** | Fails build/PR | TypeScript errors, critical a11y, security, HIG MUST violations |
 | **WARNING** | Reported, does not block | Performance regression, non-critical a11y |
-| **OBSERVATION** | Logged for tracking | Field INP, field LCP, field CLS |
+| **OBSERVATION** | Logged for tracking | Stable field INP, field LCP, field CLS. Experimental CrUX soft-navigation variants are a separate series and are not a combined pass/fail. |
 
 **Lab/CI blocking thresholds:**
 
@@ -82,7 +82,7 @@ Test interface drift with renamed/removed tools, distractor candidates, schema c
 * CLS > 0.10
 * TTFB > 800 ms
 
-Field INP is an SLO — not a deterministic CI gate from synthetic tests.
+Field INP is an SLO — not a deterministic CI gate from synthetic tests. Experimental soft-navigation LCP, INP, and CLS variants are observation-only and stay separate from the stable SLO.
 
 See [HIG.md §8](../HIG.md#layer-8-quality-assurance--cicd-gates) for the full CI pipeline diagram.
 

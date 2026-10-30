@@ -1,6 +1,6 @@
 # Animation & Motion — Level 2 Module
 
-**Version:** v1.15.0 · **Canonical spec:** [HIG.md §1](../HIG.md#layer-1-universal-ux-principles) · **Rule IDs:** HIG-MOT-001–005, HIG-VT-001, HIG-A11Y-001
+**Version:** v1.16.0 · **Canonical spec:** [HIG.md §1](../HIG.md#layer-1-universal-ux-principles) · **Rule IDs:** HIG-MOT-001–005, HIG-VT-001, HIG-A11Y-001
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -43,6 +43,8 @@ Motion is an enhancement, never a dependency. Respect `prefers-reduced-motion: r
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    /* Scroll and view timelines ignore time duration. */
+    animation-timeline: auto !important;
   }
 
   ::view-transition-group(*),
@@ -53,8 +55,18 @@ Motion is an enhancement, never a dependency. Respect `prefers-reduced-motion: r
 }
 ```
 
+A very small `animation-duration` does **not** stop scroll-linked progress. `animation-timeline: auto` returns those animations to the document timeline. Browsers without `animation-timeline` ignore that declaration.
+
+#### Scroll-driven animations
+
+`animation-timeline` (`scroll()`, `view()`, or a named scroll/view timeline) and script-created `ScrollTimeline` / `ViewTimeline` objects are motion (**HIG-A11Y-001**). Firefox 159 (27 October 2026) enables the CSS feature by default. [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline) still marks it limited availability, not Baseline. Keep a usable non-animated path for browsers that lack it.
+
+The browser does not decide whether the movement is decorative or necessary. On document surfaces and on controls, **HIG-MOT-003** still applies. On hybrid or experience surfaces, classify page-level effects with **HIG-EXP-006**, **HIG-EXP-013**, and **HIG-EXP-014**.
+
+Under `prefers-reduced-motion: reduce`, disable the animation or set `animation-timeline` to `auto` or `none`, and keep the same information and actions. A `no-preference` wrapper around the scroll-driven rule meets the same obligation. Verify keyboard scrolling, 200% zoom, and programmatic scrolling. A static check MAY flag a missing timeline reset; it does not judge necessity or distraction, and it does not see Web Animations API timelines.
+
 * Replace transform/momentum animations with instant state changes or a minimal opacity fade.
-* Disable parallax, auto-playing carousels, native View Transitions morphing, and decorative looping motion.
+* Disable parallax, auto-playing carousels, native View Transitions morphing, decorative looping motion, and unguarded scroll-driven animation.
 
 ## 1.4 Functional Micro-Animations
 

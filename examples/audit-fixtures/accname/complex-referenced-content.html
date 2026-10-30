@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AccName fixture — complex referenced containers</title>
+    <link rel="stylesheet" href="./fixture.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Complex referenced containers</h1>
+      <p class="meta">
+        Probe: <code>aria-labelledby</code> and <code>aria-describedby</code> targets that
+        contain a list, table, tree, or canvas. Safari 27.2 fixed omission of that content
+        from the accessible name or description. Compare the accessibility tree in Safari
+        27.2 and in other browser/AT pairs. A difference is an engine result, not an
+        automatic author failure when the content is in the referenced container.
+      </p>
+
+      <div class="case">
+        <h2>List as the name</h2>
+        <button type="button" aria-labelledby="name-list">Fallback label</button>
+        <div id="name-list">
+          Colors
+          <ul>
+            <li>Red</li>
+            <li>Blue</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="case">
+        <h2>Table as the description</h2>
+        <button type="button" aria-describedby="desc-table">Shipping</button>
+        <div id="desc-table">
+          <table>
+            <caption>Rates</caption>
+            <tr>
+              <th scope="col">Method</th>
+              <th scope="col">Days</th>
+            </tr>
+            <tr>
+              <td>Ground</td>
+              <td>5</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="case">
+        <h2>Tree as the name</h2>
+        <button type="button" aria-labelledby="name-tree">Fallback label</button>
+        <div id="name-tree" role="tree">
+          <div role="treeitem">Readme</div>
+          <div role="treeitem">License</div>
+        </div>
+      </div>
+
+      <div class="case">
+        <h2>Canvas fallback as the description</h2>
+        <button type="button" aria-describedby="desc-canvas">Swatch</button>
+        <div id="desc-canvas">
+          <canvas width="48" height="24">Crimson swatch</canvas>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

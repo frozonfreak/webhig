@@ -71,14 +71,16 @@ This roadmap describes **contract and tooling** direction for the standard repos
 
 ---
 
-## Research watchlist (2026-10-09)
+## Research watchlist (2026-10-30)
 
-Informational — not commitments. From the weekly Web HIG research brief:
+Informational — not commitments. From the weekly Web HIG research briefs:
 
 | Topic | Status |
 | --- | --- |
-| Core Web Vitals | No material metric, threshold, or measurement-policy change |
-| AI/agent interfaces | No new primary research strong enough to alter guidance; keep visible agent state, confirmation for consequential actions, reversibility, provenance, accessible status |
+| Core Web Vitals | Stable LCP, INP, and CLS thresholds are unchanged. Experimental CrUX soft-navigation variants (September 2026 dataset, published 13 October 2026) are a separate labeled series and must not share a pass/fail. Possible Chrome graduation in May 2027 is not a HIG date. |
+| AI/agent interfaces | No new primary research strong enough to alter guidance; keep visible agent state, confirmation for consequential actions, reversibility, provenance, accessible status. Safari 27.2 live-region behavior is a manual AT retest, not a new author rule. |
+| Scroll-driven animations | Firefox 159 enables them by default. Still limited availability, not Baseline. Guard with reduced motion; do not treat duration shortening as sufficient. Necessity stays manual. |
+| Grid Lanes | Safari 27.2 renames `flow-tolerance` to `fit-tolerance` (`flow-tolerance` remains a deprecated alias). No HIG examples use the old name. Not a universal implementation requirement and not an audit rule. DOM order stays logical if examples are added later. |
 | Modern CSS (Safari TP experiments) | Track `interpolate-size`, `calc-size()`, `symbols()`, linked parameters — no HIG recommendation or automated rule yet |
 | JPEG XL multi-engine + field evidence | Spec guidance landed in **HIG-DOC-005** (progressive enhancement only); consider a future informational audit for JXL-only delivery after stable multi-engine support |
 

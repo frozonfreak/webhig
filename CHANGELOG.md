@@ -17,6 +17,25 @@ Expanded adoption notes: [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
 ---
 
+## [1.16.0] - 2026-10-30
+
+### Changed
+
+- Stable Core Web Vitals remain the **HIG-PERF-001** gate. Experimental CrUX soft-navigation LCP, INP, and CLS variants (September 2026 dataset, published 13 October 2026) must be shown separately, with the dataset month and an experimental label, and must not share a pass/fail.
+- Scroll-driven animations (`animation-timeline`, `scroll()`, `view()`, and script scroll/view timelines) are motion under **HIG-A11Y-001**. Shortening `animation-duration` does not stop them. The partial static check may flag a missing timeline reset. Necessity and distraction stay manual.
+- [30 October research disposition](./docs/research/2026-10-30-brief.md). Reviewed earlier notes: they did not claim CrUX lacks soft-navigation data. Stable thresholds were and are unchanged.
+
+### Added
+
+- [Scroll-driven fixture](./examples/audit-fixtures/scroll-driven-motion/README.md) for reduced motion, keyboard scrolling, zoom, and programmatic scrolling. Browser execution pending.
+- [Safari 27.2 VoiceOver matrix](./examples/audit-fixtures/safari-27-2-voiceover.md) for streamed append vs re-render, complex `aria-labelledby` / `aria-describedby` targets, and iOS date, time, and color inputs. This is a stable Safari release. Other browser/AT pairs remain in scope. Execution pending.
+
+### Unchanged
+
+- Core Web Vitals thresholds, Search Console's use of the stable series, WCAG baseline, rule IDs, and severities. Grid Lanes stays deferred: no examples used `flow-tolerance`, and no audit rule was added. No new AI/agent-interface requirement.
+
+---
+
 ## [1.15.0] - 2026-10-24
 
 ### Added

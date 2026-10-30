@@ -54,7 +54,7 @@ $env:WEB_HIG_ROOT = "docs/hig"
 The installer creates this file only when absent, choosing `src/**`, `resources/**`, `app/**`, or `**/*` based on existing directories. Review the scope and archetype; existing configuration is always preserved. Alternatively, start from [web-hig.example.yaml](https://github.com/frozonfreak/webhig/blob/main/examples/web-hig.example.yaml):
 
 ```yaml
-version: "1.15.0"
+version: "1.16.0"
 profile: practical
 archetype: application
 framework:
@@ -128,7 +128,7 @@ JSON preserves the existing finding fields and adds `schema_version`, `assessmen
 **Example output:**
 
 ```text
-Web HIG v1.15.0
+Web HIG v1.16.0
 
 Profile: Practical
 Archetype: Application
@@ -171,7 +171,7 @@ Built-in checks grow over time; current deterministic rules include:
 | Rule ID | What it detects |
 | --- | --- |
 | **HIG-MOT-001** | `transition: all` in application CSS |
-| **HIG-A11Y-001** | Motion styles without `prefers-reduced-motion` handling |
+| **HIG-A11Y-001** | Motion styles without `prefers-reduced-motion` handling, including scroll-driven `animation-timeline` / `scroll()` / `view()` whose reduced-motion style does not reset the timeline. Necessity stays manual. |
 
 More rules will move into ESLint / Stylelint plugins; the CLI orchestrates the same registry and report format.
 

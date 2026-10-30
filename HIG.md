@@ -1,8 +1,8 @@
-# The Web HIG & Product Engine Contract — v1.15.0
+# The Web HIG & Product Engine Contract — v1.16.0
 
 ## Executive Summary
 
-The Web HIG v1.15.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
+The Web HIG v1.16.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
 
 This release adds a three-layer consumption model and archetype rule packs:
 
@@ -222,6 +222,8 @@ Motion is an enhancement, never a dependency. Respect `prefers-reduced-motion: r
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    /* Scroll and view timelines ignore time duration. */
+    animation-timeline: auto !important;
   }
 
   ::view-transition-group(*),
@@ -232,8 +234,20 @@ Motion is an enhancement, never a dependency. Respect `prefers-reduced-motion: r
 }
 ```
 
+A very small `animation-duration` does **not** stop scroll-linked progress. `animation-timeline: auto` returns those animations to the document timeline so the duration rule can apply. Browsers that do not support `animation-timeline` ignore that declaration.
+
 * Replace transform/momentum animations with instant state changes or a minimal opacity fade, or provide an equivalent static/simplified path that satisfies **HIG-EXP-003** on hybrid/experience content surfaces.
 * Disable parallax, auto-playing carousels, native View Transitions morphing, and decorative looping motion on **document** surfaces and on application/commerce/auth routes. On content surfaces declared **hybrid** or **experience**, ambient or narrative motion MAY be permitted when it satisfies §1.5 (**HIG-EXP-006**) and reduced-motion parity (**HIG-EXP-003**).
+
+#### Scroll-driven animations
+
+CSS scroll-driven animations are motion. `animation-timeline` with `scroll()`, `view()`, or a named `scroll-timeline` / `view-timeline`, and script-created `ScrollTimeline` or `ViewTimeline` objects, tie progress to scrolling or visibility rather than to elapsed time. Firefox 159, released 27 October 2026, enables the CSS feature by default. [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline) still marks `animation-timeline` **limited availability**, not Baseline. Provide a usable non-animated path wherever the project's browsers lack the feature.
+
+The browser does not infer whether scroll-linked movement is decorative or necessary. Classify it with **HIG-A11Y-001**, with **HIG-MOT-003** on document surfaces and on interactive controls, and with **HIG-EXP-006**, **HIG-EXP-013**, and **HIG-EXP-014** for page-level motion on hybrid or experience surfaces.
+
+Under `prefers-reduced-motion: reduce`, scroll-driven animations MUST be disabled or returned to the document timeline (`animation: none`, or `animation-timeline: auto` or `none`) and replaced by a static equivalent that keeps the same information and actions. Declaring the scroll-driven rule only inside `@media (prefers-reduced-motion: no-preference)` meets the same obligation. Verify keyboard scrolling, 200% zoom, and programmatic scrolling (`scrollTo`, `scrollBy`, or focus movement). A pointer-wheel check is not sufficient. Movement that hides required content, or that is the only way to reach a destination, still fails **HIG-EXP-002** and **HIG-EXP-005**.
+
+A static check MAY flag scroll-driven CSS whose reduced-motion style does not reset `animation-timeline` or disable the animation. That flag does not decide necessity or distraction. Those judgments stay manual. The check does not see Web Animations API timelines.
 
 ### 1.4 Functional Micro-Animations
 
@@ -290,7 +304,7 @@ Fluid, scroll-driven, and motion-forward marketing surfaces MUST satisfy **HIG-E
 | **HIG-EXP-009** | Custom scroll regions keyboard operable with visible focus |
 | **HIG-EXP-010** | Primary content available without client enhancement |
 | **HIG-EXP-011** | Kinetic type — one canonical copy; decorative repeats `aria-hidden` |
-| **HIG-EXP-012** | Same Core Web Vitals obligations; LCP not blocked by motion shell |
+| **HIG-EXP-012** | Same stable Core Web Vitals obligations; experimental soft-navigation variants are not a substitute pass; LCP not blocked by motion shell |
 
 Normative detail and agent workflow: [rules/expressive-surface.md](./rules/expressive-surface.md).
 
@@ -931,6 +945,29 @@ Field monitoring/SLO gates SHOULD track:
 
 Field INP MUST be treated as a monitoring/SLO gate — not as a deterministic build-failure result from synthetic tests.
 
+#### Stable Core Web Vitals and experimental soft navigations
+
+**HIG-PERF-001** and **HIG-PERF-002** judge the **stable** Core Web Vitals: LCP, INP, and CLS as used by Search Console. The §6.1 thresholds are unchanged.
+
+The September 2026 Chrome UX Report dataset, published 13 October 2026, also exposes experimental LCP, INP, and CLS variants that include Chromium soft navigations:
+
+| Experimental metric | What it adds |
+| --- | --- |
+| `experimental_largest_contentful_paint_with_softnavs` | LCP across hard and soft navigations |
+| `experimental_interaction_to_next_paint_with_softnavs` | INP per hard navigation and per soft navigation, rather than one value for the whole SPA session |
+| `experimental_cumulative_layout_shift_with_softnavs` | CLS per view, across hard and soft navigations |
+
+These fields are in the CrUX BigQuery dataset, the CrUX API, and the CrUX History API. [CrUX release notes](https://developer.chrome.com/docs/crux/release-notes) also record a CrUX Vis update for this dataset. The data is Chrome field data. Soft-navigation detection uses Chromium's soft-navigation measurement and does not describe other engines. Chrome has said it aims to graduate the metrics in May 2027, subject to feedback. Until graduation, Search Console continues to use the stable scores. That date is not a HIG schedule.
+
+Any performance report that shows these values, including the separate HIG Audit site, MUST:
+
+* show the stable series and the experimental series separately
+* label the experimental series as experimental
+* record the CrUX **dataset month** (the collection period; September 2026 for the 13 October 2026 publication)
+* keep a separate pass/fail for each series
+
+An experimental pass does not satisfy **HIG-PERF-001**. An experimental miss does not, by itself, fail **HIG-PERF-001**. Do not retune the §6.1 targets against the experimental distribution. This repository records the reporting contract; it does not deploy the audit site.
+
 ### 6.4 Performance Budgets
 
 Beyond Web Vitals, projects SHOULD define budgets for (**HIG-PERF-003**):
@@ -1260,7 +1297,7 @@ CI gates are classified by enforcement level:
 | --- | --- | --- |
 | **BLOCKING** | Fails build/PR | TypeScript errors, critical a11y violations, security violations, HIG MUST violations |
 | **WARNING** | Reported, does not block | Performance regression, non-critical a11y, animation issues |
-| **OBSERVATION** | Logged for tracking | Field INP, field LCP, field CLS |
+| **OBSERVATION** | Logged for tracking | Stable field INP, field LCP, field CLS. Experimental CrUX soft-navigation variants are a separate observation series and MUST NOT be folded into the stable pass/fail. |
 
 ```
 [Developer Git Push / PR Created]
@@ -1299,9 +1336,8 @@ CI gates are classified by enforcement level:
                │      └── JS bundle regression > threshold ──────> ⚠️ WARNING
                │
                ├── 7. Field RUM Monitoring ── OBSERVATION
-               │      ├── Field INP SLO
-               │      ├── Field LCP SLO
-               │      └── Field CLS SLO
+               │      ├── Stable field INP / LCP / CLS SLO
+               │      └── Experimental soft-navigation variants — separate labeled series; do not merge pass/fail
                │
                └── 8. All Blocking Gates Passed ──────────────────> ✅ BUILD APPROVED
 ```
@@ -1394,6 +1430,7 @@ Logs MUST include timestamp, actor, action, and resource — but MUST NOT includ
 
 **Release documentation:** [CHANGELOG.md](./CHANGELOG.md) (Keep a Changelog) · [RELEASE_NOTES.md](./RELEASE_NOTES.md) (adoption notes) · [VERSIONING.md](./VERSIONING.md) (semver policy).
 
+* **v1.16.0 (2026-10-30):** Minor guidance release. Stable Core Web Vitals stay the **HIG-PERF-001** gate; experimental CrUX soft-navigation LCP, INP, and CLS variants are a separate labeled series and MUST NOT share a pass/fail. Scroll-driven animations (`animation-timeline`, `scroll()`, `view()`) are motion under **HIG-A11Y-001**; duration shortening does not stop them. Safari 27.2 VoiceOver fixtures are manual review only. No new rule IDs, severity changes, WCAG baseline, or Core Web Vitals threshold changes.
 * **v1.15.0 (2026-10-24):** Minor informative guidance release. Content/Marketing applied examples, scoped manual worksheet and document/hybrid fixtures. No new rule IDs, requirement meaning, severity, applicability, WCAG or Core Web Vitals threshold changes.
 * **v1.14.0 (2026-10-23):** Minor guidance release. Clarifies module-load recovery under §2.5; adds informative §7.4 tool-schema review and runtime/AT fixtures. No new IDs, severity changes, WCAG or Core Web Vitals threshold changes.
 * **v1.13.2 (2026-10-22):** Patch release. Quick ↔ rule ID map section sweep: Quick #93 and #94 (§9.2) no longer cite **HIG-SEC-003** / **HIG-SEC-004** and are quick_only pending canonical IDs (F4), as are Quick #31, #41, and #46, whose linked rules state a different obligation. Quick map links now come from section/ID matching, and validation rejects cross-section links not listed as reviewed exceptions. No normative rule IDs added, removed, or retightened.

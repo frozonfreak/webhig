@@ -117,7 +117,7 @@ export const SECTION_EXCEPTIONS = [
     quick: 82,
     id: 'HIG-PERF-002',
     reason:
-      'Quick #82 states the §6.1 Core Web Vitals thresholds and cites HIG-PERF-002 inline because INP is judged in the field. The lab/field gate split it points to is §6.2–6.3.',
+      'Quick #82 states the §6.1 stable Core Web Vitals thresholds and cites HIG-PERF-002 inline because INP is judged in the field. The same bullet requires experimental CrUX soft-navigation variants to stay a separate pass/fail, which §6.3 states. The registry files HIG-PERF-002 under §6.2–6.3.',
   },
   {
     quick: 87,

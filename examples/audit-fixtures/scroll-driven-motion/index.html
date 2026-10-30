@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scroll-driven animation fixture</title>
+    <link rel="stylesheet" href="./fixture.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Scroll-driven animation</h1>
+      <p>
+        This page uses <code>view()</code> and <code>scroll()</code>. The words stay in the
+        document. The bar is decorative. Emulate <code>prefers-reduced-motion: reduce</code>,
+        then repeat with keyboard scrolling, 200% zoom, and the programmatic button.
+      </p>
+      <section class="scroller" tabindex="0" aria-labelledby="scroll-heading">
+        <h2 id="scroll-heading">Scroll container</h2>
+        <p>Focus this region and scroll with the keyboard, or use the button below.</p>
+        <div class="track">
+          <p class="marker">Section marker. This text stays available when motion is reduced.</p>
+          <p id="bar-label">Decorative scroll progress</p>
+          <div class="bar" aria-hidden="true"></div>
+        </div>
+      </section>
+      <button type="button" id="jump">Scroll the container</button>
+    </main>
+    <script>
+      document.querySelector('#jump').addEventListener('click', () => {
+        const scroller = document.querySelector('.scroller');
+        scroller.scrollBy(0, 240);
+        scroller.focus();
+      });
+    </script>
+  </body>
+</html>

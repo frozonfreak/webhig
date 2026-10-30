@@ -94,7 +94,7 @@ Repeated installation preserves user instructions outside the managed HIG block.
 Example agent contract line:
 
 ```text
-Pinned contract: The Web HIG v1.15.0 · Practical profile · Application archetype
+Pinned contract: The Web HIG v1.16.0 · Practical profile · Application archetype
 ```
 
 ---

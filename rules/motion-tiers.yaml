@@ -1,9 +1,9 @@
 # The Web HIG — Motion tier registry (machine-readable)
-# Version: 1.15.0
+# Version: 1.16.0
 # Normative prose: rules/expressive-surface.md § Motion tier taxonomy
 # Enforced by: HIG-EXP-006, HIG-EXP-013, HIG-EXP-014
 
-version: "1.15.0"
+version: "1.16.0"
 
 # Numeric tiers (Tier 0–3) align with motion_class for functional/spatial/narrative.
 # "ambient" is a separate motion_class (environmental loops — not narrative structure).
@@ -30,8 +30,10 @@ motion_tiers:
     description: >
       Transform- or opacity-based motion that repositions or reveals layout without
       a timed story beat — e.g. hero entrance, card lift, scroll-linked translate
-      on a bounded region, view transitions, pinned-section reveals. NOT continuous
-      idle loops (see ambient).
+      on a bounded region, CSS scroll() or view() timelines, view transitions,
+      pinned-section reveals. Scroll-driven animation is still motion (HIG-A11Y-001);
+      shortening animation-duration does not stop it. NOT continuous idle loops
+      (see ambient).
   "3":
     id: narrative
     label: "Motion Tier 3 — Narrative"

@@ -1,6 +1,6 @@
 # Expressive Surface Baseline — Level 2 Module
 
-**Version:** v1.15.0 · **Canonical spec:** [HIG.md §0.3, §1.5](../HIG.md#15-expressive-surface-baseline) · **Rule IDs:** HIG-EXP-001–014 · **Registry:** [motion-tiers.yaml](./motion-tiers.yaml)
+**Version:** v1.16.0 · **Canonical spec:** [HIG.md §0.3, §1.5](../HIG.md#15-expressive-surface-baseline) · **Rule IDs:** HIG-EXP-001–014 · **Registry:** [motion-tiers.yaml](./motion-tiers.yaml)
 
 > Standalone extract for progressive loading. Covers fluid, scroll-driven, and motion-forward **content** surfaces (~60–70% of public marketing and portfolio web). Not a visual pattern library — behavioral obligations only.
 
@@ -45,6 +45,8 @@ Application, commerce checkout, and auth routes MUST use **document** surface re
 **HIG-EXP-003:** Under `prefers-reduced-motion: reduce`, the user MUST receive **equivalent informational hierarchy** and access to the same primary actions as the enhanced path. Disabling motion MUST NOT leave broken layout, hidden-only content, or unreachable CTAs. Prefer a designed static or simplified path, not animation strip-only.
 
 Works with **HIG-A11Y-001**; exceeds minimum WCAG animation guidance for marketing surfaces.
+
+CSS scroll-driven animations (`animation-timeline`, `scroll()`, `view()`, and named scroll or view timelines) are page-level motion when they move the surface. They are not exempt because progress follows scrolling. Firefox 159 enables the CSS feature by default; it remains limited availability, not Baseline. Shortening `animation-duration` does not stop a scroll or view timeline. Reset `animation-timeline` to `auto` or `none`, or disable the animation, and check keyboard scrolling, 200% zoom, and programmatic scrolling. Necessity and distraction stay manual under the tier matrix below.
 
 ### Navigation & scroll integrity
 
@@ -110,7 +112,7 @@ Scroll-jacking and parallax that violate **HIG-EXP-005** or **limited** spatial 
 
 ### Performance
 
-**HIG-EXP-012:** Expressive surfaces MUST meet the same Layer 6 Core Web Vitals targets as document surfaces. Motion assets and enhancement scripts MUST NOT block rendering of the LCP element. Full-viewport loading gates MUST NOT hide the LCP candidate beyond documented scope exceptions.
+**HIG-EXP-012:** Expressive surfaces MUST meet the same Layer 6 **stable** Core Web Vitals targets as document surfaces. Experimental CrUX soft-navigation variants are not a substitute pass or an independent failure of this rule. Motion assets and enhancement scripts MUST NOT block rendering of the LCP element. Full-viewport loading gates MUST NOT hide the LCP candidate beyond documented scope exceptions.
 
 ---
 

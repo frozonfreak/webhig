@@ -1,0 +1,86 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  margin: 1.5rem;
+  max-inline-size: 40rem;
+}
+
+.scroller {
+  block-size: 14rem;
+  overflow: auto;
+  border: 1px solid CanvasText;
+  padding: 1rem;
+}
+
+.scroller:focus-visible {
+  outline: 3px solid Highlight;
+  outline-offset: 2px;
+}
+
+.track {
+  min-block-size: 52rem;
+}
+
+.marker,
+.bar {
+  animation-duration: auto;
+  animation-timing-function: linear;
+}
+
+.marker {
+  margin-block-start: 28rem;
+  padding: 1rem;
+  border: 1px solid CanvasText;
+  background: Canvas;
+  color: CanvasText;
+  animation-name: rise;
+  animation-timeline: view();
+}
+
+.bar {
+  block-size: 0.5rem;
+  inline-size: 100%;
+  margin-block-start: 1rem;
+  background: CanvasText;
+  animation-name: fill;
+  animation-timeline: scroll(nearest block);
+}
+
+button {
+  min-block-size: 1.5rem;
+  min-inline-size: 1.5rem;
+  margin-block-start: 0.75rem;
+  padding-block: 0.25rem;
+  padding-inline: 0.75rem;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(1.5rem);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes fill {
+  from {
+    transform: scaleX(0.15);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker,
+  .bar {
+    animation: none;
+    animation-timeline: auto;
+    transform: none;
+  }
+}

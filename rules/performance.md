@@ -1,6 +1,6 @@
 # Performance & Web Vitals — Level 2 Module
 
-**Version:** v1.15.0 · **Canonical spec:** [HIG.md §6](../HIG.md#layer-6-performance--web-vitals) · **Rule IDs:** HIG-PERF-001–004 · **Archetypes:** Universal
+**Version:** v1.16.0 · **Canonical spec:** [HIG.md §6](../HIG.md#layer-6-performance--web-vitals) · **Rule IDs:** HIG-PERF-001–004 · **Archetypes:** Universal
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -36,6 +36,14 @@ Lab/CI gates SHOULD enforce synthetic interaction latency (not field INP), LCP, 
 ## 6.3 Field Performance (RUM)
 
 Field monitoring/SLO gates SHOULD track INP, LCP, CLS, TTFB. Field INP MUST be treated as monitoring/SLO — not as deterministic build-failure from synthetic tests (**HIG-PERF-002**).
+
+### Stable Core Web Vitals and experimental soft navigations
+
+**HIG-PERF-001** judges the stable LCP, INP, and CLS thresholds in §6.1, the same series Search Console uses. Those thresholds are unchanged.
+
+The September 2026 CrUX dataset (published 13 October 2026) adds experimental variants that include Chromium soft navigations: `experimental_largest_contentful_paint_with_softnavs`, `experimental_interaction_to_next_paint_with_softnavs`, and `experimental_cumulative_layout_shift_with_softnavs`. They are available in CrUX BigQuery, the CrUX API, and the CrUX History API, and CrUX Vis can chart that dataset. Detection is Chrome field data, not a cross-browser metric. Chrome aims to graduate them in May 2027, subject to feedback; that is not a HIG date. Search Console keeps the stable scores until then.
+
+Reports that show these values, including HIG Audit, MUST present stable and experimental series separately, label the experimental series, record the dataset month (the collection period), and MUST NOT combine their pass/fail. An experimental result neither satisfies nor, by itself, fails **HIG-PERF-001**.
 
 ## 6.4 Performance Budgets
 

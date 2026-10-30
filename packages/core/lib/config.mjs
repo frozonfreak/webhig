@@ -23,7 +23,7 @@ export function validateProjectConfig(input) {
       throw new Error(`Unknown configuration key: ${key}`);
   }
   if (typeof input.version !== 'string' || !/^\d+\.\d+\.\d+$/.test(input.version)) {
-    throw new Error('version must be a quoted stable semver, e.g. "1.15.0".');
+    throw new Error('version must be a quoted stable semver, e.g. "1.16.0".');
   }
   const config = { ...defaultProjectConfig(input.version), ...input };
   if (!PROFILES.includes(config.profile)) throw new Error(`Unknown profile: ${config.profile}`);

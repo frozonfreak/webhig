@@ -26,7 +26,8 @@ export const STATIC_CHECKS = [
     rule_id: 'HIG-A11Y-001',
     mode: 'static',
     coverage: 'partial',
-    description: 'Detects motion styles without a reduced-motion query in the same file.',
+    description:
+      'Detects motion styles without a reduced-motion query, and scroll-driven animation whose reduced-motion style does not reset the timeline. Does not judge necessity.',
   },
 ];
 
@@ -102,14 +103,23 @@ export function runStaticChecks(files, { applicableRuleIds }) {
       }
     }
 
-    if (applicableRuleIds.has('HIG-A11Y-001')) {
+    if (applicableRuleIds.has('HIG-A11Y-001') && isStylesheetLike(filePath)) {
       const hasReducedMotion =
         /@media\s*\(\s*prefers-reduced-motion\s*:\s*reduce\s*\)/i.test(text) ||
         /@media\s*\(\s*prefers-reduced-motion\s*:\s*no-preference\s*\)/i.test(text);
       const mentionsMotion =
         /transition\s*:|animation\s*:|@keyframes/i.test(text) ||
         (path.extname(filePath) === '.vue' && /<transition/i.test(text));
-      if (mentionsMotion && !hasReducedMotion && isStylesheetLike(filePath)) {
+      const scrollDrivenAt = unguardedScrollDrivenIndex(text);
+      if (scrollDrivenAt !== null) {
+        findings.push({
+          rule_id: 'HIG-A11Y-001',
+          message:
+            'Scroll-driven animation lacks a prefers-reduced-motion guard that sets animation-timeline to auto or none, or disables the animation. Shortening animation-duration does not stop scroll() or view() timelines.',
+          location: `${rel}:${lineNumberAt(text, scrollDrivenAt)}`,
+        });
+      }
+      if (mentionsMotion && !hasReducedMotion) {
         findings.push({
           rule_id: 'HIG-A11Y-001',
           message: 'Motion styles without a prefers-reduced-motion media query.',
@@ -128,4 +138,74 @@ function isStylesheetLike(filePath) {
 
 function lineNumberAt(text, index) {
   return text.slice(0, index).split(/\r?\n/).length;
+}
+
+function unguardedScrollDrivenIndex(text) {
+  const source = stripCommentsPreserveLength(text);
+  const hits = [...scrollDrivenDeclarations(source)];
+  if (!hits.length) return null;
+  const guardedByPreference = mediaBlockRanges(source, 'no-preference');
+  const outside = hits.filter(
+    (hit) =>
+      !guardedByPreference.some((range) => hit.index >= range.start && hit.index <= range.end),
+  );
+  if (!outside.length) return null;
+  const neutralized = mediaBlockRanges(source, 'reduce').some((range) =>
+    neutralizesScrollTimeline(source.slice(range.bodyStart, range.bodyEnd)),
+  );
+  if (neutralized) return null;
+  return outside[0].index;
+}
+
+function scrollDrivenDeclarations(text) {
+  return [
+    ...text.matchAll(
+      /(?:^|[{};])\s*(animation-timeline|scroll-timeline-name|view-timeline-name|scroll-timeline|view-timeline)\s*:\s*([^;{}]+)/gi,
+    ),
+  ].filter((match) => isScrollDrivenValue(match[1], match[2]));
+}
+
+function isScrollDrivenValue(property, value) {
+  const prop = property.toLowerCase();
+  const val = value.trim().toLowerCase();
+  if (prop === 'animation-timeline') {
+    return /(?:^|[\s,])(?:scroll|view)\s*\(/.test(val) || /(?:^|[\s,])--[a-z0-9_-]+/.test(val);
+  }
+  return !/^(?:none|auto|initial|inherit|unset|revert|revert-layer)(?:\s*!important)?$/.test(val);
+}
+
+function neutralizesScrollTimeline(block) {
+  return (
+    /animation-timeline\s*:\s*(?:auto|none)\b/i.test(block) ||
+    /animation-name\s*:\s*none\b/i.test(block) ||
+    /animation\s*:\s*none\b/i.test(block)
+  );
+}
+
+function mediaBlockRanges(text, feature) {
+  const ranges = [];
+  for (const match of text.matchAll(/@media\b[^{]*\{/gi)) {
+    if (!new RegExp(`prefers-reduced-motion\\s*:\\s*${feature}\\b`, 'i').test(match[0])) continue;
+    const brace = match.index + match[0].lastIndexOf('{');
+    const end = matchingBrace(text, brace);
+    if (end === -1) continue;
+    ranges.push({ start: match.index, end, bodyStart: brace + 1, bodyEnd: end });
+  }
+  return ranges;
+}
+
+function matchingBrace(text, openIndex) {
+  let depth = 0;
+  for (let i = openIndex; i < text.length; i += 1) {
+    if (text[i] === '{') depth += 1;
+    else if (text[i] === '}') {
+      depth -= 1;
+      if (depth === 0) return i;
+    }
+  }
+  return -1;
+}
+
+function stripCommentsPreserveLength(text) {
+  return text.replace(/\/\*[\s\S]*?\*\//g, (comment) => comment.replace(/[^\n]/g, ' '));
 }

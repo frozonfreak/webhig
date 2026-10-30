@@ -1,6 +1,6 @@
 # The Web HIG
 
-[![Version](https://img.shields.io/badge/version-1.15.0-1d4ed8)](./VERSION)
+[![Version](https://img.shields.io/badge/version-1.16.0-1d4ed8)](./VERSION)
 [![License: MIT](https://img.shields.io/github/license/frozonfreak/webhig)](./LICENSE)
 [![Try HIG Audit](https://img.shields.io/badge/Try_HIG_Audit-0f766e)](https://hig.aruviflow.com)
 [![Validate HIG](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml/badge.svg)](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml)
@@ -166,7 +166,11 @@ Most people only need **HIG-QUICK**.
 | I want to understand why HIG exists         | [RATIONALE.md](./RATIONALE.md)          |
 | I want to audit an existing website         | [HIG Audit](https://hig.aruviflow.com/) |
 
-**Current release:** [v1.15.0](./VERSION) · [Changelog](./CHANGELOG.md) · [Release notes](./RELEASE_NOTES.md)
+**Current release:** [v1.16.0](./VERSION) · [Changelog](./CHANGELOG.md) · [Release notes](./RELEASE_NOTES.md)
+
+### New in v1.16.0: field metrics and scroll-driven motion
+
+Stable Core Web Vitals thresholds are unchanged. Experimental CrUX soft-navigation LCP, INP, and CLS variants must be labeled, dated by dataset month, and kept as a separate pass/fail. Scroll-driven animations (`animation-timeline`, `scroll()`, `view()`) are motion; shortening duration does not stop them. Safari 27.2 VoiceOver checks are manual fixtures, not a new author rule. Still **98 Quick imperatives and 76 stable rule IDs**. See the [release notes](./RELEASE_NOTES.md).
 
 ### New in v1.15.0: Content / Marketing examples
 

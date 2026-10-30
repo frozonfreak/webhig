@@ -34,6 +34,7 @@ for (const filePath of walk(root)) {
   const rel = path.relative(root, filePath).split(path.sep).join('/');
   if (skipFiles.has(rel)) continue;
   if (rel === 'VERSION' || rel.endsWith('/VERSION')) {
+    let text = fs.readFileSync(filePath, 'utf8');
     if (text.includes(from)) {
       text = text.split(from).join(to);
       fs.writeFileSync(filePath, text, 'utf8');

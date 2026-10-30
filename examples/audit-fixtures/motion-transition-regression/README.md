@@ -2,7 +2,7 @@
 
 Illustrative audit fixture for application control motion. It is **not** a normative change to The Web HIG, and it does not add a Quick imperative, a `HIG-*` id, or a conformance claim.
 
-Repository [VERSION](../../../VERSION) is the current pin (1.15.0). This fixture does not change that contract. The behaviors under test are already required.
+Repository [VERSION](../../../VERSION) is the current pin (1.16.0). This fixture does not change that contract. The behaviors under test are already required.
 
 ## What it demonstrates
 

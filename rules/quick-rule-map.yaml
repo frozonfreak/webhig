@@ -1,5 +1,5 @@
 # The Web HIG — Layer 1 Quick rule ↔ rule ID map
-# Version: 1.15.0
+# Version: 1.16.0
 # Normative Quick prose: HIG-QUICK.md · IDs: rules/registry.yaml
 # Regenerate: npm run sync:quick-map
 #
@@ -8,7 +8,7 @@
 # ID's registry hig_section must include it. Cross-section links are allowed only
 # when listed in section_exceptions with a reason (npm run validate enforces this).
 
-version: "1.15.0"
+version: "1.16.0"
 
 section_exceptions:
   - quick: 1
@@ -19,7 +19,7 @@ section_exceptions:
     reason: "Quick #65 is a §3.2 container-query bullet that cites HIG-SIM-001 inline. HIG.md §3.2 itself states the HIG-SIM-001 guard against adding containers only to satisfy the rule. The registry files HIG-SIM-001 under Exception System, §7.2 without §3.2, a metadata gap tracked separately."
   - quick: 82
     id: HIG-PERF-002
-    reason: "Quick #82 states the §6.1 Core Web Vitals thresholds and cites HIG-PERF-002 inline because INP is judged in the field. The lab/field gate split it points to is §6.2–6.3."
+    reason: "Quick #82 states the §6.1 stable Core Web Vitals thresholds and cites HIG-PERF-002 inline because INP is judged in the field. The same bullet requires experimental CrUX soft-navigation variants to stay a separate pass/fail, which §6.3 states. The registry files HIG-PERF-002 under §6.2–6.3."
   - quick: 87
     id: HIG-MOT-002
     reason: "Quick #87 restates the §1.4 \"Tokenized timing\" rule (do not invent per-component millisecond values). HIG-MOT-002 is filed under §3.1, where the motion duration tokens are defined."

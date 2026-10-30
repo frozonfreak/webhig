@@ -1,6 +1,6 @@
 # The Web HIG — Practical Guide (Layer 2)
 
-**Version:** v1.15.0 · **Quick Reference:** [HIG-QUICK.md](./HIG-QUICK.md) · **Core:** [HIG-CORE.md](./HIG-CORE.md) · **Full spec:** [HIG.md](./HIG.md) · **Topic index:** [rules/INDEX.md](./rules/INDEX.md)
+**Version:** v1.16.0 · **Quick Reference:** [HIG-QUICK.md](./HIG-QUICK.md) · **Core:** [HIG-CORE.md](./HIG-CORE.md) · **Full spec:** [HIG.md](./HIG.md) · **Topic index:** [rules/INDEX.md](./rules/INDEX.md)
 
 Practical documentation with rule IDs and checklists. Start with [HIG-QUICK.md](./HIG-QUICK.md) (Layer 1, ~5 min); open this file when you need rule ID links and archetype guidance. Load [rules/manifest.yaml](./rules/manifest.yaml) topic modules when the task requires depth beyond this summary.
 
@@ -28,7 +28,7 @@ Practical documentation with rule IDs and checklists. Start with [HIG-QUICK.md](
 - SEO/shareable content uses metadata, canonical URLs, social metadata, and structured data where warranted (**HIG-SEO-001**, **HIG-SEO-002**, **HIG-SEO-003**)
 - Immediate local feedback on every interaction ([§1.1](./HIG.md#11-direct-manipulation--motion-ergonomics))
 - Functional micro-animations only; ≤300 ms for micro-feedback (**HIG-MOT-004** → [§1.4](./HIG.md#14-functional-micro-animations))
-- Respect reduced motion — mandatory, not optional (**HIG-A11Y-001** → [§1.3](./HIG.md#13-reduced-motion--animation-safety))
+- Respect reduced motion — mandatory, not optional (**HIG-A11Y-001** → [§1.3](./HIG.md#13-reduced-motion--animation-safety)). Scroll-driven animations (`animation-timeline`, `scroll()`, `view()`) are motion; reset the timeline or disable the animation. Limited availability is not an exemption. Necessity and distraction are manual review.
 
 ## 2. Accessibility
 
@@ -106,7 +106,7 @@ Load [rules/expressive-surface.md](./rules/expressive-surface.md) when scope dec
 - Avoid unnecessary JavaScript; default to server rendering (**HIG-SSR-001** → [§4.1](./HIG.md#41-server-driven--progressive-rendering-architecture))
 - Lazy-load appropriate resources; optimize images ([§6.4](./HIG.md#64-performance-budgets))
 - Avoid blocking critical rendering path ([§6.1](./HIG.md#61-core-web-vitals--supporting-performance-metrics))
-- Protect Core Web Vitals: LCP, INP (field SLO), CLS ([§6.1](./HIG.md#61-core-web-vitals--supporting-performance-metrics))
+- Protect stable Core Web Vitals: LCP, INP (field SLO), CLS ([§6.1](./HIG.md#61-core-web-vitals--supporting-performance-metrics)). Experimental CrUX soft-navigation variants stay a separate labeled series with the dataset month and MUST NOT share that pass/fail ([§6.3](./HIG.md#63-field-performance-rum))
 - Slow async server regions need streaming boundaries + skeleton (**HIG-SSR-002** → [§4.1](./HIG.md#41-server-driven--progressive-rendering-architecture))
 
 ## 6b. Search and data density

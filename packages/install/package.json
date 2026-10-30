@@ -1,6 +1,6 @@
 {
   "name": "@web-hig/install",
-  "version": "1.15.0",
+  "version": "1.16.0",
   "description": "Install The Web HIG Quick Reference, agent rules, and editor skills into a project",
   "type": "module",
   "dependencies": {

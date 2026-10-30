@@ -2,7 +2,7 @@
 
 Fixtures and manual review notes for **[HIG Audit](https://hig.aruviflow.com/)** and local assistive-technology checks. They are **not** a substitute for the normative contract in [HIG.md](../../HIG.md).
 
-Sourced from the **2026-10-09**, **2026-10-16** and [**2026-10-23**](../../docs/research/2026-10-23-brief.md) Web HIG research briefs.
+Sourced from the **2026-10-09**, **2026-10-16**, [**2026-10-23**](../../docs/research/2026-10-23-brief.md) and [**2026-10-30**](../../docs/research/2026-10-30-brief.md) Web HIG research briefs.
 
 | Item | Action in this folder |
 | --- | --- |
@@ -13,6 +13,8 @@ Sourced from the **2026-10-09**, **2026-10-16** and [**2026-10-23**](../../docs/
 | Firefox 158 Android `aria-busy` (2026-10-13) | Manual review checklist in [`firefox-158-android-talkback.md`](./firefox-158-android-talkback.md); device testing pending |
 | JPEG XL (Chrome 155) | Spec-only — see **HIG-DOC-005**; no automated failure here |
 | Scoped transitions vs `transition: all` | [motion-transition-regression/](./motion-transition-regression/) — illustrative; not a normative rule change |
+| Firefox 159 scroll-driven animations (2026-10-27) | [scroll-driven-motion/](./scroll-driven-motion/) — reduced motion, keyboard, zoom, and programmatic scroll. Execution pending. A static check may flag a missing timeline reset; necessity stays manual. |
+| Safari 27.2 VoiceOver (2026-10-26) | [Stable-release matrix](./safari-27-2-voiceover.md): streamed append vs re-render, complex `aria-labelledby` / `aria-describedby` targets, and iOS date/time/color. Execution pending. Not a universal AT pass. |
 
 ## How to use
 
@@ -33,3 +35,4 @@ For landing-page semantics, responsive review and scoped enhancement/reduced-mot
 | [`accname/aria-description-precedence.html`](./accname/aria-description-precedence.html) | `aria-describedby` vs `aria-description` |
 | [`accname/css-generated-content.html`](./accname/css-generated-content.html) | CSS `::before` / `::after` in name computation |
 | [`accname/prohibited-name-role.html`](./accname/prohibited-name-role.html) | Roles that prohibit naming |
+| [`accname/complex-referenced-content.html`](./accname/complex-referenced-content.html) | List, table, tree, and canvas content inside `aria-labelledby` / `aria-describedby` targets |
