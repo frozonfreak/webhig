@@ -101,7 +101,7 @@ You are looking for `HIG-MUT-001` on the delete, `HIG-A11Y-008` on focus inside 
 
 The longer path is the [quick-profile walkthrough](https://github.com/frozonfreak/webhig/blob/v1.18.0/examples/adoption/quick-profile-walkthrough.md), then [INTEGRATION.md](https://github.com/frozonfreak/webhig/blob/v1.18.0/INTEGRATION.md) for a team rollout. A copyable consumer layout is [`examples/golden-path`](https://github.com/frozonfreak/webhig/tree/v1.18.0/examples/golden-path).
 
-If the site already exists, [HIG Audit](https://hig.aruviflow.com/) reads an implementation against the standard. The repository defines the rules. The auditor applies them. `web-hig check` can validate a pin today. A broader evaluator and lint rules are on the [roadmap](https://github.com/frozonfreak/webhig/blob/v1.18.0/ROADMAP.md). They are not implied by the version number.
+If the site already exists, [HIG Audit](https://webhigaudit.sastha.dev/) reads an implementation against the standard. The repository defines the rules. The auditor applies them. `web-hig check` can validate a pin today. A broader evaluator and lint rules are on the [roadmap](https://github.com/frozonfreak/webhig/blob/v1.18.0/ROADMAP.md). They are not implied by the version number.
 
 ## Adopt it without a rewrite
 

@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/badge/version-1.18.0-1d4ed8)](./VERSION)
 [![License: MIT](https://img.shields.io/github/license/frozonfreak/webhig)](./LICENSE)
-[![Try HIG Audit](https://img.shields.io/badge/Try_HIG_Audit-0f766e)](https://hig.aruviflow.com)
+[![Try HIG Audit](https://img.shields.io/badge/Try_HIG_Audit-0f766e)](https://webhigaudit.sastha.dev)
 [![Validate HIG](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml/badge.svg)](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml)
 [![Pin me](https://img.shields.io/badge/Pin_me-HIG--QUICK.md-0f172a)](./HIG-QUICK.md)
 
@@ -31,7 +31,7 @@ The same standard can be used by **developers, designers, reviewers, CI systems,
 
 ## Already have a website?
 
-Use **[HIG Audit](https://hig.aruviflow.com/)** to evaluate an existing website against The Web HIG.
+Use **[HIG Audit](https://webhigaudit.sastha.dev/)** to evaluate an existing website against The Web HIG.
 
 **The Web HIG** is the standard.
 **HIG Audit** is a separate tool that applies the standard to an existing implementation.
@@ -48,7 +48,7 @@ Your application / design system
 HIG Audit
 ```
 
-[Open HIG Audit →](https://hig.aruviflow.com/)
+[Open HIG Audit →](https://webhigaudit.sastha.dev/)
 
 ---
 
@@ -164,7 +164,7 @@ Most people only need **HIG-QUICK**.
 | I need individual rule IDs                  | [HIG-LITE.md](./HIG-LITE.md)            |
 | I need the complete normative specification | [HIG.md](./HIG.md)                      |
 | I want to understand why HIG exists         | [RATIONALE.md](./RATIONALE.md)          |
-| I want to audit an existing website         | [HIG Audit](https://hig.aruviflow.com/) |
+| I want to audit an existing website         | [HIG Audit](https://webhigaudit.sastha.dev/) |
 
 **Current release:** [v1.18.0](./VERSION) · [Changelog](./CHANGELOG.md) · [Release notes](./RELEASE_NOTES.md)
 
@@ -188,7 +188,7 @@ The examples cover semantic hierarchy, keyboard actions, responsive information,
 
 This is an informative guidance release. Existing requirements, severity and applicability are unchanged: **98 Quick imperatives and 76 stable rule IDs**. No prescribed layout, sales CTA or universal no-JavaScript requirement is added. Manual browser and assistive-technology checks for the new fixtures remain untested; see their execution record.
 
-**[Documentation site](https://frozonfreak.github.io/webhig/)** · **[HIG Audit](https://hig.aruviflow.com/)** · **[Integration guide](./INTEGRATION.md)** · **[Adopters](./ADOPTERS.md)**
+**[Documentation site](https://frozonfreak.github.io/webhig/)** · **[HIG Audit](https://webhigaudit.sastha.dev/)** · **[Integration guide](./INTEGRATION.md)** · **[Adopters](./ADOPTERS.md)**
 
 ---
 
@@ -310,7 +310,7 @@ A typical project can:
 
 For a guided adoption path, see [INTEGRATION.md](./INTEGRATION.md).
 
-For evaluating an existing interface, use **[HIG Audit](https://hig.aruviflow.com/)**.
+For evaluating an existing interface, use **[HIG Audit](https://webhigaudit.sastha.dev/)**.
 
 ---
 
@@ -336,7 +336,7 @@ This repository contains the standard, machine-readable rules, agent integration
 
 For website evaluation and conformance analysis, use:
 
-**[HIG Audit →](https://hig.aruviflow.com/)**
+**[HIG Audit →](https://webhigaudit.sastha.dev/)**
 
 ### Planned / evolving tooling
 

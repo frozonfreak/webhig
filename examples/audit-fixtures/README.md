@@ -1,6 +1,6 @@
 # Audit fixtures — runtime recovery & AT review
 
-Fixtures and manual review notes for **[HIG Audit](https://hig.aruviflow.com/)** and local assistive-technology checks. They are **not** a substitute for the normative contract in [HIG.md](../../HIG.md).
+Fixtures and manual review notes for **[HIG Audit](https://webhigaudit.sastha.dev/)** and local assistive-technology checks. They are **not** a substitute for the normative contract in [HIG.md](../../HIG.md).
 
 Sourced from the **2026-10-09**, **2026-10-16**, [**2026-10-23**](../../docs/research/2026-10-23-brief.md), [**2026-10-30**](../../docs/research/2026-10-30-brief.md), [**2026-11-06**](../../docs/research/2026-11-06-brief.md) and [**2026-11-13**](../../docs/research/2026-11-13-brief.md) Web HIG research briefs.
 

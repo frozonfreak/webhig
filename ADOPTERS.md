@@ -9,7 +9,7 @@ Products and repositories that **pin** The Web HIG (semver + profile) and use it
 | Project | Version / profile | Stack | Notes |
 | --- | --- | --- | --- |
 | [HIG documentation site](https://frozonfreak.github.io/webhig/) | v1.18.0 · Full | Static docs | Source pin updated; deployment verification pending |
-| [Live demo (Aruvi Flow)](https://hig.aruviflow.com/) | v1.18.0 · Practical | Web app | Target pin for this release; live upgrade verification pending |
+| [Live demo (Aruvi Flow)](https://webhigaudit.sastha.dev/) | v1.18.0 · Practical | Web app | Target pin for this release; live upgrade verification pending |
 | [This repository](https://github.com/frozonfreak/webhig) | v1.18.0 · Full | Markdown, CI | Source of truth; `examples/agent-rules/` consumed by downstream repos |
 
 ---
