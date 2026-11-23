@@ -1,6 +1,6 @@
 # AI & Agent Enforcement — Level 2 Module
 
-**Version:** v1.18.0 · **Canonical spec:** [HIG.md §7–8](../HIG.md#layer-7-ai--agent-enforcement-contract) · **Rule ID:** HIG-SIM-001 + all Layer 7 IDs
+**Version:** v1.19.0 · **Canonical spec:** [HIG.md §7–8](../HIG.md#layer-7-ai--agent-enforcement-contract) · **Rule ID:** HIG-SIM-001 + all Layer 7 IDs
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -67,7 +67,9 @@ Intended `eslint-plugin-hig` rules:
 
 Review validation against the current tool names and argument schemas before execution and after repair. Reject unknown/renamed tools and invalid arguments without side effects. A repair must stay within authorized intent and must not silently substitute a consequential action, target or scope; changed actions return to the existing confirmation flow. Record the original call, validation failure, repair and final execution/rejection with correlated, redacted evidence (§9.4).
 
-Test interface drift with renamed/removed tools, distractor candidates, schema changes and invalid repairs. See [HIG.md §7.4](../HIG.md#74-agent-tool-schema-review-informative) for the complete review guidance. This does not add an automated website audit rule or require a repair layer.
+For state-changing operations, verify the target before execution and the result after it. Resolve the target against live environment state at call time, not the model's description or a remembered identifier. Validate the object and scope, and ask for clarification when the reference is ambiguous. Treat remembered tool use (skills, persistent memory, earlier calls) as a hint and read the current definition first. After execution, read back the affected state and check the intended postcondition, not only the API success response. Report completion only when verified, and distinguish attempted, accepted, queued, and completed. Scale verification to consequence (**HIG-SIM-001**).
+
+Test interface drift with renamed/removed tools, distractor candidates, schema changes and invalid repairs. Also test a silent change behind an unchanged success response, an ambiguous reference, a stale identifier, and an accepted-but-not-applied write. See [HIG.md §7.4](../HIG.md#74-agent-tool-schema-review-informative) for the complete review guidance. This does not add an automated website audit rule or require a repair layer.
 
 ## Layer 8: CI/CD Gates
 

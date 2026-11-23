@@ -4,6 +4,20 @@ User-facing notes for each published version of The Web HIG. The brief machine-o
 
 Versions follow [Semantic Versioning](https://semver.org/). Newest first.
 
+## [v1.19.0](./HIG.md) — 2026-11-20
+
+Minor informative update for embedded-frame focus, foldable devices, and agent execution. WCAG mappings, rule IDs, severities, and Core Web Vitals thresholds do not change.
+
+- **Agents.** For a state-changing operation, resolve and validate the target against live state before it runs. After it runs, read back the state and check the postcondition, not the API success response. Report completion only when verified, and keep attempted, accepted, queued, and completed apart. Remembered skills, memory, and earlier calls are hints, so read the current tool definition first. Match the effort to the consequence. This is review guidance for the agent execution contract, not a website audit rule ([§7.4](./HIG.md#74-agent-tool-schema-review-informative)).
+- **Embedded frames.** Chrome 158 adds an opt-in `focus-without-user-activation` Permissions Policy. With it denied, a widget’s dialog can open while focus stays outside. Open dialogs from the user action where you can, check where focus landed, and keep the dialog reachable and dismissible by keyboard. Embedders deny the policy deliberately or deliver focus by delegation. Test with an iframe fixture ([§5.3](./HIG.md#embedded-content-and-programmatic-focus-informative), [fixture](./examples/audit-fixtures/embedded-frame-focus/README.md)).
+- **Foldable devices.** The layout must work with no posture signal. Keep important controls off the fold, do not span large content across it, do not assume one posture, and announce significant layout changes. Device Posture is Chromium-only and optional ([§3.2](./HIG.md#foldable-devices-and-device-posture-informative), [fixture](./examples/audit-fixtures/device-posture/README.md)).
+- **Location.** Describe geolocation accuracy as approximate, because the radius is a 68% confidence level. Test permission, timeout, cache, and error states per feature ([§5.5](./HIG.md#55-browser-permissions-ux)).
+- **Tracked, not required.** WCAG PR #5446 on contrast for text in images, ARIA `listview`, `text-autospace-size`, View Transitions `shadowRoots`, and the Web Install API.
+
+Upgrade by refreshing the contract pin and reviewing the [research disposition](./docs/research/2026-11-20-brief.md). No new stable IDs, severity changes, WCAG baseline, or Core Web Vitals thresholds. The separate audit site is not deployed by this update. Fixture execution is pending. Quick remains 98 imperatives and the registry remains 76 stable IDs.
+
+---
+
 ## [v1.18.0](./HIG.md) — 2026-11-13
 
 Minor packaging update for how coding agents and auditors consume the contract. Stable Core Web Vitals thresholds, WCAG mappings, and conformance scores do not change.

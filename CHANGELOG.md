@@ -17,6 +17,23 @@ Expanded adoption notes: [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
 ---
 
+## [1.19.0] - 2026-11-20
+
+### Changed
+
+- Agent execution review (§7.4) adds target verification before a state-changing operation and result verification after it. Resolve the target against live state at call time, validate the object and scope, and ask when the reference is ambiguous. Treat remembered tool use, skills, and memory as a hint and read the current definition. Read back the affected state, check the intended postcondition rather than the API success response, report completion only when verified, and distinguish attempted, accepted, queued, and completed. Scale verification to consequence. Informative review guidance, not a website audit rule.
+- Embedded content and programmatic focus (§5.3): Chrome 158 adds the opt-in `focus-without-user-activation` Permissions Policy. When it is denied, `focus()`, `autofocus`, and dialog and popover focusing are blocked without transient user activation or focus already in the frame, and a dialog can still open without receiving focus. Do not assume automatic focus succeeded, and test it with an iframe fixture. Manual or integration test, not a static scan. **HIG-A11Y-008** is unchanged.
+- Foldable devices (§3.2): informative Device Posture guidance. The continuous layout works with no signal, important controls stay off the fold, large content does not span it, no single posture is assumed, and significant layout changes are announced. Device Posture is Chromium-only and has no mandatory use.
+- Location accuracy (§5.5): `coords.accuracy` is a 68% confidence radius, so describe it as approximate and test permission, timeout, cache, fresh acquisition, and error states per feature.
+- Audit outcomes (§8.3) list embedded-frame focus, device posture, and text embedded in images as manual or integration review. New fixtures: [embedded-frame-focus](./examples/audit-fixtures/embedded-frame-focus/README.md) and [device-posture](./examples/audit-fixtures/device-posture/README.md). Consumption metadata for **HIG-A11Y-005** and **HIG-A11Y-008** has a 2026-11-20 source date.
+- [20 November research disposition](./docs/research/2026-11-20-brief.md).
+
+### Unchanged
+
+- WCAG mappings, rule IDs, severities, conformance scores, and Core Web Vitals thresholds. The open WCAG PR #5446 on contrast for text in images, ARIA `listview`, CSS `text-autospace-size`, View Transitions `shadowRoots`, and the Web Install API are tracked and deferred. No new requirement for any of them.
+
+---
+
 ## [1.18.0] - 2026-11-13
 
 ### Changed

@@ -1,6 +1,6 @@
 # The Web HIG
 
-[![Version](https://img.shields.io/badge/version-1.18.0-1d4ed8)](./VERSION)
+[![Version](https://img.shields.io/badge/version-1.19.0-1d4ed8)](./VERSION)
 [![License: MIT](https://img.shields.io/github/license/frozonfreak/webhig)](./LICENSE)
 [![Try HIG Audit](https://img.shields.io/badge/Try_HIG_Audit-0f766e)](https://webhigaudit.sastha.dev)
 [![Validate HIG](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml/badge.svg)](https://github.com/frozonfreak/webhig/actions/workflows/validate.yml)
@@ -166,7 +166,11 @@ Most people only need **HIG-QUICK**.
 | I want to understand why HIG exists         | [RATIONALE.md](./RATIONALE.md)          |
 | I want to audit an existing website         | [HIG Audit](https://webhigaudit.sastha.dev/) |
 
-**Current release:** [v1.18.0](./VERSION) · [Changelog](./CHANGELOG.md) · [Release notes](./RELEASE_NOTES.md)
+**Current release:** [v1.19.0](./VERSION) · [Changelog](./CHANGELOG.md) · [Release notes](./RELEASE_NOTES.md)
+
+### New in v1.19.0: embedded-frame focus, foldables, and agent verification
+
+State-changing agent operations now get target verification before and result verification after (§7.4, informative). An embedded widget in Chrome 158 can open a dialog without focus entering it when an embedder denies `focus-without-user-activation`, so test it (§5.3). Foldable-device guidance keeps the continuous layout complete and important controls off the fold (§3.2). Geolocation accuracy is a 68% confidence radius, so describe it as approximate (§5.5). These are review and integration guidance, not new rules. Rule IDs, WCAG mappings, and Core Web Vitals thresholds are unchanged. Still **98 Quick imperatives and 76 stable rule IDs**. See the [release notes](./RELEASE_NOTES.md).
 
 ### New in v1.18.0: agent consumption metadata
 

@@ -1,6 +1,6 @@
 # The Web HIG — Practical Guide (Layer 2)
 
-**Version:** v1.18.0 · **Quick Reference:** [HIG-QUICK.md](./HIG-QUICK.md) · **Core:** [HIG-CORE.md](./HIG-CORE.md) · **Full spec:** [HIG.md](./HIG.md) · **Topic index:** [rules/INDEX.md](./rules/INDEX.md)
+**Version:** v1.19.0 · **Quick Reference:** [HIG-QUICK.md](./HIG-QUICK.md) · **Core:** [HIG-CORE.md](./HIG-CORE.md) · **Full spec:** [HIG.md](./HIG.md) · **Topic index:** [rules/INDEX.md](./rules/INDEX.md)
 
 Practical documentation with rule IDs and checklists. Start with [HIG-QUICK.md](./HIG-QUICK.md) (Layer 1, ~5 min); open this file when you need rule ID links and archetype guidance. Load [rules/manifest.yaml](./rules/manifest.yaml) topic modules when the task requires depth beyond this summary.
 
@@ -39,7 +39,7 @@ Practical documentation with rule IDs and checklists. Start with [HIG-QUICK.md](
 - Accessible names on all controls; icon buttons and images included — match the platform AccName computation / browser accessibility tree, not a simplified attribute order (**HIG-A11Y-004**, **HIG-A11Y-005** → [§5.2](./HIG.md#52-native-html-over-aria))
 - **MUST** 24×24 CSS px minimum targets — WCAG 2.5.8-aligned baseline (**HIG-A11Y-007** → [§5.4](./HIG.md#54-target-sizes)); WCAG exceptions apply
 - **SHOULD** 44×44 CSS px for primary touch — HIG ergonomic recommendation only; not **HIG-A11Y-007**
-- Modal focus containment, not just `aria-modal` (**HIG-A11Y-008** → [§5.3](./HIG.md#53-keyboard-focus--interaction))
+- Modal focus containment, not just `aria-modal` (**HIG-A11Y-008** → [§5.3](./HIG.md#53-keyboard-focus--interaction)). In an embedded frame, a denied `focus-without-user-activation` Permissions Policy (Chrome 158) can open a dialog without moving focus into it. Do not assume automatic focus succeeded, and test it ([embedded content and programmatic focus](./HIG.md#embedded-content-and-programmatic-focus-informative))
 
 ## 3. UI & tokens
 
@@ -127,6 +127,7 @@ Load [rules/expressive-surface.md](./rules/expressive-surface.md) when scope dec
 - Use `@media` for page layout, environment, and user preferences ([§3.2](./HIG.md#32-container-queries-engine))
 - Do not add wrapper containers solely for CQ compliance (**HIG-SIM-001**)
 - Content usable at 200% zoom; support reflow where applicable ([§5.1](./HIG.md#51-standards-baseline))
+- Foldable devices: the layout must work with no posture signal. Keep important controls out of the fold, do not span large content across it, do not design for one posture, and announce significant layout changes. Device Posture is Chromium-only and informative ([§3.2](./HIG.md#foldable-devices-and-device-posture-informative))
 
 ## 8. Engineering
 
@@ -135,6 +136,7 @@ Load [rules/expressive-surface.md](./rules/expressive-surface.md) when scope dec
 - Don't introduce dependencies without justification
 - Don't over-engineer to satisfy the HIG
 - For accessibility, forms, motion, or performance, read [rules/agent-consumption.yaml](./rules/agent-consumption.yaml) with the rule. Follow its maturity, browser target, fallback, and checks. A modern API is not a pass ([§7.1](./HIG.md#agent-consumption-metadata)).
+- For state-changing agent operations, resolve and validate the target against live state before execution, read back the result and check the postcondition after it, and report completion only when verified. Distinguish attempted, accepted, queued, and completed ([§7.4](./HIG.md#74-agent-tool-schema-review-informative), informative).
 - For agent tool execution, review current-schema validation, rejection of unknown tools, constrained repair and redacted audit trails ([§7.4](./HIG.md#74-agent-tool-schema-review-informative), informative; no automated website audit rule).
 - Critical mutations SHOULD be idempotent (**HIG-MUT-002** → [§4.5](./HIG.md#45-concurrency-conflict--idempotency))
 

@@ -25,7 +25,7 @@ You keep MUI, shadcn, Tailwind, or a home-grown token file. You keep React, Vue,
 
 > **Design systems define *what* it looks like.** **The Web HIG defines *how* it behaves.**
 
-Current release: **v1.18.0**. [Quick Reference](https://github.com/frozonfreak/webhig/blob/main/HIG-QUICK.md) · [Live demo](https://webhigaudit.sastha.dev/) · [Documentation site](https://frozonfreak.github.io/webhig/)
+Current release: **v1.19.0**. [Quick Reference](https://github.com/frozonfreak/webhig/blob/main/HIG-QUICK.md) · [Live demo](https://webhigaudit.sastha.dev/) · [Documentation site](https://frozonfreak.github.io/webhig/)
 
 ## Why “just use a checklist” fails at scale
 
@@ -150,7 +150,7 @@ Minimal PR checklist once the HIG is pinned:
 - [ ] Destructive actions use proportional confirmation, not optimistic delete  
 - [ ] Visible focus on interactive controls  
 
-## What’s inside (v1.18.0)
+## What’s inside (v1.19.0)
 
 - **98** quick rules  
 - **17** topic modules (forms, mutations, performance, security UX, …)  

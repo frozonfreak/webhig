@@ -1,6 +1,6 @@
 # Nuxt Framework Adapter
 
-**Version:** v1.18.0 · **Base adapter:** [vue.md](./vue.md) · **Universal architecture:** [rules/architecture.md](../rules/architecture.md)
+**Version:** v1.19.0 · **Base adapter:** [vue.md](./vue.md) · **Universal architecture:** [rules/architecture.md](../rules/architecture.md)
 
 > Nuxt-specific conventions. Normative requirements remain in the universal architecture module.
 

@@ -2,7 +2,7 @@
 
 Fixtures and manual review notes for **[HIG Audit](https://webhigaudit.sastha.dev/)** and local assistive-technology checks. They are **not** a substitute for the normative contract in [HIG.md](../../HIG.md).
 
-Sourced from the **2026-10-09**, **2026-10-16**, [**2026-10-23**](../../docs/research/2026-10-23-brief.md), [**2026-10-30**](../../docs/research/2026-10-30-brief.md), [**2026-11-06**](../../docs/research/2026-11-06-brief.md) and [**2026-11-13**](../../docs/research/2026-11-13-brief.md) Web HIG research briefs.
+Sourced from the **2026-10-09**, **2026-10-16**, [**2026-10-23**](../../docs/research/2026-10-23-brief.md), [**2026-10-30**](../../docs/research/2026-10-30-brief.md), [**2026-11-06**](../../docs/research/2026-11-06-brief.md), [**2026-11-13**](../../docs/research/2026-11-13-brief.md) and [**2026-11-20**](../../docs/research/2026-11-20-brief.md) Web HIG research briefs.
 
 | Item | Action in this folder |
 | --- | --- |
@@ -15,6 +15,8 @@ Sourced from the **2026-10-09**, **2026-10-16**, [**2026-10-23**](../../docs/res
 | Scoped transitions vs `transition: all` | [motion-transition-regression/](./motion-transition-regression/) — illustrative; not a normative rule change |
 | Firefox 159 scroll-driven animations (2026-10-27) | [scroll-driven-motion/](./scroll-driven-motion/) — reduced motion, keyboard, zoom, and programmatic scroll. Execution pending. A static check may flag a missing timeline reset; necessity stays manual. |
 | Animated images (2026-11-07) | [animated-images/](./animated-images/) — pause or stop control, duration, essential-motion judgment, reduced motion, and a fallback in engines that ignore `image-animation`. The property is not a pass. Execution pending. |
+| Embedded-frame focus (Chrome 158, 2026-11-17) | [embedded-frame-focus/](./embedded-frame-focus/) — dialog and popover opening with `focus-without-user-activation` denied, user-initiated focus, keyboard reachability, and focus return. Integration test, not a static scan. Execution pending. |
+| Device Posture CRD (2026-11-17) | [device-posture/](./device-posture/) — folded and continuous layouts using WebDriver posture simulation where supported: content placement, focus order, announcements, reflow. Informative. Execution pending. |
 | Safari 27.2 VoiceOver (2026-10-26) | [Stable-release matrix](./safari-27-2-voiceover.md): streamed append vs re-render, complex `aria-labelledby` / `aria-describedby` targets, and iOS date/time/color. Execution pending. Not a universal AT pass. |
 | Safari 27.3 Adaptive Dark Mode (2026-11-03) | [Screenshot matrix](./safari-27-3-adaptive-dark-mode.md): declared `light dark`, an undeclared light page, text, focus, hover, SVG, transparent bitmap, and canvas. Execution pending. Computed style is not the displayed color. |
 

@@ -71,12 +71,18 @@ This roadmap describes **contract and tooling** direction for the standard repos
 
 ---
 
-## Research watchlist (2026-11-13)
+## Research watchlist (2026-11-20)
 
 Informational — not commitments. From the weekly Web HIG research briefs:
 
 | Topic | Status |
 | --- | --- |
+| Embedded-frame focus | Chrome 158 (17 November 2026) adds the opt-in `focus-without-user-activation` Permissions Policy. A dialog can open without focus entering it. Guidance and an iframe fixture are in. Integration test, not a static scan. No other engine is claimed. |
+| Device Posture | Candidate Recommendation Draft, 17 November 2026. Chromium-only. Informative foldable guidance is in. No mandatory use. |
+| Agent execution | Verify the target before and the result after a state-changing call. Two preprints with limited configurations (Experience Rot, Intent Contracts). Review guidance in §7.4, not a website audit rule. |
+| Geolocation | Candidate Recommendation Draft, 18 November 2026. Accuracy is a 68% confidence radius. Describe it as approximate. Per-feature permission, timeout, cache, and error tests. |
+| WCAG contrast for text in images | Open PR #5446. Not WCAG. Track the wording. WCAG 2.2 AA mapping unchanged. A manual or OCR-assisted observation is allowed. OCR output is not a failure. |
+| Deferred this week | ARIA `listview` (PR #2951), CSS `text-autospace-size` (Editor’s Draft), View Transitions `shadowRoots` (PR #14826), and the Web Install API (Chrome 158, WICG incubation). No requirement and no audit failure for any of them. |
 | Agent consumption | Modern Web Guidance 1.0 (10 November 2026) is a vendor skill set, not a web standard. Accessibility, forms, motion, and performance rules carry maturity, browser target, fallback, automated checks, manual checks, and a source date. Audits judge outcomes. A modern API is not a pass. Vendor check rates do not change HIG scores. |
 | CSS `image-animation` | Working Draft, 7 November 2026. Experimental technique for declarative images only. Not a pass. Does not cover video, canvas, or inline SVG. Keep a static image, video controls, or a script control until cross-engine support is stable. |
 | ATAG and AI authoring | WAI restated the two-part model on 10 November 2026. No normative draft. Apply the existing principle to HIG Audit’s interface and remediation text. Do not add a scanned-site rule yet. |

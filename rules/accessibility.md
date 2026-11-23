@@ -1,6 +1,6 @@
 # Accessibility — Level 2 Module
 
-**Version:** v1.18.0 · **Canonical spec:** [HIG.md §5](../HIG.md#layer-5-accessibility-a11y--keyboard-navigation) · **Rule IDs:** HIG-A11Y-001–008
+**Version:** v1.19.0 · **Canonical spec:** [HIG.md §5](../HIG.md#layer-5-accessibility-a11y--keyboard-navigation) · **Rule IDs:** HIG-A11Y-001–008
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -59,6 +59,8 @@ Icon buttons MUST have accessible names (**HIG-A11Y-004**). Images MUST have `al
 | Sortable table | Keyboard-accessible sort controls |
 | Drag/drop | Keyboard alternative MUST exist |
 
+**Embedded content and programmatic focus (informative).** Chrome 158 and Edge 158 add the opt-in `focus-without-user-activation` Permissions Policy. When it is denied for the initiating frame, `element.focus()`, `window.focus()`, `autofocus`, and the focusing steps of dialogs and popovers are blocked, unless the frame has transient user activation or focus is already inside it. A focused parent can delegate focus to a child. Clicking and tabbing are never blocked. **A dialog or popover can still open with its focus step blocked**, so a cross-origin authentication, payment, or application widget can leave keyboard focus outside an open dialog. Open dialogs from the user-activation handler where practical. After a programmatic open, check where focus landed. Keep the dialog keyboard-reachable and dismissible if it did not move. Embedders that deny the policy deliver focus by delegation or leave it allowed for frames that need it. Test with an iframe fixture (policy denied): dialog and popover opening, user-initiated focus, keyboard reachability, and focus return. Manual or integration test, not a static scan. No change to **HIG-A11Y-008**. See [HIG.md §5.3](../HIG.md#embedded-content-and-programmatic-focus-informative) and the [fixture](../examples/audit-fixtures/embedded-frame-focus/README.md).
+
 ## 5.4 Target Sizes
 
 The Web HIG cites WCAG for conformance floors and adds ergonomic guidance beyond WCAG — do not treat both numbers as mandatory.
@@ -82,3 +84,5 @@ Pointer targets smaller than 24×24 CSS px MUST NOT be used unless a WCAG except
 | **Downloads** | Confirm large downloads; show progress; handle blocked popups |
 
 Permission prompts MUST NOT appear without prior in-app explanation. Denied permissions MUST degrade gracefully.
+
+**Location accuracy (informative).** `coords.accuracy` is a radius at the 68% confidence level (one standard deviation), so the true position can lie outside it. Describe a position as approximate, not a guaranteed boundary, and keep manual location entry. Test permission, timeout, cache, fresh acquisition, and each error state per feature, using geolocation emulation where supported. See [HIG.md §5.5](../HIG.md#55-browser-permissions-ux).

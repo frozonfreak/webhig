@@ -1,5 +1,5 @@
 {
-  "hig_version": "1.18.0",
+  "hig_version": "1.19.0",
   "evaluator": {
     "name": "hig-evaluator-example",
     "version": "0.1.0"

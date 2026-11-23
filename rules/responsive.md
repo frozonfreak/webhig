@@ -1,6 +1,6 @@
 # Responsive Layout & Container Queries — Level 2 Module
 
-**Version:** v1.18.0 · **Canonical spec:** [HIG.md §3.2](../HIG.md#32-container-queries-engine) · **Rule IDs:** HIG-CQ-001, HIG-CQ-002
+**Version:** v1.19.0 · **Canonical spec:** [HIG.md §3.2](../HIG.md#32-container-queries-engine) · **Rule IDs:** HIG-CQ-001, HIG-CQ-002
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -18,6 +18,18 @@
 | `@media` (environment) | Viewport or device conditions when that signal is genuinely required (e.g. safe-area, orientation for page chrome) |
 
 `@media (prefers-reduced-motion: reduce)` and similar preference queries are legitimate inside component stylesheets.
+
+### Foldable devices and device posture (informative)
+
+The Device Posture API (Candidate Recommendation Draft, 17 November 2026) defines `navigator.devicePosture.type` (`continuous` or `folded`), a `change` event, and the `device-posture` media feature. It is implemented in Chromium-based browsers; WebKit and Mozilla have published no formal positions. It is not a baseline, and nothing here is a new requirement. The continuous layout MUST work with no posture signal.
+
+* Keep important controls, especially buttons, out of the fold or hinge area. Watch centered dialogs on a symmetrical fold.
+* Do not span a video or photograph across the fold when folded.
+* Do not design for a single posture. Let people keep the layout they prefer.
+* Announce a significant layout change with an accessible status message. Do not announce every reflow. Keep focus and DOM order logical in both postures.
+* Test content placement, focus order, announcements, reflow, and assistive technology in both postures, using WebDriver posture simulation where supported.
+
+Manual or integration review, not a static scan. See [HIG.md §3.2](../HIG.md#foldable-devices-and-device-posture-informative) and the [fixture](../examples/audit-fixtures/device-posture/README.md).
 
 **HIG-CQ-001 (SHOULD):** Component-internal layout adaptation SHOULD use `@container` when layout depends on the space allocated by the parent — not the viewport width alone.
 

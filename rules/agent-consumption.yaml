@@ -1,11 +1,11 @@
 # The Web HIG — agent consumption metadata
-# Version: 1.18.0
+# Version: 1.19.0
 # Packaging for agents and auditors. Not a conformance score.
 # Intentional differences from Modern Web Guidance 1.0: docs/research/2026-11-13-brief.md
 # Regenerate is manual. npm run validate checks this file.
 
-version: "1.18.0"
-reviewed: "2026-11-13"
+version: "1.19.0"
+reviewed: "2026-11-20"
 
 rules:
   HIG-A11Y-001:
@@ -45,8 +45,8 @@ rules:
     minimum_browser_target: "Project supported browser matrix."
     fallback: "A text alternative that matches the image. Empty alt only when the image is decorative."
     automated_checks: "A static check may flag a missing alt attribute. It cannot judge whether the text is accurate."
-    manual_checks: "Accuracy of the alternative, including images of text and complex images."
-    source_date: "2026-11-13"
+    manual_checks: "Accuracy of the alternative, including images of text and complex images. Meaningful text embedded in a photograph or illustration is a manual or OCR-assisted observation. OCR output is not an automatic failure. The open WCAG PR #5446 would extend contrast to that text. It is not adopted and does not change the WCAG 2.2 AA mapping. Standalone images of text keep their existing requirements."
+    source_date: "2026-11-20"
 
   HIG-A11Y-006:
     maturity: stable
@@ -69,8 +69,8 @@ rules:
     minimum_browser_target: "Project supported browser matrix. Dialog and popover APIs are techniques, not the requirement."
     fallback: "Focus moves into the dialog, stays inside while it is open, and returns to the trigger. The same outcome is required when the native API is absent."
     automated_checks: "Presence of showModal, popover, or inert is not a pass."
-    manual_checks: "Keyboard containment, Escape, return focus, the inert background, and the assistive-technology announcement. Test the native branch and the fallback branch in different engines."
-    source_date: "2026-11-13"
+    manual_checks: "Keyboard containment, Escape, return focus, the inert background, and the assistive-technology announcement. Test the native branch and the fallback branch in different engines. In an embedded frame, test with the focus-without-user-activation Permissions Policy denied (Chrome 158 and later): a dialog or popover can open while its focus step is blocked, so confirm where focus lands, that the dialog stays keyboard-reachable and dismissible, and that focus returns to the trigger. This is an integration test, not a static scan."
+    source_date: "2026-11-20"
 
   HIG-FRM-001:
     maturity: stable

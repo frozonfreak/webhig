@@ -1,8 +1,8 @@
-# The Web HIG & Product Engine Contract — v1.18.0
+# The Web HIG & Product Engine Contract — v1.19.0
 
 ## Executive Summary
 
-The Web HIG v1.18.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
+The Web HIG v1.19.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
 
 This release adds a three-layer consumption model and archetype rule packs:
 
@@ -700,6 +700,21 @@ When adaptation genuinely depends on viewport or environment (page shell, global
 
 `@media (prefers-reduced-motion: reduce)` and similar preference queries are legitimate even inside component stylesheets.
 
+#### Foldable devices and device posture (informative)
+
+The [Device Posture API](https://www.w3.org/TR/device-posture/) became a Candidate Recommendation Draft on 17 November 2026. It defines `navigator.devicePosture.type` (`continuous` or `folded`), a `change` event on `navigator.devicePosture`, the `device-posture` CSS media feature, and WebDriver commands that simulate a posture. A device that does not fold reports `continuous`. The draft says it is implemented in Chromium-based browsers, and that WebKit and Mozilla have not published formal positions. It is not a cross-browser baseline. A `device-posture` query is an environment query in the table above, not a replacement for container queries.
+
+Nothing here is a new requirement. The layout MUST work with no posture signal, because most browsers and devices will never send one. A posture-specific layout is an enhancement. Do not add a mandatory device-posture requirement to a project because a foldable layout exists. The draft’s accessibility considerations translate into the following review guidance:
+
+* **Hinge and fold area.** Do not place an important control, especially a button, where the fold or hinge falls. Centered dialogs are an easy way to put their buttons there on a symmetrical fold. The draft notes touch is less precise there and text can distort.
+* **Large contiguous content.** Do not span a video, photograph, or other large item across the fold when the device is folded. Place it on one side, for example fullscreen content above or below the fold.
+* **One posture is not the product.** Do not design for a single posture. People change posture for their own needs, as they change orientation. Where a posture-specific layout exists, let the person keep the layout they prefer, and keep the continuous layout complete.
+* **Announce significant change.** When a posture change moves the content a person is working with (for example a video to the top screen and comments below), announce it through an accessible status message. Do not announce every reflow. Keep focus on the control or content the person was using, and keep the DOM order and focus order logical in both postures (**HIG-A11Y-002**, WCAG 2.2 AA).
+* **Reflow and zoom still apply.** The 200% text-zoom and reflow requirement (§5.1) does not change in a folded posture.
+* **Test assistive technology.** Check a screen reader and keyboard in each posture the product supports, not only a visual comparison.
+
+**Test design.** Use WebDriver posture simulation where the test browser supports it, and a physical foldable when one is available. Check content placement, focus order, announcements, and reflow in both postures, and confirm the continuous layout in a browser that sends no posture signal. See the [device-posture fixture](./examples/audit-fixtures/device-posture/README.md). Posture changes need a physical action, so a person confirms the announcement and the feel of the layout. This is informative guidance and manual or integration review, not a static scan or a new rule ID. See the [20 November research disposition](./docs/research/2026-11-20-brief.md).
+
 ### 3.3 Data Density Standards (Application / Dashboard)
 
 Data-heavy interfaces MUST use tokenized density levels (**HIG-DEN-001**):
@@ -911,6 +926,24 @@ Do not add an audit rule until another engine implements HTML-in-Canvas and inde
 | Sortable table | Keyboard-accessible sort controls |
 | Drag/drop | Keyboard alternative MUST exist |
 
+#### Embedded content and programmatic focus (informative)
+
+The outcome in this section does not change: focus moves into a dialog, stays there while it is modal, and returns to the trigger. What changes is whether script in an embedded frame can cause the first of those. Chrome 158 (stable 17 November 2026) and Edge 158 (19 November) add the [`focus-without-user-activation`](https://chromestatus.com/release-notes/158) Permissions Policy. The default allowlist is `*`, so it is opt-in. An embedder sets it with a `Permissions-Policy` response header or an iframe `allow` attribute. When it is denied for the frame that starts the change, the browser blocks these programmatic focus changes:
+
+* `element.focus()` and `window.focus()`
+* `autofocus`
+* The focusing steps of a dialog or popover
+
+Three exceptions apply. A frame with transient user activation can still move focus. A frame that already has focus, or contains it, can still move focus inside its own subtree. A focused parent can delegate focus to a child frame, including one that has the policy denied. User-initiated focus, such as a click or Tab, is never blocked. Chromium’s separate restriction on `autofocus` in cross-origin iframes is unchanged, so allowing the policy does not enable it. No Safari or Firefox support is claimed. Treat the policy as a Chromium feature, not a baseline.
+
+**A dialog or popover can still open when its focus step is blocked.** A cross-origin authentication, payment, or application widget can therefore open a dialog and leave keyboard focus outside it. Do not assume an automatic focus move succeeded because the dialog is visible.
+
+* **Embedded content.** Where practical, open a dialog or popover from the user-activation handler that caused it, such as a click or key press. A dialog opened later from a timer, a network response, or a `postMessage` may no longer have transient activation. After opening programmatically, check where focus landed. If it did not enter the dialog, keep the dialog and its controls reachable by keyboard, and keep a visible way to proceed or dismiss it. Do not suppress the dialog and do not claim the focus requirement is met. A blocked move is not a reason to drop focus return on close (**HIG-A11Y-008**).
+* **Embedders.** Deny the policy deliberately and test the result. If an embedded frame must take focus, for example an authentication, payment, or application widget, deliver focus by delegation from a focused parent after a user action, or leave the policy allowed for that frame. Do not deny the policy for a frame whose task needs a dialog and then leave the keyboard user to find it.
+* **Do not assume.** A component that works in a top-level page can behave differently in a frame, so test it in a frame, not only in isolation.
+
+**Integration test.** Add an iframe fixture with the policy denied and run it as a manual or integration test. Open a dialog and a popover from a click and from a timer. Confirm that user-initiated focus (click, Tab, Shift+Tab) works, that every control in the open dialog is keyboard-reachable, that Escape and the close control work, and that focus returns to the trigger. Repeat with focus delegated from the parent. See the [embedded-frame focus fixture](./examples/audit-fixtures/embedded-frame-focus/README.md). This is not a static HTML scanning rule: the header, the `allow` attribute, and the runtime behavior come from different documents. No new rule ID and no change to **HIG-A11Y-008**. See the [20 November research disposition](./docs/research/2026-11-20-brief.md).
+
 ### 5.4 Target Sizes
 
 The HIG distinguishes **WCAG-aligned minimums** from **HIG ergonomic guidance**. Do not treat 44×44 CSS px as mandatory for conformance.
@@ -936,6 +969,10 @@ When requesting browser capabilities, applications MUST:
 | **Downloads** | Confirm large downloads; show progress; handle blocked popups gracefully |
 
 Permission prompts MUST NOT appear without prior in-app explanation. Denied permissions MUST degrade gracefully with alternative workflows — never block core functionality silently.
+
+**Location accuracy (informative).** The [Geolocation API](https://www.w3.org/TR/geolocation/) (Candidate Recommendation Draft, 18 November 2026) defines `coords.accuracy` as a radius at the 68% confidence level, one standard deviation. About one time in three the true position is outside it. Describe a result as approximate. Do not draw the radius as a guaranteed boundary, and do not use it alone for a decision that depends on being inside an area, such as eligibility, delivery, or safety. Platform providers differ, and a reported value is only as good as the provider’s own estimate. Offer manual location entry (above) and let a person correct the position.
+
+Test location features per feature, not once for the site: permission prompt, grant, denial, and revocation; the timeout; a cached position and a fresh acquisition after a cache miss; and each error state (permission denied, position unavailable, timeout) with the manual fallback. Use geolocation emulation where the test browser supports it. A real device still confirms the platform provider. This is spec review guidance with no new rule ID. See the [20 November research disposition](./docs/research/2026-11-20-brief.md).
 
 ---
 
@@ -1355,7 +1392,26 @@ For systems that execute agent tool calls, review the execution boundary as well
 * Record the original call, validation failure, proposed repair and final execution or rejection in a correlated audit trail. Redact secrets and sensitive values according to §9.4; retain enough safe structure to explain the decision.
 * Exercise renamed tools, added distractor tools, removed candidates, changed schemas and a repair that still fails validation. Verify that invalid calls produce no side effects and rejected repairs never execute.
 
-This is specification review guidance, not a new automated website audit rule, mandatory repair layer or agent-readiness score. The [interface-drift study](https://arxiv.org/abs/2610.23342) supplies model-specific evidence for validation and constrained repair; it does not establish general accuracy or authorize silent action substitution. See the [research disposition](./docs/research/2026-10-23-brief.md).
+Schema validation checks that a call is well-formed. It does not check that the call is aimed at the right object, or that it worked. For **state-changing** operations (writes, deletes, sends, payments, permission changes), review two more safeguards.
+
+**Before execution: verify the target.**
+
+* Resolve the target against current environment state when the call runs. Do not rely on the model’s description of the object, or on an identifier remembered from earlier in the session, a skill, or persisted memory.
+* Validate the intended object and scope: the resolved object is the one the user referred to, and the set of things the call can touch (count, filter, path prefix, tenant) is within what was authorized. Show a person the resolved object, by a label they recognize and not only an ID, when the action is consequential (§2.4).
+* When the reference is ambiguous, resolves to more than one candidate, or resolves to something other than what the user described, ask for clarification. Do not choose. Make this a code path with read access to the live state and an explicit candidate list. In the study cited below, telling a model to decline when unsure did not remove wrong-target errors, because the model could not see the environment.
+* Treat remembered tool use as a hint. Versioned skills, persistent memory, cached examples, and earlier calls can describe an interface that has since changed. Before a state-changing call, read the current tool definition and any documentation that says what a value means (units, numbering, direction of a priority scale) when the schema does not carry it.
+
+**After execution: verify the result.**
+
+* Read back the affected state where a read path exists. Check the intended postcondition: the field holds the requested value, the object is in the expected state, and nothing outside the scope changed where that is cheap to check. An API success response is not that check. A service can accept a request it silently did not apply.
+* Report completion only when the outcome is verified. Distinguish *attempted*, *accepted*, *queued*, and *completed* in the agent’s report, in the audit trail, and in any status the person sees. If the result could not be verified, say it is unverified and what was attempted. Do not retry a non-idempotent call blindly (**HIG-MUT-002**, §4.5).
+* Match the effort to the consequence (**HIG-SIM-001**). Read-back costs calls: in the study below, checking after writing improved results and needed more than twice the model calls. Always verify destructive, financial, permission, and external-communication changes. A low-consequence, reversible, idempotent change may use lighter verification, such as sampling.
+
+**Test cases.** Rename a field, change a unit, or reverse a priority scale behind an unchanged success response, and confirm the agent notices the write did not land and does not report it done. Give a reference that matches two objects, and confirm a clarifying question instead of an action. Give a stale identifier whose object has since changed, and confirm the call is not sent. Return *accepted* or *queued* with no change yet, and confirm the report says so. Confirm a rejected, unverified, or wrong-target call leaves an auditable record and, for a rejected call, no side effect.
+
+**Evidence limits.** [Experience Rot](https://arxiv.org/abs/2611.20922) (16 November 2026) tested six models on three small synthetic services whose tool interfaces changed silently. Success was 63% with no experience, 100% with correct experience, and 23% with out-of-date experience. Agents often reused earlier calls instead of checking current definitions, and nearly every failed run ended with a report that the task was complete. [Intent Contracts](https://arxiv.org/abs/2611.24025) (18 November 2026) has a planner that holds no tools submit a goal, a quotation of the user, and scope. A trusted executor validates it and writes the call. Contracts did not reduce unauthorized actions, and every state-changing condition hit a wrong target in 40–49% of the affected runs, because the executor could not check the live environment. Both are preprints with limited configurations. The second used one benchmark and one pair of models and tested benign over-reach, not an adversarial planner. They are not general measurements. They support checking live state and verifying the result. They do not establish a rate for any product and do not require an intent-contract architecture.
+
+This is specification review guidance, not a new automated website audit rule, mandatory repair layer or agent-readiness score. It belongs to the agent execution contract, not to the accessibility audit of a website. The [interface-drift study](https://arxiv.org/abs/2610.23342) supplies model-specific evidence for validation and constrained repair; it does not establish general accuracy or authorize silent action substitution. See the research dispositions of [23 October](./docs/research/2026-10-23-brief.md) and [20 November](./docs/research/2026-11-20-brief.md).
 
 ## Layer 8: Quality Assurance & CI/CD Gates
 
@@ -1430,6 +1486,8 @@ Machine-readable contract: [EVALUATOR.md](./EVALUATOR.md) · [schema/evaluator-r
 HIG Audit and any other conformance review judge the observable result. Using a particular modern API is not a pass, and omitting one is not a failure when the outcome is already met. When a requirement defines a fallback, test the native branch and the fallback branch in different engines in the supported matrix. Written guidance may name a technique. Runtime verification still has to confirm performance, reduced-motion behavior, focus management, and the fallback path.
 
 Focus behavior, whether motion is essential, form-error timing, and assistive-technology announcements stay manual. A vendor agent-evaluation pass rate is not a HIG conformance score and does not change a WCAG mapping.
+
+Three review areas need an integration or manual test, not a static scan of the delivered HTML. **Embedded-frame focus** depends on a response header or `allow` attribute on another document, so use the [fixture](./examples/audit-fixtures/embedded-frame-focus/README.md) (§5.3). **Foldable posture** needs a simulated or physical posture, so use the [fixture](./examples/audit-fixtures/device-posture/README.md) (§3.2). **Meaningful text embedded in a photograph or illustration** may get a manual or OCR-assisted observation. OCR output is a lead for a person, not an automatic failure, and standalone images of text keep their existing requirements (**HIG-A11Y-005**). The 14 November WCAG [PR #5446](https://github.com/w3c/wcag/pull/5446) would extend contrast requirements to such text. It is open, it is not WCAG, and the WCAG 2.2 AA mapping does not change. Agent execution checks (§7.4) belong to the agent execution contract, not to this audit.
 
 HIG Audit’s own interface is covered by the same accessibility requirements as other product UI. Remediation text it generates should help authors meet WCAG 2.2 AA and should not recommend a technique that fails an applicable requirement. On 10 November 2026, WAI restated [ATAG](https://www.w3.org/WAI/standards-guidelines/atag/)’s two-part model: an authoring tool is itself accessible, and it helps people produce WCAG-conforming content. WAI said ATAG needs updating for current WCAG, emerging technology, and AI authoring. No updated normative draft is published. Do not add a new AI-authoring requirement or a scanned-site rule until that draft exists. See the [13 November research disposition](./docs/research/2026-11-13-brief.md).
 
@@ -1506,6 +1564,7 @@ Logs MUST include timestamp, actor, action, and resource — but MUST NOT includ
 
 **Release documentation:** [CHANGELOG.md](./CHANGELOG.md) (Keep a Changelog) · [RELEASE_NOTES.md](./RELEASE_NOTES.md) (adoption notes) · [VERSIONING.md](./VERSIONING.md) (semver policy).
 
+* **v1.19.0 (2026-11-20):** Minor informative guidance release. §7.4 adds target verification before, and result verification after, state-changing agent operations. §5.3 adds embedded-frame focus guidance for the `focus-without-user-activation` Permissions Policy. §3.2 adds foldable-device posture guidance. §5.5 describes geolocation accuracy as a 68% confidence radius. Embedded-frame, device-posture and image-text fixtures are manual or integration review, not static rules. The WCAG image-text contrast proposal, ARIA `listview`, `text-autospace-size`, View Transitions shadow roots and the Web Install API are tracked and deferred. No new rule IDs, severity changes, WCAG mapping changes, or Core Web Vitals threshold changes.
 * **v1.18.0 (2026-11-13):** Minor packaging release for agent consumption. Accessibility, forms, motion, and performance rules carry maturity, browser target, fallback, automated checks, manual checks, and a source date. Audits judge outcomes and test both branches when a fallback exists. `image-animation` stays an experimental technique and is not a pass. No new rule IDs, severity changes, WCAG mapping changes, or Core Web Vitals threshold changes. The ATAG update is tracked and not yet a requirement.
 * **v1.17.0 (2026-11-06):** Minor guidance release. Supported color schemes MUST be declared in the initial document; `light only` is an opt-out, not the default. Safari Adaptive Dark Mode does not count as WCAG contrast. Long Animation Frames style and layout durations are diagnostic only and do not change **HIG-PERF-001**. HTML-in-Canvas stays informative, with no audit rule. Safari Technology Preview 256 accessibility fixes do not change stable compatibility expectations. No new rule IDs or severity changes.
 * **v1.16.0 (2026-10-30):** Minor guidance release. Stable Core Web Vitals stay the **HIG-PERF-001** gate; experimental CrUX soft-navigation LCP, INP, and CLS variants are a separate labeled series and MUST NOT share a pass/fail. Scroll-driven animations (`animation-timeline`, `scroll()`, `view()`) are motion under **HIG-A11Y-001**; duration shortening does not stop them. Safari 27.2 VoiceOver fixtures are manual review only. No new rule IDs, severity changes, WCAG baseline, or Core Web Vitals threshold changes.
