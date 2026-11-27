@@ -1,6 +1,6 @@
 # Animation & Motion — Level 2 Module
 
-**Version:** v1.19.0 · **Canonical spec:** [HIG.md §1](../HIG.md#layer-1-universal-ux-principles) · **Rule IDs:** HIG-MOT-001–005, HIG-VT-001, HIG-A11Y-001
+**Version:** v1.20.0 · **Canonical spec:** [HIG.md §1](../HIG.md#layer-1-universal-ux-principles) · **Rule IDs:** HIG-MOT-001–005, HIG-VT-001, HIG-A11Y-001
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -64,6 +64,14 @@ A very small `animation-duration` does **not** stop scroll-linked progress. `ani
 The browser does not decide whether the movement is decorative or necessary. On document surfaces and on controls, **HIG-MOT-003** still applies. On hybrid or experience surfaces, classify page-level effects with **HIG-EXP-006**, **HIG-EXP-013**, and **HIG-EXP-014**.
 
 Under `prefers-reduced-motion: reduce`, disable the animation or set `animation-timeline` to `auto` or `none`, and keep the same information and actions. A `no-preference` wrapper around the scroll-driven rule meets the same obligation. Verify keyboard scrolling, 200% zoom, and programmatic scrolling. A static check MAY flag a missing timeline reset; it does not judge necessity or distraction, and it does not see Web Animations API timelines.
+
+#### Pointer-driven animations (informative)
+
+Pointer-driven Animations Module Level 1 (Working Draft, 24 November 2026) ties progress to pointer position, in CSS and in the Web Animations API. It is not a baseline and not an automated rule. Treat it as motion (**HIG-A11Y-001**). Pointer position must not be the only way to reach essential information. Provide a keyboard and touch equivalent. Under reduced motion, disable or neutralize the effect; shortening duration is not enough when progress follows the pointer. Decorative movement must not interfere with reading, focus, or interaction. Presence of a pointer timeline is not a pass. See [HIG.md](../HIG.md#pointer-driven-animations-informative).
+
+#### CSS `random()` (informative)
+
+[Firefox 161](https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/161) adds CSS `random()`. Use a deterministic fallback and check the project’s browser matrix before enabling it. Use it for decorative variation only. Do not use it for essential layout, or for text and control colors that can fail contrast. Keep visual regression captures deterministic. No new requirement.
 
 #### Animated images (informative)
 

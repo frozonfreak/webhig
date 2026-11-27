@@ -1,20 +1,20 @@
 # The Web HIG — agent consumption metadata
-# Version: 1.19.0
+# Version: 1.20.0
 # Packaging for agents and auditors. Not a conformance score.
 # Intentional differences from Modern Web Guidance 1.0: docs/research/2026-11-13-brief.md
 # Regenerate is manual. npm run validate checks this file.
 
-version: "1.19.0"
-reviewed: "2026-11-20"
+version: "1.20.0"
+reviewed: "2026-11-27"
 
 rules:
   HIG-A11Y-001:
     maturity: stable
-    minimum_browser_target: "Project supported browser matrix. prefers-reduced-motion is the requirement. Scroll-driven timelines and image-animation are not."
-    fallback: "Instant state change or a minimal opacity fade. Scroll-driven motion keeps a static equivalent. Animated images keep a static image, video controls, or a script control until image-animation is stable across engines."
-    automated_checks: "A static check may flag a missing reduced-motion guard, including a scroll-driven timeline that is not reset. Presence of image-animation is not a pass."
-    manual_checks: "Whether the motion is essential, whether a visible keyboard pause or stop exists when WCAG 2.2.2 applies, duration, and any assistive-technology announcement."
-    source_date: "2026-11-13"
+    minimum_browser_target: "Project supported browser matrix. prefers-reduced-motion is the requirement. Scroll-driven timelines, pointer progress timelines, and image-animation are not."
+    fallback: "Instant state change or a minimal opacity fade. Scroll-driven motion keeps a static equivalent. Pointer-driven motion keeps a path that does not depend on pointer position. Animated images keep a static image, video controls, or a script control until image-animation is stable across engines."
+    automated_checks: "A static check may flag a missing reduced-motion guard, including a scroll-driven timeline that is not reset. Presence of image-animation is not a pass. There is no automated rule for pointer progress timelines."
+    manual_checks: "Whether the motion is essential, whether a visible keyboard pause or stop exists when WCAG 2.2.2 applies, duration, and any assistive-technology announcement. For pointer progress timelines, confirm keyboard and touch equivalents, that reduced motion neutralizes the effect, and that decorative movement does not interfere with reading, focus, or interaction."
+    source_date: "2026-11-27"
 
   HIG-A11Y-002:
     maturity: stable
@@ -130,11 +130,11 @@ rules:
 
   HIG-PERF-001:
     maturity: stable
-    minimum_browser_target: "Field and lab data for the project matrix. No new performance API is required."
-    fallback: "The thresholds stand when a diagnostic API is missing. Combined long-frame timing remains the diagnostic fallback."
-    automated_checks: "Lab LCP and CLS may gate. Field INP is not a synthetic CI pass. Using a loading, scheduling, or image API is not a pass."
+    minimum_browser_target: "Field and lab data for the project matrix. No new performance API is required. Compute Pressure and compression dictionaries are not this rule."
+    fallback: "The thresholds stand when a diagnostic API is missing. Combined long-frame timing remains the diagnostic fallback. Measure Web Vitals regardless of whether the project uses optional resource or transport optimizations."
+    automated_checks: "Lab LCP and CLS may gate. Field INP is not a synthetic CI pass. Using a loading, scheduling, image, pressure, or compression API is not a pass."
     manual_checks: "The measured route is one people use. A vendor 50 ms main-thread example is not an extra threshold."
-    source_date: "2026-11-13"
+    source_date: "2026-11-27"
 
   HIG-PERF-002:
     maturity: stable

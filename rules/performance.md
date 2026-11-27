@@ -1,6 +1,6 @@
 # Performance & Web Vitals — Level 2 Module
 
-**Version:** v1.19.0 · **Canonical spec:** [HIG.md §6](../HIG.md#layer-6-performance--web-vitals) · **Rule IDs:** HIG-PERF-001–004 · **Archetypes:** Universal
+**Version:** v1.20.0 · **Canonical spec:** [HIG.md §6](../HIG.md#layer-6-performance--web-vitals) · **Rule IDs:** HIG-PERF-001–004 · **Archetypes:** Universal
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -76,9 +76,21 @@ Projects SHOULD define performance budgets beyond Web Vitals (**HIG-PERF-003**).
 | Long tasks | Main-thread blocking |
 | DOM size | Node count limits |
 
+**Shared compression dictionaries (informative).** Firefox 161 adds Compression Dictionary Transport. Chrome has supported it since version 130. Safari remains a compatibility limit. Optional transport only. Negotiate the dictionary and vary the cache. Measure the transfer and any LCP change. Support is not a conformance pass and not a Core Web Vitals result.
+
 ## 6.5 Regression-Based Gates
 
 PRs that increase initial JS by >10% (or other project-defined thresholds) SHOULD fail unless explicitly approved — even when below the absolute limit (**HIG-PERF-004**).
+
+## 6.6 Resource adaptation (informative)
+
+The [Compute Pressure API Level 1](https://www.w3.org/TR/compute-pressure/) (Candidate Recommendation Draft, 21 November 2026) reports `nominal`, `fair`, `serious`, and `critical`. Chromium implements it. WebKit has published an opposing position. Mozilla’s position is pending. It is not a baseline.
+
+Do not require the API. Do not score it as a Core Web Vital or as **HIG-PERF-001**.
+
+When an application adapts to pressure, prioritize sign-language interpreter streams and other streams the person has pinned. If an essential stream cannot be sustained, explain what changed and offer an accessible recovery path. A load indicator needs more than color. A notice of restricted functionality is available to assistive technology and dismissible without an unnecessary interruption. The browser’s own observation notice is the browser’s control.
+
+Test resource adaptation and the ordinary experience when a signal is unavailable. For Compute Pressure integrations, use virtual pressure sources where the browser supports them. See [HIG.md §6.6](../HIG.md#66-resource-adaptation-informative) and the [fixture](../examples/audit-fixtures/compute-pressure/README.md).
 
 ## Practical guidance
 

@@ -1,6 +1,6 @@
 # Archetype Pack — Auth / Account
 
-**Version:** v1.19.0 · **Archetype:** `auth` · **Matrix:** [applicability.md](../applicability.md)
+**Version:** v1.20.0 · **Archetype:** `auth` · **Matrix:** [applicability.md](../applicability.md)
 
 Sign-in, sign-up, recovery, settings. Security- and privacy-sensitive.
 
@@ -45,3 +45,4 @@ All universal rules **plus:** HIG-SSR-001, HIG-SSR-003, HIG-MUT-001, HIG-FRM-001
 | Settings page | forms, ux (unsaved changes), security |
 | Session timeout UX | security §9.5, notifications |
 | Account deletion | mutations, ux §2.4, security |
+| Digital credential presentation | security §9.5 (conditional; native chooser is not a site failure) |

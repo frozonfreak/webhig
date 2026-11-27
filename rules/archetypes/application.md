@@ -1,6 +1,6 @@
 # Archetype Pack — Application / Dashboard
 
-**Version:** v1.19.0 · **Archetype:** `application` · **Matrix:** [applicability.md](../applicability.md)
+**Version:** v1.20.0 · **Archetype:** `application` · **Matrix:** [applicability.md](../applicability.md)
 
 Authenticated tools, admin panels, data workflows. Write-heavy, state-heavy, RBAC-governed.
 

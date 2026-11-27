@@ -1,6 +1,6 @@
 # AI & Agent Enforcement — Level 2 Module
 
-**Version:** v1.19.0 · **Canonical spec:** [HIG.md §7–8](../HIG.md#layer-7-ai--agent-enforcement-contract) · **Rule ID:** HIG-SIM-001 + all Layer 7 IDs
+**Version:** v1.20.0 · **Canonical spec:** [HIG.md §7–8](../HIG.md#layer-7-ai--agent-enforcement-contract) · **Rule ID:** HIG-SIM-001 + all Layer 7 IDs
 
 > Standalone extract for progressive loading. The complete normative contract remains in [HIG.md](../HIG.md).
 
@@ -70,6 +70,14 @@ Review validation against the current tool names and argument schemas before exe
 For state-changing operations, verify the target before execution and the result after it. Resolve the target against live environment state at call time, not the model's description or a remembered identifier. Validate the object and scope, and ask for clarification when the reference is ambiguous. Treat remembered tool use (skills, persistent memory, earlier calls) as a hint and read the current definition first. After execution, read back the affected state and check the intended postcondition, not only the API success response. Report completion only when verified, and distinguish attempted, accepted, queued, and completed. Scale verification to consequence (**HIG-SIM-001**).
 
 Test interface drift with renamed/removed tools, distractor candidates, schema changes and invalid repairs. Also test a silent change behind an unchanged success response, an ambiguous reference, a stale identifier, and an accepted-but-not-applied write. See [HIG.md §7.4](../HIG.md#74-agent-tool-schema-review-informative) for the complete review guidance. This does not add an automated website audit rule or require a repair layer.
+
+## 7.5 User-visible agent control boundaries (informative)
+
+A person who delegates work should be able to understand and control, in ordinary language: what the agent may do; which resources and accounts it can access; which actions need another approval; which actions can be reversed; whether it is executing, waiting, blocked, or finished; how to pause, cancel, or intervene; and what actually happened. Do not satisfy this with raw JSON schemas or model reasoning. Show the current scope and approval points before delegation, the effect of pause or cancellation during execution, and completed actions and remaining effects afterward. Use the state distinctions from §7.4. This is interaction review, not a website audit rule. The WebAgents Community Group report (23 November 2026) is background only. Do not adopt a protocol from it as a requirement. See [HIG.md §7.5](../HIG.md#75-user-visible-agent-control-boundaries-informative).
+
+## 7.6 Generated drafts and records (informative)
+
+Where model output can become a record someone relies on, keep the draft distinct from the verified record, keep source and provenance available where showing them is appropriate, and let a person review and correct the draft before a consequential commitment. Give control over source capture and retention in products that capture a source. Make cancellation stop pending work where possible and show any effects already applied. Apply deletion to the stated content and disclose retention limits. Recording controls from the 25 November 2026 care-work study are not universal requirements for every AI interface. See [HIG.md §7.6](../HIG.md#76-generated-drafts-and-records-informative).
 
 ## Layer 8: CI/CD Gates
 

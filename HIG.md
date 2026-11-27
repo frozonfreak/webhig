@@ -1,8 +1,8 @@
-# The Web HIG & Product Engine Contract — v1.19.0
+# The Web HIG & Product Engine Contract — v1.20.0
 
 ## Executive Summary
 
-The Web HIG v1.19.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
+The Web HIG v1.20.0 defines design principles, normative requirements, information architecture, state machines, interaction rules, accessibility standards, security & privacy standards, and programmatic execution constraints for modern web applications, content, commerce, and server-driven web platforms.
 
 This release adds a three-layer consumption model and archetype rule packs:
 
@@ -248,6 +248,16 @@ The browser does not infer whether scroll-linked movement is decorative or neces
 Under `prefers-reduced-motion: reduce`, scroll-driven animations MUST be disabled or returned to the document timeline (`animation: none`, or `animation-timeline: auto` or `none`) and replaced by a static equivalent that keeps the same information and actions. Declaring the scroll-driven rule only inside `@media (prefers-reduced-motion: no-preference)` meets the same obligation. Verify keyboard scrolling, 200% zoom, and programmatic scrolling (`scrollTo`, `scrollBy`, or focus movement). A pointer-wheel check is not sufficient. Movement that hides required content, or that is the only way to reach a destination, still fails **HIG-EXP-002** and **HIG-EXP-005**.
 
 A static check MAY flag scroll-driven CSS whose reduced-motion style does not reset `animation-timeline` or disable the animation. That flag does not decide necessity or distraction. Those judgments stay manual. The check does not see Web Animations API timelines.
+
+#### Pointer-driven animations (informative)
+
+[Pointer-driven Animations Module Level 1](https://www.w3.org/TR/2026/WD-pointer-animations-1-20261124/) (First Public Working Draft, 24 November 2026) introduces pointer progress timelines. Animation progress follows pointer position across an element rather than elapsed time. The draft provides CSS declarations and a Web Animations API interface. It is a Working Draft, not a Recommendation, and not a baseline. Do not add an automated audit rule for it yet.
+
+Pointer-driven animation is motion under **HIG-A11Y-001**, with time-driven and scroll-driven animation. Pointer position must not be the only way to discover essential information. Keyboard and touch need an equivalent path to the same information and actions. Under `prefers-reduced-motion: reduce`, disable or neutralize pointer-driven effects. A shortened `animation-duration` is not enough when progress is tied to the pointer rather than to time. Decorative movement must not interfere with reading, focus, or interaction. Presence of a pointer timeline is not a pass. See the [27 November research disposition](./docs/research/2026-11-27-brief.md).
+
+#### CSS `random()` (informative)
+
+[Firefox 161](https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases/161) adds CSS `random()`. Use a deterministic fallback and check the project’s browser matrix before enabling it. Use it for decorative variation. Do not use it for a semantic or essential layout decision, and do not use it for text or control colors that can fail contrast. Keep visual regression captures deterministic. No new conformance requirement.
 
 #### Animated images (informative)
 
@@ -1074,9 +1084,26 @@ Beyond Web Vitals, projects SHOULD define budgets for (**HIG-PERF-003**):
 | Long tasks | Main-thread blocking |
 | DOM size | Node count limits |
 
+**Shared compression dictionaries (informative).** Firefox 161 adds Compression Dictionary Transport. Chrome has supported it since version 130. Safari remains a compatibility limit. It is an optional transport optimization for resources that change relatively little between releases, such as JavaScript bundles. The server has to negotiate the dictionary and vary the cache correctly. Measure the transfer and any LCP change. Do not assume a saving, and do not treat dictionary support as a conformance pass or as a Core Web Vitals result.
+
 ### 6.5 Regression-Based Gates
 
 Absolute thresholds alone are insufficient. PRs that increase initial JS by >10% (or other project-defined regression thresholds) SHOULD fail unless explicitly approved — even when the application remains below the absolute limit (**HIG-PERF-004**).
+
+### 6.6 Resource adaptation (informative)
+
+The [Compute Pressure API Level 1](https://www.w3.org/TR/compute-pressure/) (Candidate Recommendation Draft, 21 November 2026) lets a page observe CPU pressure and reduce work before contention, thermal throttling, and input delay degrade the experience. The states are `nominal`, `fair`, `serious`, and `critical`. Chromium-based browsers implement it. WebKit has published an opposing position. Mozilla’s position is pending. It is not a cross-browser baseline.
+
+Do not require the API. Do not add it to Core Web Vitals scoring or to **HIG-PERF-001**. Compute Pressure is a resource-adaptation mechanism, not a replacement for the stable LCP, INP, and CLS series.
+
+When an application does adapt to pressure:
+
+* Do not automatically drop accessibility-critical content. When pressure rises in a video conference, prioritize the sign-language interpreter and other streams the person has pinned. If an essential stream cannot be sustained, tell the person what changed and offer an accessible way to recover. Let the person pin essential streams, and keep that choice.
+* A load or pressure indicator must communicate through more than color (**HIG-A11Y-002**).
+* A notice that functionality is restricted must be available to assistive technology and dismissible without an unnecessary interruption of the task.
+* The browser’s own notice that pressure observation is active, and the option to block or dismiss it, belong to the browser. The site does not replace that control.
+
+Exercise each resource-adaptation feature that the application implements, including its ordinary behavior when a signal is unavailable. For applications that use Compute Pressure, where the test browser supports it, use the specification’s virtual pressure sources to simulate a constrained device. Check that adaptation happens, that status is understandable without color alone, and that pinned content stays. This is a conditional integration test, not a static scan and not a new rule ID. See the [compute-pressure fixture](./examples/audit-fixtures/compute-pressure/README.md) and the [27 November research disposition](./docs/research/2026-11-27-brief.md).
 
 ---
 
@@ -1413,6 +1440,40 @@ Schema validation checks that a call is well-formed. It does not check that the 
 
 This is specification review guidance, not a new automated website audit rule, mandatory repair layer or agent-readiness score. It belongs to the agent execution contract, not to the accessibility audit of a website. The [interface-drift study](https://arxiv.org/abs/2610.23342) supplies model-specific evidence for validation and constrained repair; it does not establish general accuracy or authorize silent action substitution. See the research dispositions of [23 October](./docs/research/2026-10-23-brief.md) and [20 November](./docs/research/2026-11-20-brief.md).
 
+### 7.5 User-visible agent control boundaries (informative)
+
+§7.4 checks that a call is well-formed, aimed at the right object, and verified after it runs. It does not say how a person sees and sets the boundary the agent works inside.
+
+Wafa Johal and Sarah Schombs, [“Where is the Interface for the AI Harness?”](https://arxiv.org/abs/2611.31739) (preprint, 24 November 2026, submitted for review at Interaction), argue that ordinary interaction design assumes the person is present while the software acts. Delegation breaks that assumption: the person names an outcome and leaves, and the agent can run many operations they never see. The paper names two problems. The gulf of specification is that a person cannot state every constraint in advance. The gulf of oversight is that, after delegation, they cannot readily see, judge, or stop what the agent is doing. The harness — tools, permissions, checks, and the execution loop — is often hidden. The paper is a preprint, not an established empirical standard.
+
+For a product that lets a person delegate work to an agent, that person should be able to understand and control, in ordinary language:
+
+* What the agent is permitted to do.
+* Which resources and accounts it can access.
+* Which actions need another approval.
+* Which actions can be reversed.
+* Whether the agent is executing, waiting, blocked, or finished.
+* How to pause, cancel, or intervene.
+* What actually happened after execution (§7.4’s attempted, accepted, queued, and completed distinction is the status to show, not a success flag alone).
+
+Do not meet this by showing raw JSON schemas or internal model reasoning. Show the current scope and approval points before delegation. During execution, show when a pause or cancellation takes effect and what work is already in flight. After execution, show completed actions and any remaining effects or available recovery steps. This is specification review guidance. It is not an automated website accessibility rule. Test it by using the product: change a permission, start a delegated task, pause it, cancel it, and read the record of what happened.
+
+The W3C WebAgents Community Group’s [living interoperability report](https://w3c-cg.github.io/webagents/TaskForces/Interoperability/Reports/report-interoperability.html) compares MCP, Agent2Agent, the Agent Network Protocol, the Universal Tool Calling Protocol, OpenAPI, and the Web of Things, and separates discovery, identification, interaction, environment access, and observability. It is not a W3C Standard. Its sections on agent-human interaction and on security and privacy are incomplete. Use it as architectural background for this section. Do not adopt any protocol it compares as a HIG requirement.
+
+### 7.6 Generated drafts and records (informative)
+
+A [Research through Design study with care workers](https://www.frontiersin.org/journals/digital-health/articles/10.3389/fdgth.2026.1972601/full) evaluated summaries using 40 recordings of real care interactions. The summaries contained useful information and also inaccurate and irrelevant material. Some wrong inferences were not transcription errors. Some privacy and autonomy problems appeared only after the system was used in a realistic setting.
+
+Where a product turns model output into something a person might rely on — especially a healthcare, finance, legal, or other consequential record:
+
+* Distinguish a generated draft from a verified record. Do not present the draft as the record.
+* Keep access to the source and to provenance where the product has them, and where showing them does not expose something the person meant to withhold.
+* Let a person review and correct the draft before a consequential commitment.
+* Let a person control capture and retention of the source. In the care study that included deciding when recording starts, pausing it when sensitive information arises, and deleting a recording. Those exact controls belong to a product that records people. They are not a universal requirement for every AI interface.
+* Make cancellation stop pending work where possible. Show any effects that already occurred. Make deletion apply to the stated content and disclose any retention limits.
+
+This is specification review guidance, not a scanned-site rule and not a new rule ID. See the [27 November research disposition](./docs/research/2026-11-27-brief.md).
+
 ## Layer 8: Quality Assurance & CI/CD Gates
 
 CI gates are classified by enforcement level:
@@ -1491,6 +1552,8 @@ Three review areas need an integration or manual test, not a static scan of the 
 
 HIG Audit’s own interface is covered by the same accessibility requirements as other product UI. Remediation text it generates should help authors meet WCAG 2.2 AA and should not recommend a technique that fails an applicable requirement. On 10 November 2026, WAI restated [ATAG](https://www.w3.org/WAI/standards-guidelines/atag/)’s two-part model: an authoring tool is itself accessible, and it helps people produce WCAG-conforming content. WAI said ATAG needs updating for current WCAG, emerging technology, and AI authoring. No updated normative draft is published. Do not add a new AI-authoring requirement or a scanned-site rule until that draft exists. See the [13 November research disposition](./docs/research/2026-11-13-brief.md).
 
+Two further checks are conditional, and neither is a static scan. **Digital credential flows** apply when the site starts presentation or issuance. Test the site’s launch control, progress, error, cancellation, and an alternative that does not depend on a cross-device QR code, using the [review procedure](./examples/audit-fixtures/digital-credentials/README.md) (§9.5). An inaccessible native browser or operating-system chooser is not a website failure. **Compute Pressure** applies when the application observes pressure. Test adaptation, status, and pinned content with the [review procedure](./examples/audit-fixtures/compute-pressure/README.md) (§6.6). Pointer progress timelines have no automated rule (§1.3). User-visible agent boundaries (§7.5) and generated-record review (§7.6) belong to the product’s agent interface, not to this audit.
+
 ---
 
 ## Layer 9: Security & Privacy
@@ -1498,6 +1561,8 @@ HIG Audit’s own interface is covered by the same accessibility requirements as
 > **Level 2 module:** [rules/security.md](./rules/security.md)
 
 Security and privacy requirements apply to all archetypes. Layer 9 complements Layer 8 security CI gates with product-level standards.
+
+Cross-check permission, identity, and agent-authority guidance against the W3C TAG [Web Platform Design Principles](https://www.w3.org/TR/design-principles/) (Group Note, updated 24 November 2026). The note covers user needs first, safe browsing, trustworthy browser interfaces, designing for user intent, accessibility by default, assistive-technology privacy, minimizing user data, and permission and capability design. It warns against pages that imitate trusted browser interfaces, and against exposing whether assistive technology is in use. It is not a conformance standard and does not add an audit rule. See the [27 November research disposition](./docs/research/2026-11-27-brief.md).
 
 ### 9.1 Content Security Policy (CSP)
 
@@ -1540,11 +1605,29 @@ Browser storage (`localStorage`, `IndexedDB`) MUST NOT store sensitive tokens, P
 * **MFA** — support TOTP/WebAuthn where security policy requires; provide recovery codes.
 * **Sign-out** — clear client state and invalidate server session; confirm on shared devices.
 
+#### Digital credentials (informative)
+
+The [Digital Credentials API](https://www.w3.org/TR/digital-credentials/) (Working Draft, 25 November 2026) defines browser-mediated presentation and issuance of digital credentials, including identity documents and other verifiable information. It is not a W3C Recommendation. Check support for the specific operation, browser, platform, protocol, and wallet. Keep an alternative verification path when the integration is unavailable.
+
+The site cannot repair an inaccessible native chooser. Judge the website’s own controls and status. When a site starts presentation or issuance:
+
+* The control that starts the flow has an accessible name. Waiting, success, error, and cancellation that the site renders are announced programmatically.
+* Continue and cancel on the site are keyboard-operable.
+* Focus moves in a logical order into and out of a chooser the site renders. Do not assume the native chooser does this.
+* A QR code or other non-text content the site shows has a text alternative (**HIG-A11Y-005**). Provide a path that does not depend on scanning a code on another device.
+* For authentication, evaluate the applicable conditions in [WCAG 2.2 SC 3.3.8](https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html). An alternative without a cognitive function test is one way to meet the criterion.
+* Allow enough time to finish, and offer a retry. Do not expire the attempt without a way to start again.
+* Before disclosure, say what will be shared. A browser permission is not legal consent. Do not present one as the other.
+
+Where the test browser supports it, the draft’s optional WebDriver BiDi virtual-wallet interface can supply a successful response, reject the request, or leave it pending so the page’s cancellation can be exercised. Use it for a repeatable integration test. This is conditional. It is not a static HTML scan and not a new rule ID. See the [digital-credentials fixture](./examples/audit-fixtures/digital-credentials/README.md) and the [27 November research disposition](./docs/research/2026-11-27-brief.md).
+
 ### 9.6 Third-Party Scripts & Analytics
 
 * Third-party scripts MUST be inventory-tracked and loaded with `async`/`defer`.
 * Analytics MUST be privacy-safe: no PII in event payloads; respect Do Not Track / consent preferences where applicable.
 * Tag managers and ad scripts MUST NOT block core rendering (Layer 6 third-party JS budget).
+
+**SVG referrer policy (informative).** Firefox 161 supports the `referrerpolicy` attribute on SVG `image`, `script`, and `feImage`. Set it when an SVG fetches an external resource and the product needs that referrer limited. This is optional privacy guidance. It is not a new conformance requirement, and it does not claim support beyond the browsers in the project matrix that actually implement it.
 
 ### 9.7 Audit Logging (Application / Auth)
 
@@ -1564,6 +1647,7 @@ Logs MUST include timestamp, actor, action, and resource — but MUST NOT includ
 
 **Release documentation:** [CHANGELOG.md](./CHANGELOG.md) (Keep a Changelog) · [RELEASE_NOTES.md](./RELEASE_NOTES.md) (adoption notes) · [VERSIONING.md](./VERSIONING.md) (semver policy).
 
+* **v1.20.0 (2026-11-27):** Minor informative guidance release. §9.5 adds conditional digital-credential presentation guidance. §7.5 adds user-visible agent control boundaries. §6.6 adds accessibility-preserving Compute Pressure guidance. §7.6 distinguishes generated drafts from verified records. §1.3 extends reduced-motion review to pointer progress timelines and notes CSS `random()`. §6.4 notes Compression Dictionary Transport. Credential and pressure fixtures are conditional integration review, not static rules. Filter Effects Level 2, the WebAgents Community Group report, and pointer-timeline automation are tracked and deferred. No new rule IDs, severity changes, WCAG mapping changes, or Core Web Vitals threshold changes.
 * **v1.19.0 (2026-11-20):** Minor informative guidance release. §7.4 adds target verification before, and result verification after, state-changing agent operations. §5.3 adds embedded-frame focus guidance for the `focus-without-user-activation` Permissions Policy. §3.2 adds foldable-device posture guidance. §5.5 describes geolocation accuracy as a 68% confidence radius. Embedded-frame, device-posture and image-text fixtures are manual or integration review, not static rules. The WCAG image-text contrast proposal, ARIA `listview`, `text-autospace-size`, View Transitions shadow roots and the Web Install API are tracked and deferred. No new rule IDs, severity changes, WCAG mapping changes, or Core Web Vitals threshold changes.
 * **v1.18.0 (2026-11-13):** Minor packaging release for agent consumption. Accessibility, forms, motion, and performance rules carry maturity, browser target, fallback, automated checks, manual checks, and a source date. Audits judge outcomes and test both branches when a fallback exists. `image-animation` stays an experimental technique and is not a pass. No new rule IDs, severity changes, WCAG mapping changes, or Core Web Vitals threshold changes. The ATAG update is tracked and not yet a requirement.
 * **v1.17.0 (2026-11-06):** Minor guidance release. Supported color schemes MUST be declared in the initial document; `light only` is an opt-out, not the default. Safari Adaptive Dark Mode does not count as WCAG contrast. Long Animation Frames style and layout durations are diagnostic only and do not change **HIG-PERF-001**. HTML-in-Canvas stays informative, with no audit rule. Safari Technology Preview 256 accessibility fixes do not change stable compatibility expectations. No new rule IDs or severity changes.

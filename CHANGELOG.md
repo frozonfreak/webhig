@@ -17,6 +17,16 @@ Expanded adoption notes: [RELEASE_NOTES.md](./RELEASE_NOTES.md).
 
 ---
 
+## [1.20.0] - 2026-11-27
+
+### Added
+
+- Informative guidance for [digital credentials](./HIG.md#digital-credentials-informative) and [resource adaptation](./HIG.md#66-resource-adaptation-informative). The audit fixture index includes manual and integration procedures for each.
+- Agent product guidance for [user-visible authority and intervention](./HIG.md#75-user-visible-agent-control-boundaries-informative) and [review of generated records](./HIG.md#76-generated-drafts-and-records-informative).
+- [27 November research disposition](./docs/research/2026-11-27-brief.md), including pointer-driven motion and optional Firefox 161 techniques.
+
+---
+
 ## [1.19.0] - 2026-11-20
 
 ### Changed

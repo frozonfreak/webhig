@@ -4,7 +4,20 @@ User-facing notes for each published version of The Web HIG. The brief machine-o
 
 Versions follow [Semantic Versioning](https://semver.org/). Newest first.
 
-## [v1.19.0](./HIG.md) — 2026-11-20
+## [v1.20.0](./HIG.md) - 2026-11-27
+
+Minor guidance update. The release retains 98 Quick imperatives and 76 stable rule IDs.
+
+- **Credential flows.** Review keyboard operation, status announcements, focus, cancellation, and an accessible alternative on the site. Record native wallet and chooser behavior separately. [§9.5](./HIG.md#digital-credentials-informative)
+- **Resource adaptation.** Prioritize accessibility-critical and pinned content under pressure. Test status and recovery, including the path with no pressure signal. [§6.6](./HIG.md#66-resource-adaptation-informative)
+- **Agent supervision and generated records.** Surface delegated scope, approval points, intervention controls, and execution results. Provide review and correction before a generated draft becomes a consequential record. [§7.5](./HIG.md#75-user-visible-agent-control-boundaries-informative) · [§7.6](./HIG.md#76-generated-drafts-and-records-informative)
+- **Pointer-driven motion.** Preserve equivalent keyboard and touch access. Verify that reduced motion neutralizes pointer-driven effects. [Motion guidance](./HIG.md#pointer-driven-animations-informative)
+
+Refresh the pinned contract and use the [research disposition](./docs/research/2026-11-27-brief.md) to identify relevant review cases. Browser and assistive-technology execution is pending for the two new review procedures.
+
+---
+
+## [v1.19.0](./HIG.md) - 2026-11-20
 
 Minor informative update for embedded-frame focus, foldable devices, and agent execution. WCAG mappings, rule IDs, severities, and Core Web Vitals thresholds do not change.
 
